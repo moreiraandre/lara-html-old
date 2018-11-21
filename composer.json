@@ -1,0 +1,21 @@
+{
+    "name": "moreiraandre/php-html",
+    "description": "Classes PHP para gerar marcação HTML com Bootstrap",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "André Moreira",
+            "email": "andre.mcx1@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "illuminate/container": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpHtml\\": "src/PhpHtml/"
+        }
+    }
+}
