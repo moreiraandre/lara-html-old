@@ -1,6 +1,6 @@
 <?php
 /**
- * User: andre
+ * Created by: André Moreira
  * Date: 20/11/18
  * Time: 23:35
  */
@@ -8,7 +8,8 @@
 namespace PhpHtml\Managers;
 
 
-use PhpHtml\Plugins\Layout\Column;
+use PhpHtml\Plugins\Layout\Col;
+use PhpHtml\Plugins\Layout\Row;
 
 class Layout
 {
@@ -20,9 +21,14 @@ class Layout
         return $this->objPlugins;
     }
 
-    public function column(string $content, int $number)
+    public function col(string $content, int $number)
     {
-        return $this->objPlugins[] = new Column($content, $number);
+        return $this->objPlugins[] = new Col($content, $number);
+    }
+
+    public function row()
+    {
+        return $this->objPlugins[] = new Row();
     }
 
 }

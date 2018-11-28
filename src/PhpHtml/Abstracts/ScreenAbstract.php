@@ -2,22 +2,32 @@
 /**
  * Responsável por gerar o HTML geral da tela.
  *
- * User: andre
+ * Created by: André Moreira
  * Date: 20/11/18
  * Time: 23:37
  */
 
 namespace PhpHtml\Abstracts;
 
-
 use PhpHtml\Interfaces\ScreenInterface;
 use PhpHtml\PhpHtml;
 
+/**
+ * Class ScreenAbstract
+ * @package PhpHtml\Abstracts
+ */
 abstract class ScreenAbstract implements ScreenInterface
 {
 
+    /**
+     * @var PhpHtml
+     */
     protected $phpHtml;
 
+    /**
+     * ScreenAbstract constructor.
+     * @param PhpHtml $phpHtml
+     */
     public function __construct(PhpHtml $phpHtml)
     {
         $this->phpHtml = $phpHtml;
@@ -32,11 +42,6 @@ abstract class ScreenAbstract implements ScreenInterface
     {
         static::run();
         return $this->phpHtml->getHtml();
-    }
-
-    public function __toString()
-    {
-        return 'Tá aqui';
     }
 
 }

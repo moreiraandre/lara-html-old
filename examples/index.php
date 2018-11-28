@@ -12,6 +12,13 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+
+    <style type="text/css">
+        body {
+            color: #FFF;
+            background-color: #000;
+        }
+    </style>
 </head>
 <body>
 <h1>Hello, world!</h1>
@@ -20,9 +27,11 @@
 
 <div class="container-fluid">
 <?php
-if ($_GET['class'])
-    require_once $_GET['class'] . '.php';
-
+if ($_GET['class']) {
+    require_once $_GET['class'] . '.php'; // INCLUI O ARQUIVO
+    $class = app($_GET['class']); // CRIA O OBJETO
+    echo $class->getHtml(); // EXIBE O HTML
+}
 ?>
 </div>
 
