@@ -31,14 +31,6 @@ class Row implements PluginInterface
                 $html .= "<div class='row'>$htmlRow</div>";
                 $htmlRow = '';
             }
-
-            echo $col->getHtml();
-
-            /*try {
-                $htmlRow .= $col->getHtml();
-            } finally {
-                exit('Aqui -> '.var_dump($col));
-            }*/
             $countCol++;
         }
         if ($countCol > 0)

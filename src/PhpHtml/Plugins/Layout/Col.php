@@ -13,20 +13,27 @@ use PhpHtml\Interfaces\PluginInterface;
 class Col implements PluginInterface
 {
 
-    private
-        $content,
-        $number;
+    private $plugins = [];
 
-    public function __construct(string $content, int $number = null)
+    public function __construct(PluginInterface $plugin = null)
     {
-        $this->content = $content;
-        $this->number = $number;
+        if ($plugin)
+            $this->addPlugin($plugin);
+    }
+
+    public function addPlugin(PluginInterface $plugin)
+    {
+        $this->plugins[] = $plugin;
     }
 
     public function getHtml(): string
     {
-        return "<div class='col-sm'>$this->content</div>";
-        return "<div class='col-md-$this->number'>$this->content</div>";
+        $html = '';
+
+        foreach ($this->plugins as $plugin)
+            $html .= "<div class='col-sm'>{$plugin->getHtml()}</div>";
+
+        return $html;
     }
 
 }

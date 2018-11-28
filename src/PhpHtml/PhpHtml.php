@@ -11,7 +11,12 @@ namespace PhpHtml;
 
 
 use PhpHtml\Managers\Form;
-use PhpHtml\Managers\Layout;
+//use PhpHtml\Managers\Layout;
+
+use PhpHtml\Managers;
+use PhpHtml\Plugins\Layout\Col;
+use PhpHtml\Plugins\Layout\Row;
+
 
 /**
  * Class PhpHtml
@@ -19,26 +24,21 @@ use PhpHtml\Managers\Layout;
  */
 class PhpHtml
 {
+    private $plugins = [];
 
-    /**
-     * @var array
-     */
-    private $objManagers = [];
-
-    /**
-     * @return Form
-     */
-    public function form()
+    public function row()
     {
-        return $this->objManagers[] = new Form();
+        return $this->plugins[] = new Row();
     }
 
-    /**
-     * @return Layout
-     */
-    public function layout()
+    public function col()
     {
-        return $this->objManagers[] = new Layout();
+        return $this->plugins[] = new Col();
+    }
+
+    public function plugin()
+    {
+        return $this->plugins[] = new Col();
     }
 
 
