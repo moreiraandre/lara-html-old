@@ -5,27 +5,40 @@
  * Time: 02:06
  */
 
-namespace PhpHtml\Plugins\Layout;
+namespace PhpHtml\Plugins;
 
 
-use PhpHtml\Interfaces\PluginInterface;
+use PhpHtml\Abstracts\PluginAbstract;
 
-class Col implements PluginInterface
+class Col extends PluginAbstract
 {
 
+    /**
+     * @var array
+     */
     private $plugins = [];
 
-    public function __construct(PluginInterface $plugin = null)
+    /**
+     * Col constructor.
+     * @param PluginAbstract|null $plugin
+     */
+    public function __construct(PluginAbstract $plugin = null)
     {
         if ($plugin)
             $this->addPlugin($plugin);
     }
 
-    public function addPlugin(PluginInterface $plugin)
+    /**
+     * @param PluginAbstract $plugin
+     */
+    public function addPlugin(PluginAbstract $plugin)
     {
         $this->plugins[] = $plugin;
     }
 
+    /**
+     * @return string
+     */
     public function getHtml(): string
     {
         $html = '';
