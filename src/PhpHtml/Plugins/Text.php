@@ -10,12 +10,27 @@ namespace PhpHtml\Plugins;
 
 use PhpHtml\Abstracts\PluginAbstract;
 
+/**
+ * Class Text
+ * @package PhpHtml\Plugins
+ */
 class Text extends PluginAbstract
 {
     private
+        /**
+         * @var string
+         */
         $name,
+        /**
+         * @var string
+         */
         $label;
 
+    /**
+     * Text constructor.
+     * @param string $name
+     * @param string|null $label
+     */
     public function __construct(string $name, string $label = null)
     {
         // Caso $label não seja informado ele recebe o valor de $name com a primeira letra maiúscula.
@@ -25,12 +40,17 @@ class Text extends PluginAbstract
         $this->label = $label;
     }
 
+    /**
+     * @return string
+     */
     public function getHtml(): string
     {
+        var_dump($this->getAttributesTag());
+
         return
             "<div class='form-group'>
                 <label>$this->label</label>
-                <input class='form-control form-control-sm' name='$this->name'>
+                <input class='form-control form-control-sm' name='$this->name' ".$this->getAttributesTag().">
             </div>";
     }
 }

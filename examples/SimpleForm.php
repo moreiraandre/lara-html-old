@@ -5,12 +5,13 @@
  * Time: 00:11
  */
 
+use PhpHtml\Abstracts\ScreenAbstract;
 
-class SimpleForm extends \PhpHtml\Abstracts\ScreenAbstract
+class SimpleForm extends ScreenAbstract
 {
     public function run()
     {
-        $this->phpHtml->form()->text('apelido');
-        $this->phpHtml->form()->text('endereco', 'Endereço');
+        $this->phpHtml->text('apelido');
+        $this->phpHtml->text('endereco', 'Endereço')->setReadonly('readonly');
     }
 }

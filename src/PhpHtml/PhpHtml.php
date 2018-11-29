@@ -9,14 +9,9 @@
 
 namespace PhpHtml;
 
-
-use PhpHtml\Managers\Form;
-//use PhpHtml\Managers\Layout;
-
-use PhpHtml\Managers;
-use PhpHtml\Plugins\Layout\Col;
-use PhpHtml\Plugins\Layout\Row;
-
+use PhpHtml\Interfaces\PluginInterface;
+use PhpHtml\Plugins\Col;
+use PhpHtml\Plugins\Row;
 
 /**
  * Class PhpHtml
@@ -24,23 +19,48 @@ use PhpHtml\Plugins\Layout\Row;
  */
 class PhpHtml
 {
-    private $plugins = [];
+    /**
+     * @var array
+     */
+    private $columns = [];
 
+    /**
+     * @return Row
+     */
     public function row()
     {
-        return $this->plugins[] = new Row();
+        return new Row();
     }
 
+    /**
+     * @return Col
+     */
     public function col()
     {
-        return $this->plugins[] = new Col();
+        return new Col();
     }
 
-    public function plugin()
+    /**
+     * Cria plugins dinamicamente pelo nome da classe invocada.
+     *
+     * @param $name
+     * @param $arguments
+     * @return Col
+     * @throws \Throwable
+     */
+    public function __call($name, $arguments)
     {
-        return $this->plugins[] = new Col();
-    }
+        $name = ucfirst($name);
+        $class = "PhpHtml\Plugins\\$name";
+        $obj =  new $class(...$arguments);
+        throw_if(
+            ! $obj instanceof PluginInterface,
+            \Exception::class,
+            "Object don't is a PluginInterface instance!"
+        );
 
+        return $this->columns[] = new Col($obj);
+    }
 
     /**
      * @return string
@@ -49,20 +69,12 @@ class PhpHtml
     {
         $html = '';
         $countCol = 0;
-        $row = $this->layout()->row();
+        $row = $this->row();
         // PERCORRE TODOS OS GESTOES DE PLUGINS
-        foreach ($this->objManagers as $manager) {
-            // PERCORRE TODOS OS PLUGINS DO GESTOR
-            foreach ($manager->getPlugins() as $plugin) {
-                $row->addCol($plugin);
-//                exit(var_dump($row->getHtml()));
-
-//                $html .= $this->layout()->col($plugin->getHtml(), 12 / 2)->getHtml();
-            }
-        }
+        foreach ($this->columns as $col)
+            $row->addCol($col);
 
         return "<form>{$row->getHtml()}</form>";
-        return "<form><div class='row'>$html</div></form>";
     }
 
 }
