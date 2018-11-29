@@ -5,12 +5,12 @@
  * Time: 23:41
  */
 
-namespace PhpHtml\Plugins\Form;
+namespace PhpHtml\Plugins;
 
 
-use PhpHtml\Interfaces\PluginInterface;
+use PhpHtml\Abstracts\PluginAbstract;
 
-class Text implements PluginInterface
+class Text extends PluginAbstract
 {
     private
         $name,
