@@ -66,20 +66,10 @@ class PhpHtml
     public function getHtml()
     {
         $html = '';
-        // PERCORRE TODOS OS GESTOES DE PLUGINS
         foreach ($this->plugins as $p)
             $html .= $p->getHtml();
 
         return $html;
-
-        /*$html = '';
-        $countCol = 0;
-        $row = new Row();
-        // PERCORRE TODOS OS GESTOES DE PLUGINS
-        foreach ($this->plugins as $col)
-            $row->addCol($col);
-
-        return "<form>{$row->getHtml()}</form>";*/
     }
 
 }
