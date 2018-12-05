@@ -1,7 +1,5 @@
 <?php
 /**
- * Prove acesso as classes gestoras de plugins.
- *
  * Created by: André Moreira
  * Date: 20/11/18
  * Time: 23:52
@@ -22,22 +20,22 @@ class PhpHtml
     /**
      * @var array
      */
-    private $columns = [];
+    private $plugins = [];
 
     /**
-     * @return Row
+     * Inicia nova linha
      */
     public function row()
     {
-        return new Row();
+        $this->plugins[] = 'row';
     }
 
     /**
-     * @return Col
+     * Inicia nova coluna
      */
     public function col()
     {
-        return new Col();
+        $this->plugins[] = 'col';
     }
 
     /**
@@ -59,7 +57,7 @@ class PhpHtml
             "Object don't is a PluginInterface instance!"
         );
 
-        return $this->columns[] = new Col($obj);
+        return $this->plugins[] = $obj;
     }
 
     /**
@@ -68,13 +66,20 @@ class PhpHtml
     public function getHtml()
     {
         $html = '';
-        $countCol = 0;
-        $row = $this->row();
         // PERCORRE TODOS OS GESTOES DE PLUGINS
-        foreach ($this->columns as $col)
+        foreach ($this->plugins as $p)
+            $html .= $p->getHtml();
+
+        return $html;
+
+        /*$html = '';
+        $countCol = 0;
+        $row = new Row();
+        // PERCORRE TODOS OS GESTOES DE PLUGINS
+        foreach ($this->plugins as $col)
             $row->addCol($col);
 
-        return "<form>{$row->getHtml()}</form>";
+        return "<form>{$row->getHtml()}</form>";*/
     }
 
 }

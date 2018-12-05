@@ -15,18 +15,24 @@ abstract class PluginAbstract implements PluginInterface
     /**
      * @var array
      */
-    private $attributes = [];
+    protected $attributes = [];
 
     /**
      * @param $name
      * @param $arguments
+     * @return $this
+     * @throws \Throwable
      */
     public function __call($name, $arguments)
     {
-        if (substr($name, 0, 3) == 'set')
-            $this->attributes[mb_strtolower(substr($name, 3))] = $arguments[0];
+        throw_if(
+            !substr($name, 0, 3) == 'set',
+            \Exception::class,
+            "Method $name don't exists!"
+        );
 
-        var_dump($this->attributes);
+        $this->attributes[mb_strtolower(substr($name, 3))] = $arguments[0];
+        return $this;
     }
 
     /**
@@ -34,8 +40,6 @@ abstract class PluginAbstract implements PluginInterface
      */
     public function getAttributesTag()
     {
-        var_dump($this->attributes);
-
         $html = '';
         foreach ($this->attributes as $attr => $value)
             $html .= "$attr=\"$value\"";

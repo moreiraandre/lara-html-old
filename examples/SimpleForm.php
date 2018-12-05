@@ -11,7 +11,10 @@ class SimpleForm extends ScreenAbstract
 {
     public function run()
     {
-        $this->phpHtml->text('apelido');
-        $this->phpHtml->text('endereco', 'Endereço')->setReadonly('readonly');
+
+        $form = $this->phpHtml->form('/');
+        $form->addText('apelido');
+        $form->addText('endereco', 'Endereço')->setReadonly('readonly');
+        $form->addText('ocupacao', 'Ocupação');
     }
 }
