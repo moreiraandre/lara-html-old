@@ -1,9 +1,13 @@
 # Problema
-Perda de tempo com edição HTML.
+Perda de tempo com edição HTML pré-definida.
 
 # Contexto
-Criação de HTML que já possui uma certa pré-definição (bootstrap) gasta muito 
-tempo para editar HTML e reescrever marcações pré-definidas.
+Para escrita do HTML devem ser criados arquivos _views_, o problema é que isso 
+causa reescrita de HTML pré-definido ([Bootstrap](http://getbootstrap.com/)) 
+cujas futuras mudanças no padrão do HTML devem ser alteradas em cada arquivo 
+_view_ aumentando assim o grau de dificuldade na manutenção pois a marcação HTML 
+torna o conteúdo do arquivo grande e menos legível do que usar uma padrão para 
+abstração de métodos para geração do HTML.
 
 # Solução
 Criar conjunto de classes PHP para gerar HTML pré-definido passando apenas 
