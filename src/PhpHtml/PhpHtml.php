@@ -44,7 +44,7 @@ class PhpHtml
      *
      * @param $name
      * @param $arguments
-     * @return Col|Row
+     * @return PluginInterface
      * @throws \Throwable
      */
     public function __call($name, $arguments)
@@ -60,23 +60,11 @@ class PhpHtml
             $class = "PhpHtml\Plugins\\$name";
 
             try {
-                $obj = new $class(...$arguments);
+                return $this->rowCurrent->addCol($name, $arguments);
             } catch (\Error $e) {
+                echo $e->getMessage();
                 throw new PluginNonexistentError("Plugin $class does not exist!");
             }
-
-            // DEFININDO LINHA E COLUNA DO PLUGIN
-            $obj->setRow = $this->rowCurrent;
-            $col = $this->rowCurrent->addCol($obj);
-            $obj->setCol = $col;
-
-            throw_if(
-                !$obj instanceof PluginInterface,
-                \Exception::class,
-                "Object don't is a PluginInterface instance!"
-            );
-
-            return $obj;
         }
     }
 

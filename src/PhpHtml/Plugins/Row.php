@@ -21,9 +21,10 @@ final class Row extends PluginAbstract
      * @param PluginAbstract $plugin
      * @return PluginAbstract
      */
-    public function addCol(PluginAbstract $plugin)
+    public function addCol($pluginName, $arguments)
     {
-        return $this->columns[] = new Col($plugin);
+        $this->columns[] = $col = new Col();
+        return $col->{"$pluginName"}($arguments);
     }
 
     /**

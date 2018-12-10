@@ -38,6 +38,18 @@ abstract class PluginAbstract implements PluginInterface
      */
     private $items = [];
 
+    //==================================================================================================================
+    /**
+     * @var array
+     */
+    private $rows = [];
+
+    /**
+     * @var Row Linha atual
+     */
+    private $rowCurrent = null;
+    //==================================================================================================================
+
     /**
      * @return Row
      */
@@ -89,22 +101,15 @@ abstract class PluginAbstract implements PluginInterface
             "Method $name don't exists!"
         );
 
+        if ((!$this->rowCurrent)
+            or ($name == 'row')
+            or ($this->rowCurrent->totalColumns() == 12))
+            $this->items[] = $this->rowCurrent = new Row();
+
         if ($prefix == 'set') { // DEFINE ATRIBUTOS DE TAG
             $this->attributes[mb_strtolower(substr($name, 3))] = $arguments[0];
             return $this;
-        } elseif ($prefix == 'add') { // CRIA PLUGINS DENTRO DO ATUAL
-            $class = "PhpHtml\Plugins\\$suffix";
-
-            // LANÇA UM ERRO PERSONALIZADO SE O PLUGIN NÃO EXISTIR
-            try {
-                $obj = new $class(...$arguments);
-            } catch (\Error $e) {
-                throw new PluginNonexistentError("Plugin $class does not exist!");
-            }
-
-            return $this->items[] = $obj;
-        } elseif ($prefix == 'row')
-            $this->items[] = 'row';
+        }
     }
 
     /**
@@ -122,21 +127,9 @@ abstract class PluginAbstract implements PluginInterface
      */
     protected function getItemsHtml()
     {
-        $row = new Row();
         $html = '';
-        foreach ($this->getItems() as $item) {
-            if (($row->totalColumns() == 12)
-                or ($item == 'row')) {
-                $html .= $row->getHtml();
-                $row = new Row();
-            }
-
-            if ($item != 'row')
-                $row->addCol($item);
-        }
-
-        if ($row->totalColumns() < 12)
-            $html .= $row->getHtml();
+        foreach ($this->getItems() as $item)
+            $html .= $item->getHtml();
 
         return $html;
     }
