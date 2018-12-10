@@ -10,7 +10,7 @@ namespace PhpHtml\Plugins;
 
 use PhpHtml\Abstracts\PluginAbstract;
 
-class Col extends PluginAbstract
+final class Col extends PluginAbstract
 {
 
     /**

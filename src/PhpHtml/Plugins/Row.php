@@ -10,7 +10,7 @@ namespace PhpHtml\Plugins;
 
 use PhpHtml\Abstracts\PluginAbstract;
 
-class Row extends PluginAbstract
+final class Row extends PluginAbstract
 {
     /**
      * @var array
