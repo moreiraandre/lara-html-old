@@ -35,9 +35,7 @@ class Form extends PluginAbstract
      */
     public function getHtml(): string
     {
-        $html = '';
-        foreach ($this->getItems() as $item)
-            $html .= $item->getHtml();
+        $html = $this->getItemsHtml();
 
         return
             "<form action='$this->action'>$html</form>";

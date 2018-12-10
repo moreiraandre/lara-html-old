@@ -16,5 +16,17 @@ class SimpleForm extends ScreenAbstract
         $form->addText('apelido');
         $form->addText('endereco', 'Endereço')->setReadonly('readonly');
         $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
+        $form->row();
+        $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
+        $form->row();
+        $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
+        $form->addText('ocupacao', 'Ocupação');
     }
 }

@@ -46,7 +46,7 @@ class Text extends PluginAbstract
     public function getHtml(): string
     {
         return
-            "<div class='form-group col-sm'>
+            "<div class='form-group'>
                 <label>$this->label</label>
                 <input class='form-control form-control-sm' name='$this->name' " . $this->getAttributesTag() . ">
             </div>";

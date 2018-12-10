@@ -7,6 +7,7 @@
 
 namespace PhpHtml;
 
+use PhpHtml\Errors\PluginNonexistentError;
 use PhpHtml\Interfaces\PluginInterface;
 use PhpHtml\Plugins\Col;
 use PhpHtml\Plugins\Row;
@@ -20,22 +21,22 @@ class PhpHtml
     /**
      * @var array
      */
-    private $plugins = [];
+    private $rows = [];
 
     /**
-     * Inicia nova linha
+     * @var Row Linha atual
      */
-    public function row()
-    {
-        $this->plugins[] = 'row';
-    }
+    private $rowCurrent;
 
     /**
-     * Inicia nova coluna
+     * Inicia a linha atual
+     *
+     * PhpHtml constructor.
+     * @param Row $rowCurrent
      */
-    public function col()
+    public function __construct(Row $rowCurrent)
     {
-        $this->plugins[] = 'col';
+        $this->rows[] = $this->rowCurrent = $rowCurrent;
     }
 
     /**
@@ -43,21 +44,40 @@ class PhpHtml
      *
      * @param $name
      * @param $arguments
-     * @return Col
+     * @return Col|Row
      * @throws \Throwable
      */
     public function __call($name, $arguments)
     {
-        $name = ucfirst($name);
-        $class = "PhpHtml\Plugins\\$name";
-        $obj =  new $class(...$arguments);
-        throw_if(
-            ! $obj instanceof PluginInterface,
-            \Exception::class,
-            "Object don't is a PluginInterface instance!"
-        );
+        if (($this->rowCurrent->totalColumns() == 12)
+            or ($name == 'row'))
+            $this->rows[] = $this->rowCurrent = new Row();
 
-        return $this->plugins[] = $obj;
+        if ($name == 'row')
+            return $this->rowCurrent;
+        else {
+            $name = ucfirst($name);
+            $class = "PhpHtml\Plugins\\$name";
+
+            try {
+                $obj = new $class(...$arguments);
+            } catch (\Error $e) {
+                throw new PluginNonexistentError("Plugin $class does not exist!");
+            }
+
+            // DEFININDO LINHA E COLUNA DO PLUGIN
+            $obj->setRow = $this->rowCurrent;
+            $col = $this->rowCurrent->addCol($obj);
+            $obj->setCol = $col;
+
+            throw_if(
+                !$obj instanceof PluginInterface,
+                \Exception::class,
+                "Object don't is a PluginInterface instance!"
+            );
+
+            return $obj;
+        }
     }
 
     /**
@@ -66,8 +86,8 @@ class PhpHtml
     public function getHtml()
     {
         $html = '';
-        foreach ($this->plugins as $p)
-            $html .= $p->getHtml();
+        foreach ($this->rows as $row)
+            $html .= $row->getHtml();
 
         return $html;
     }

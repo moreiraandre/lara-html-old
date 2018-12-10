@@ -33,6 +33,9 @@ abstract class PluginAbstract implements PluginInterface
      */
     private $col;
 
+    /**
+     * @var array Plugins
+     */
     private $items = [];
 
     /**
@@ -46,7 +49,7 @@ abstract class PluginAbstract implements PluginInterface
     /**
      * @param Row $row
      */
-    public function setRow(Row $row): void
+    protected function setRow(Row $row): void
     {
         $this->row = $row;
     }
@@ -62,7 +65,7 @@ abstract class PluginAbstract implements PluginInterface
     /**
      * @param Col $col
      */
-    public function setCol(Col $col): void
+    protected function setCol(Col $col): void
     {
         $this->col = $col;
     }
@@ -81,7 +84,7 @@ abstract class PluginAbstract implements PluginInterface
         $suffix = substr($name, 3);
 
         throw_if(
-            !in_array($prefix, ['set', 'add']),
+            !in_array($prefix, ['set', 'add', 'row']),
             \Exception::class,
             "Method $name don't exists!"
         );
@@ -100,7 +103,8 @@ abstract class PluginAbstract implements PluginInterface
             }
 
             return $this->items[] = $obj;
-        }
+        } elseif ($prefix == 'row')
+            $this->items[] = 'row';
     }
 
     /**
@@ -111,6 +115,30 @@ abstract class PluginAbstract implements PluginInterface
     protected function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getItemsHtml()
+    {
+        $row = new Row();
+        $html = '';
+        foreach ($this->getItems() as $item) {
+            if (($row->totalColumns() == 12)
+                or ($item == 'row')) {
+                $html .= $row->getHtml();
+                $row = new Row();
+            }
+
+            if ($item != 'row')
+                $row->addCol($item);
+        }
+
+        if ($row->totalColumns() < 12)
+            $html .= $row->getHtml();
+
+        return $html;
     }
 
     /**
