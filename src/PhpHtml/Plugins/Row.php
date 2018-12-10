@@ -27,6 +27,16 @@ final class Row extends PluginAbstract
     }
 
     /**
+     * Total de colunas
+     *
+     * @return int
+     */
+    public function totalColumns()
+    {
+        return count($this->columns);
+    }
+
+    /**
      * @return string
      */
     public function getHtml(): string
@@ -35,6 +45,6 @@ final class Row extends PluginAbstract
         foreach ($this->columns as $col)
             $html .= $col->getHtml();
 
-        return "<div class='row'>$html</div>";
+        return "<div class='form-row'>$html</div>";
     }
 }
