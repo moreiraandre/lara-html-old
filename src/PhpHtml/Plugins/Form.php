@@ -16,15 +16,10 @@ use PhpHtml\Abstracts\PluginAbstract;
  */
 class Form extends PluginAbstract
 {
-    private
-        /**
-         * @var array
-         */
-        $items = [],
-        /**
-         * @var string
-         */
-        $action;
+    /**
+     * @var string
+     */
+    private $action;
 
     /**
      * Form constructor.
@@ -35,29 +30,16 @@ class Form extends PluginAbstract
         $this->action = $action;
     }
 
-    public function __call($name, $arguments)
-    {
-        if (substr($name, 0, 3) == 'add') {
-            $name = substr($name, 3);
-            $class = "PhpHtml\Plugins\\$name";
-            $obj =  new $class(...$arguments);
-            return $this->items[] = $obj;
-        } else
-            parent::__call($name, $arguments);
-    }
-
     /**
      * @return string
      */
     public function getHtml(): string
     {
         $html = '';
-        foreach ($this->items as $item)
+        foreach ($this->getItems() as $item)
             $html .= $item->getHtml();
 
         return
-            "<form>
-                <div class='form-row'>$html</div>
-            </form>";
+            "<form action='$this->action'>$html</form>";
     }
 }
