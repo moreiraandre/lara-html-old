@@ -12,3 +12,11 @@ abstração de métodos para geração do HTML.
 # Solução
 Criar conjunto de classes PHP para gerar HTML pré-definido passando apenas 
 parâmetros necessários para geração dinâmica.
+
+# Plugins recebendo plugins
+É padrão utilizar `add` antes do nome do plugin para adicioná-lo a outro.
+```php
+$form = $this->phpHtml->form('/');
+$form->addText('apelido');
+```
+> O exemplo acima adiciona o plugin `text` ao plugin `form`.
