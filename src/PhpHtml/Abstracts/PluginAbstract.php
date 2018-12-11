@@ -11,11 +11,11 @@ use PhpHtml\Errors\MethodNonexistentError;
 use PhpHtml\Interfaces\PluginInterface;
 use PhpHtml\Plugins\Col;
 use PhpHtml\Plugins\Row;
-use PhpHtml\Traits\PluginCreateTrait;
+use PhpHtml\Traits\PluginTrait;
 
 abstract class PluginAbstract implements PluginInterface
 {
-    use PluginCreateTrait;
+    use PluginTrait;
 
     /**
      * @var array

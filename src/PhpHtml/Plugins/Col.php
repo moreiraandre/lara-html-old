@@ -9,7 +9,7 @@ namespace PhpHtml\Plugins;
 
 
 use PhpHtml\Interfaces\PluginInterface;
-use PhpHtml\Traits\PluginCreateTrait;
+use PhpHtml\Traits\PluginTrait;
 
 /**
  * Class Col
@@ -17,7 +17,7 @@ use PhpHtml\Traits\PluginCreateTrait;
  */
 final class Col implements PluginInterface
 {
-    use PluginCreateTrait;
+    use PluginTrait;
 
     /**
      * @var Row Referência da linha

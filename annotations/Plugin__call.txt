@@ -1,0 +1,22 @@
+__call()
+========
+CRIAÇÃO DE OBJETOS
+DEFINIÇÃO DE ATRIBUTOS
+
+
+
+PluginAndAttributeAbstract
+
+
+
+CRIAÇÃO DE PLUGINS
+------------------
+UNICO
+=====
+CRIAR LINHA
+CRIAR COLUNA
+CRIAR PLUGIN
+
+DENTRO DE OUTRO
+===============
+MESMA ROTINA DE "UNICO"
