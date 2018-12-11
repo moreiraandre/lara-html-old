@@ -9,8 +9,9 @@ namespace PhpHtml\Plugins;
 
 
 use PhpHtml\Abstracts\PluginAbstract;
+use PhpHtml\Interfaces\PluginInterface;
 
-final class Row extends PluginAbstract
+final class Row implements PluginInterface
 {
     /**
      * @var array
@@ -18,13 +19,19 @@ final class Row extends PluginAbstract
     private $columns = [];
 
     /**
-     * @param PluginAbstract $plugin
+     * Adicionando colunas
+     *
+     * @param $pluginName
+     * @param $arguments
      * @return PluginAbstract
      */
     public function addCol($pluginName, $arguments)
     {
-        $this->columns[] = $col = new Col();
-        return $col->{"$pluginName"}($arguments);
+        $this->columns[] = $col = new Col(); // CRIANDO COLUNA
+        $col->setRow($this); // ADICIONANDO REFERÊNCIA DA LINHA AO OBJETO DA COLUNA
+        $plugin = $col->{"$pluginName"}($arguments); // CRIANDO PLUGIN
+
+        return $plugin;
     }
 
     /**

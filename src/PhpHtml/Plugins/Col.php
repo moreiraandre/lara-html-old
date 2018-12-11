@@ -8,69 +8,50 @@
 namespace PhpHtml\Plugins;
 
 
-use PhpHtml\Abstracts\PluginAbstract;
-use PhpHtml\Errors\PluginNonexistentError;
+use PhpHtml\Interfaces\PluginInterface;
+use PhpHtml\Traits\PluginCreateTrait;
 
-final class Col extends PluginAbstract
+/**
+ * Class Col
+ * @package PhpHtml\Plugins
+ */
+final class Col implements PluginInterface
 {
+    use PluginCreateTrait;
 
     /**
-     * @var array
+     * @var Row Referência da linha
      */
-    private $plugins = [];
+    private $row;
 
     /**
-     * @var array
+     * Retorna a referência da linha
+     *
+     * @return Row
      */
-    private $rows = [];
-
-    /**
-     * @var Row Linha atual
-     */
-    private $rowCurrent = null;
-
-    /**
-     * Col constructor.
-     * @param PluginAbstract|null $plugin
-     */
-    public function __construct(PluginAbstract $plugin = null)
+    public function getRow()
     {
-        /*if ($plugin)
-            $this->addPlugin($plugin);*/
-    }
-
-    public function __call($name, $arguments)
-    {
-        $arguments = $arguments[0];
-
-        $prefix = substr($name, 0, 3);
-        $suffix = substr($name, 3);
-
-        $class = "PhpHtml\Plugins\\$suffix";
-
-        throw_if(
-            !file_exists(__DIR__ . "/../Plugins/$suffix.php"),
-            \Exception::class,
-            "Method $name don't exists!"
-        );
-
-        // LANÇA UM ERRO PERSONALIZADO SE O PLUGIN NÃO EXISTIR
-        try {
-            $this->plugins[] = $obj = new $class(...$arguments);
-            $obj->setCol($this);
-        } catch (\Error $e) {
-            throw new PluginNonexistentError("Plugin $class does not exist!");
-        }
-
-        return $obj;
+        return $this->row;
     }
 
     /**
-     * @param PluginAbstract $plugin
+     * Guarda a referência da linha
+     *
+     * @param Row $row
      */
-    public function addPlugin(PluginAbstract $plugin)
+    public function setRow(Row $row)
     {
-        $this->plugins[] = $plugin;
+        $this->row = $row;
+    }
+
+    /**
+     * Retorna o array que armazena os plugins
+     *
+     * @return array
+     */
+    public function getPlugins()
+    {
+        return $this->plugins;
     }
 
     /**
@@ -80,9 +61,9 @@ final class Col extends PluginAbstract
     {
         $html = '';
         foreach ($this->plugins as $plugin)
-            $html .= "<div class='col-sm'>{$plugin->getHtml()}</div>";
+            $html .= $plugin->getHtml();
 
-        return $html;
+        return "<div class='col-sm'>$html</div>";
     }
 
 }

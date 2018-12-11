@@ -9,7 +9,6 @@ namespace PhpHtml;
 
 use PhpHtml\Errors\PluginNonexistentError;
 use PhpHtml\Interfaces\PluginInterface;
-use PhpHtml\Plugins\Col;
 use PhpHtml\Plugins\Row;
 
 /**
@@ -45,7 +44,6 @@ class PhpHtml
      * @param $name
      * @param $arguments
      * @return PluginInterface
-     * @throws \Throwable
      */
     public function __call($name, $arguments)
     {
@@ -55,17 +53,8 @@ class PhpHtml
 
         if ($name == 'row')
             return $this->rowCurrent;
-        else {
-            $name = ucfirst($name);
-            $class = "PhpHtml\Plugins\\$name";
-
-            try {
-                return $this->rowCurrent->addCol($name, $arguments);
-            } catch (\Error $e) {
-                echo $e->getMessage();
-                throw new PluginNonexistentError("Plugin $class does not exist!");
-            }
-        }
+        else
+            return $this->rowCurrent->addCol($name, $arguments);
     }
 
     /**

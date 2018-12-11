@@ -11,26 +11,16 @@ class SimpleForm extends ScreenAbstract
 {
     public function run()
     {
+        /*$this->phpHtml->addText('a');
+        $this->phpHtml->addText('a');
+        $this->phpHtml->row();
+        $this->phpHtml->addText('a');*/
 
         $form = $this->phpHtml->addForm('/');
-        $form->addText('apelido');
-        echo "<pre>";
-        print_r($form);
-        echo "</pre>";
-//        $form->addText('endereco', 'Endereço')->setReadonly('readonly');
-        /*$form->addText('ocupacao', 'Ocupação');
-        $form->addText('ocupacao', 'Ocupação');
-        $form->row();
-        $form->addText('ocupacao', 'Ocupação');
-        $form->addText('ocupacao', 'Ocupação');
-        $form->row();
-        $form->addText('ocupacao', 'Ocupação');
-        $form->addText('ocupacao', 'Ocupação');
-        $form->addText('ocupacao', 'Ocupação');*/
-        /*$col = $form->addText('ocupacao', 'Ocupação')->getCol();
-        $col->addText('teste');*/
-        /*$form->addText('ocupacao', 'Ocupação');
-        $form->addText('ocupacao', 'Ocupação');
-        $form->addText('ocupacao', 'Ocupação');*/
+        $form->addText('a');
+        $form->addText('b');
+//        $formCol = $form->getCol();
+//        dd($formCol);
+//        $formCol->addText('apelido');
     }
 }
