@@ -8,8 +8,8 @@
 namespace PhpHtml;
 
 use PhpHtml\Errors\PluginNonexistentError;
-use PhpHtml\Interfaces\PluginInterface;
-use PhpHtml\Plugins\Row;
+use PhpHtml\Interfaces\PluginOutHtmlInterface;
+use PhpHtml\Plugins\Grid\Row;
 
 /**
  * Class PhpHtml
@@ -43,7 +43,7 @@ class PhpHtml
      *
      * @param $name
      * @param $arguments
-     * @return PluginInterface
+     * @return PluginOutHtmlInterface
      */
     public function __call($name, $arguments)
     {

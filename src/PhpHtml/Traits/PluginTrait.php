@@ -12,8 +12,8 @@ namespace PhpHtml\Traits;
 
 use PhpHtml\Errors\MethodNonexistentError;
 use PhpHtml\Errors\PluginNonexistentError;
-use PhpHtml\Plugins\Col;
-use PhpHtml\Plugins\Row;
+use PhpHtml\Plugins\Grid\Col;
+use PhpHtml\Plugins\Grid\Row;
 
 trait PluginTrait
 {

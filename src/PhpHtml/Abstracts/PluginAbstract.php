@@ -8,12 +8,12 @@
 namespace PhpHtml\Abstracts;
 
 use PhpHtml\Errors\MethodNonexistentError;
-use PhpHtml\Interfaces\PluginInterface;
-use PhpHtml\Plugins\Col;
-use PhpHtml\Plugins\Row;
+use PhpHtml\Interfaces\PluginOutHtmlInterface;
+use PhpHtml\Plugins\Grid\Col;
+use PhpHtml\Plugins\Grid\Row;
 use PhpHtml\Traits\PluginTrait;
 
-abstract class PluginAbstract implements PluginInterface
+abstract class PluginAbstract implements PluginOutHtmlInterface
 {
     use PluginTrait;
 
