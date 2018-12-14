@@ -9,7 +9,7 @@ namespace PhpHtml\Plugins\Grid;
 
 
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
-use PhpHtml\Traits\PluginTrait;
+use PhpHtml\Traits\CreatePluginTrait;
 
 /**
  * Class Col
@@ -17,7 +17,7 @@ use PhpHtml\Traits\PluginTrait;
  */
 final class Col implements PluginOutHtmlInterface
 {
-    use PluginTrait;
+    use CreatePluginTrait;
 
     /**
      * @var Row Referência da linha
