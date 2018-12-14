@@ -8,7 +8,7 @@
 namespace PhpHtml\Interfaces;
 
 
-interface PluginInterface
+interface PluginOutHtmlInterface
 {
     /**
      * Gera e retorna o HTML do plugin.
