@@ -34,3 +34,36 @@ A ADIÇÃO DE LINHAS DENTRO DAS COLUNAS DEVE SER RECURSIVA CASO HAJA MAIS DE UM 
 
 -> LINHAS PODEM OU NÃO ESTAREM DENTRO DE COLUNAS!
 
+<div class="row"> <!-- $this->firstRow() -->
+
+    <div class="col"> <!-- $this->firstRow()->firstColumn() -->
+        <div class="row"> <!-- $this->firstRow()->firstColumn()->firstRow() -->
+            <div class="col"> <!-- $this->firstRow()->firstColumn()->firstRow()->firstColumn() -->
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row"> <!-- $this->lastRow() -->
+
+    <div class="col">
+        ...
+    </div>
+
+    <div class="col"> <!-- $this->lastRow()->lastColumn() -->
+        <div class="row">
+            ...
+        </div>
+
+        <div class="row"> <!-- $this->lastRow()->lastColumn()->lastRow() -->
+            <div class="col"> <!-- $this->lastRow()->lastColumn()->lastRow()->firstColumn() -->
+                <input type="text" name="nome"> <!-- $this->lastRow()->lastColumn()->lastRow()->firstColumn()->firstPlugin() -->
+                <input type="text" name="idade"> <!-- $this->lastRow()->lastColumn()->lastRow()->firstColumn()->getPlugin(1) -->
+                <input type="text" name="altura"> <!-- $this->lastRow()->lastColumn()->lastRow()->firstColumn()->lastPlugin() -->
+            </div>
+        </div>
+    </div>
+
+</div>
