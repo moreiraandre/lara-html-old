@@ -15,7 +15,11 @@ use PhpHtml\Errors\PluginNonexistentError;
 use PhpHtml\Plugins\Grid\Col;
 use PhpHtml\Plugins\Grid\Row;
 
-trait PluginTrait
+/*
+ * !!! VAI VIRAR UMA CLASSE ABSTRATA !!!
+ * */
+
+trait CreatePluginTrait
 {
 
     /**
@@ -81,11 +85,6 @@ trait PluginTrait
                 else
                     return $this->rowCurrent->addCol($name, $arguments);
             }
-        } elseif ($prefix == 'attr') {
-            $attribute = mb_strtolower(substr($name, 3));
-            $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
-
-            return $this;
         } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
             throw new MethodNonexistentError("Method $name does not exist!");
