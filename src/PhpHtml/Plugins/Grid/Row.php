@@ -7,7 +7,6 @@
 
 namespace PhpHtml\Plugins\Grid;
 
-
 use PhpHtml\Abstracts\PluginAbstract;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 
@@ -17,6 +16,24 @@ final class Row implements PluginOutHtmlInterface
      * @var array
      */
     private $columns = [];
+
+    /**
+     * @var Col|null
+     */
+    private $col = null;
+
+    /**
+     * @var GetItems|null
+     */
+    private $accessCols = null;
+
+    /**
+     * Row constructor.
+     */
+    public function __construct()
+    {
+        $this->accessCols = new GetItems($this->columns);
+    }
 
     /**
      * Adicionando colunas
@@ -45,28 +62,27 @@ final class Row implements PluginOutHtmlInterface
     }
 
     /**
-     * @return mixed|null
+     * @return GetItems|null
      */
-    public function firstCol()
+    public function cols()
     {
-        return count($this->columns) > 0 ? $this->columns[0] : null;
+        return $this->accessCols;
     }
 
     /**
-     * @param int $index
-     * @return mixed
+     * @param Col $col
      */
-    public function getCol(int $index)
+    public function setCol(Col $col)
     {
-        return $this->columns[$index];
+        $this->col = $col;
     }
 
     /**
-     * @return mixed|null
+     * @return Col|null
      */
-    public function lastCol()
+    public function getCol()
     {
-        return count($this->columns) > 0 ? end($this->columns) : null;
+        return $this->col;
     }
 
     /**

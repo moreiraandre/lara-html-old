@@ -40,6 +40,11 @@ final class Col implements PluginOutHtmlInterface
     private $row;
 
     /**
+     * @var null
+     */
+    private $accessRows = null;
+
+    /**
      * Inicia a linha atual
      *
      * PhpHtml constructor.
@@ -48,6 +53,7 @@ final class Col implements PluginOutHtmlInterface
     public function __construct(Row $rowCurrent)
     {
         $this->rows[] = $this->rowCurrent = $rowCurrent;
+        $this->accessRows = new GetItems($this->rows);
     }
 
     /**
@@ -117,6 +123,14 @@ final class Col implements PluginOutHtmlInterface
     public function getPlugins()
     {
         return $this->plugins;
+    }
+
+    /**
+     * @return GetItems|null
+     */
+    public function rows()
+    {
+        return $this->accessRows;
     }
 
     /**
