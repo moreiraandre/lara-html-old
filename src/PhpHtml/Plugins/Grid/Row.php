@@ -5,13 +5,13 @@
  * Time: 23:43
  */
 
-namespace PhpHtml\Plugins;
+namespace PhpHtml\Plugins\Grid;
 
 
 use PhpHtml\Abstracts\PluginAbstract;
-use PhpHtml\Interfaces\PluginInterface;
+use PhpHtml\Interfaces\PluginOutHtmlInterface;
 
-final class Row implements PluginInterface
+final class Row implements PluginOutHtmlInterface
 {
     /**
      * @var array

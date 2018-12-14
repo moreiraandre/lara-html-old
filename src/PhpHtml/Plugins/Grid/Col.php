@@ -5,17 +5,17 @@
  * Time: 02:06
  */
 
-namespace PhpHtml\Plugins;
+namespace PhpHtml\Plugins\Grid;
 
 
-use PhpHtml\Interfaces\PluginInterface;
+use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Traits\PluginTrait;
 
 /**
  * Class Col
  * @package PhpHtml\Plugins
  */
-final class Col implements PluginInterface
+final class Col implements PluginOutHtmlInterface
 {
     use PluginTrait;
 
