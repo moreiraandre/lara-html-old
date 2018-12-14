@@ -45,6 +45,31 @@ final class Row implements PluginOutHtmlInterface
     }
 
     /**
+     * @return mixed|null
+     */
+    public function firstCol()
+    {
+        return count($this->columns) > 0 ? $this->columns[0] : null;
+    }
+
+    /**
+     * @param int $index
+     * @return mixed
+     */
+    public function getCol(int $index)
+    {
+        return $this->columns[$index];
+    }
+
+    /**
+     * @return mixed|null
+     */
+    public function lastCol()
+    {
+        return count($this->columns) > 0 ? end($this->columns) : null;
+    }
+
+    /**
      * @return string
      */
     public function getHtml(): string
