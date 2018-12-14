@@ -1,5 +1,7 @@
 <?php
 /**
+ * Define o Padrão de um Plugin
+ *
  * Created by: André Moreira
  * Date: 20/11/18
  * Time: 23:40
@@ -11,11 +13,15 @@ use PhpHtml\Errors\MethodNonexistentError;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Plugins\Grid\Col;
 use PhpHtml\Plugins\Grid\Row;
-use PhpHtml\Traits\PluginTrait;
+use PhpHtml\Traits\CreatePluginTrait;
 
+/**
+ * Class PluginAbstract
+ * @package PhpHtml\Abstracts
+ */
 abstract class PluginAbstract implements PluginOutHtmlInterface
 {
-    use PluginTrait;
+    use CreatePluginTrait;
 
     /**
      * @var array
@@ -25,14 +31,14 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     /**
      * Referência da linha pai
      *
-     * @var \PhpHtml\Plugins\Row
+     * @var Row
      */
     private $row;
 
     /**
      * Referência da coluna pai
      *
-     * @var \PhpHtml\Plugins\Col
+     * @var Col
      */
     private $col;
 
@@ -69,26 +75,28 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     }
 
     /**
-     * Define atributos de tag ou cria plugins dentro do atual
+     * Define atributos de tag
      *
      * @param $name
      * @param $arguments
      * @return $this
      * @throws \Throwable
      */
-    /*public function __call($name, $arguments)
+    public function __call($name, $arguments)
     {
-        $prefix = substr($name, 0, 3);
+        $prefix = substr($name, 0, 4); // ARMAZENA OS 4 PRIMEIROS CARACTERES
 
+        // SE O PREFIXO DO COMANDO INVOCADO FOR attr ENTÃO NO ATRIBUTO SERÁ CRIADO
         if ($prefix == 'attr') {
-            $attribute = mb_strtolower(substr($name, 3));
+            // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
+            $attribute = mb_strtolower(substr($name, 4));
             $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
 
-            return $this;
+            return $this; // RETORNA O PRÓPRIO PLUGIN
         }  else
-            // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA set UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
+            // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA attr UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
             throw new MethodNonexistentError("Method $name does not exist!");
-    }*/
+    }
 
     /**
      * Retorna os atributos formatados para adicionar a tag HTML
@@ -99,8 +107,8 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     {
         $html = '';
         foreach ($this->attributes as $attr => $value)
-            $html .= "$attr=\"$value\"";
+            $html .= " $attr=\"$value\"";
 
-        return $html;
+        return ltrim($html); // RETIRA PRIMEIRO ESPAÇO ANTES DE RETORNAR
     }
 }
