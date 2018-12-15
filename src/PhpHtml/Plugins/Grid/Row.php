@@ -43,7 +43,7 @@ final class Row implements PluginOutHtmlInterface
      *
      * @return int
      */
-    public function totalColumns()
+    public function totalCols()
     {
         return count($this->cols);
     }
