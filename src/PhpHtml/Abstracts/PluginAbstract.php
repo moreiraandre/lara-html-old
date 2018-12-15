@@ -9,7 +9,7 @@
 
 namespace PhpHtml\Abstracts;
 
-use PhpHtml\Errors\MethodNonexistentError;
+use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Plugins\Grid\Col;
 use PhpHtml\Plugins\Grid\Row;
@@ -21,8 +21,6 @@ use PhpHtml\Traits\CreatePluginTrait;
  */
 abstract class PluginAbstract implements PluginOutHtmlInterface
 {
-    use CreatePluginTrait;
-
     /**
      * @var array
      */
@@ -95,7 +93,7 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
             return $this; // RETORNA O PRÓPRIO PLUGIN
         }  else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA attr UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new MethodNonexistentError("Method $name does not exist!");
+            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
     }
 
     /**

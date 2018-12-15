@@ -10,8 +10,8 @@
 
 namespace PhpHtml\Abstracts;
 
-use PhpHtml\Errors\MethodNonexistentError;
-use PhpHtml\Errors\PluginNonexistentError;
+use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
+use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
 use PhpHtml\Plugins\Grid\Col;
 use PhpHtml\Plugins\Grid\Row;
 
@@ -61,7 +61,7 @@ abstract class CreatePluginAbstract
             return $this->rowCurrent->addCol($name, $arguments[0]);
         else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new MethodNonexistentError("Method $name does not exist!");
+            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
     }
 
 }

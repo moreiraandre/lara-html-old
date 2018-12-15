@@ -7,7 +7,7 @@
 
 namespace PhpHtml;
 
-use PhpHtml\Errors\PluginNonexistentError;
+use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Plugins\Grid\Row;
 
