@@ -10,27 +10,49 @@
 namespace PhpHtml\Abstracts;
 
 use PhpHtml\Interfaces\ScreenInterface;
-use PhpHtml\PhpHtml;
+use PhpHtml\Plugins\Grid\Row;
 
-/**
- * Class ScreenAbstract
- * @package PhpHtml\Abstracts
- */
 abstract class ScreenAbstract implements ScreenInterface
 {
-
     /**
-     * @var PhpHtml
+     * @var array|null
      */
-    protected $phpHtml;
+    private $rows = null;
 
     /**
+     * @var Row|null
+     */
+    private $currentRow = null;
+
+    /**
+     * Inicia a linha atual
+     *
      * ScreenAbstract constructor.
-     * @param PhpHtml $phpHtml
+     * @param Row $row
      */
-    public function __construct(PhpHtml $phpHtml)
+    public function __construct(Row $row)
     {
-        $this->phpHtml = $phpHtml;
+        $this->rows[] = $this->currentRow = $row;
+    }
+
+    /**
+     * Cria plugins dinamicamente pelo nome da classe invocada ou adiciona nova linha
+     *
+     * @param $name
+     * @param $arguments
+     * @return PluginAbstract|Row
+     */
+    public function __call($name, $arguments)
+    {
+        // CASO O TATOAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO NOVA LINHA SERÁ CRIADA
+        if (($this->currentRow->totalCols() == 12)
+            or ($name == 'row'))
+            $this->rows[] = $this->currentRow = new Row();
+
+        if ($name == 'row')
+            return $this->currentRow;
+        else // CASO O DESENVOLVEDOR ESTEJA CRIANDO NOVO PLUGIN ELE SERÁ ADICIONADO A UMA COLUNA
+            return $this->currentRow->addCol($name, $arguments);
     }
 
     /**
@@ -40,8 +62,14 @@ abstract class ScreenAbstract implements ScreenInterface
      */
     public final function getHtml(): string
     {
-        static::run();
-        return $this->phpHtml->getHtml();
+        static::run(); // POPULA AS VARIÁVEIS PRIVADAS COM OS OBJETOS DE PLUGINS
+
+        // GERA O HTML DE TODAS AS LINHAS
+        $html = '';
+        foreach ($this->rows as $row)
+            $html .= $row->getHtml();
+
+        return $html;
     }
 
 }
