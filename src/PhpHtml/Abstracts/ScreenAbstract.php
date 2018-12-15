@@ -44,7 +44,7 @@ abstract class ScreenAbstract implements ScreenInterface
      */
     public function __call($name, $arguments)
     {
-        // CASO O TATOAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO NOVA LINHA SERÁ CRIADA
+        // CASO O TOTAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO A NOVA LINHA SERÁ CRIADA
         if (($this->currentRow->totalCols() == 12)
             or ($name == 'row'))
             $this->rows[] = $this->currentRow = new Row();

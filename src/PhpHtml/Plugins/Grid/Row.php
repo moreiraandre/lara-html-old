@@ -31,7 +31,7 @@ final class Row implements PluginOutHtmlInterface
      */
     public function addCol($pluginName, $arguments)
     {
-        $this->cols[] = $col = app(Col::class); // CRIANDO COLUNA
+        $this->cols[] = $col = new Col($this); // CRIANDO COLUNA
         $col->setRow($this); // ADICIONANDO REFERÊNCIA DA LINHA AO OBJETO DA COLUNA
         $plugin = $col->{"$pluginName"}($arguments); // CRIANDO PLUGIN
 
