@@ -8,4 +8,4 @@
 namespace PhpHtml\Errors;
 
 
-class MethodNonexistentError extends \Error {}
+class PhpHtmlMethodNotFoundError extends \Error {}

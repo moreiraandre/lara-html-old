@@ -8,4 +8,4 @@
 namespace PhpHtml\Errors;
 
 
-class PluginNonexistentError extends \Error {}
+class PhpHtmlPluginNotFoundError extends \Error {}
