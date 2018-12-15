@@ -7,10 +7,9 @@
 
 namespace PhpHtml\Plugins\Grid;
 
-
+use PhpHtml\Errors\MethodNonexistentError;
 use PhpHtml\Errors\PluginNonexistentError;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
-use PhpHtml\Traits\CreatePluginTrait;
 
 /**
  * Class Col
@@ -40,11 +39,6 @@ final class Col implements PluginOutHtmlInterface
     private $row;
 
     /**
-     * @var null
-     */
-    private $accessRows = null;
-
-    /**
      * Inicia a linha atual
      *
      * PhpHtml constructor.
@@ -53,7 +47,6 @@ final class Col implements PluginOutHtmlInterface
     public function __construct(Row $rowCurrent)
     {
         $this->rows[] = $this->rowCurrent = $rowCurrent;
-        $this->accessRows = new GetItems($this->rows);
     }
 
     /**
@@ -78,7 +71,7 @@ final class Col implements PluginOutHtmlInterface
             $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
             // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
-            if (!file_exists(__DIR__ . "/../../Plugins/$pluginClass.php"))
+            if (!file_exists(__DIR__ . "/../$pluginClass.php"))
                 throw new PluginNonexistentError("Plugin $class does not exist!");
 
             if ($this instanceof Col) {
@@ -126,11 +119,11 @@ final class Col implements PluginOutHtmlInterface
     }
 
     /**
-     * @return GetItems|null
+     * @return \Illuminate\Support\Collection
      */
     public function rows()
     {
-        return $this->accessRows;
+        return collect($this->rows);
     }
 
     /**
