@@ -7,8 +7,9 @@
 
 namespace PhpHtml\Plugins\Grid;
 
-use PhpHtml\Errors\MethodNonexistentError;
-use PhpHtml\Errors\PluginNonexistentError;
+use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
+use PhpHtml\Errors\PhpHtmlParametersError;
+use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 
 /**
@@ -72,9 +73,20 @@ final class Col implements PluginOutHtmlInterface
 
             // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
             if (!file_exists(__DIR__ . "/../$pluginClass.php"))
-                throw new PluginNonexistentError("Plugin $class does not exist!");
+                throw new PhpHtmlPluginNotFoundError("Plugin $class does not exist!");
 
-            if ($this instanceof Col) {
+            // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
+            try {
+                $this->plugins[] = $obj = new $class(...$arguments); // CRIANDO OBJETO
+            } catch (\TypeError $e) {
+                throw new PhpHtmlParametersError($e->getMessage());
+            }
+
+            $obj->setCol($this); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
+            $obj->setRow($this->getRow()); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+            return $obj;
+
+            /*if ($this instanceof Col) {
                 $arguments = !is_array($arguments) ? [$arguments] : $arguments; //!!!!!!!!!!!!!!!
                 $this->plugins[] = $obj = new $class(...$arguments); // CRIANDO OBJETO
                 $obj->setCol($this); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
@@ -82,10 +94,10 @@ final class Col implements PluginOutHtmlInterface
 
                 return $obj;
             } else
-                return $this->rowCurrent->addCol($name, $arguments);
+                return $this->rowCurrent->addCol($name, $arguments);*/
         } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new MethodNonexistentError("Method $name does not exist!");
+            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
     }
 
     /**
