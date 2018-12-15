@@ -15,25 +15,12 @@ final class Row implements PluginOutHtmlInterface
     /**
      * @var array
      */
-    private $columns = [];
+    private $cols = [];
 
     /**
      * @var Col|null
      */
     private $col = null;
-
-    /**
-     * @var GetItems|null
-     */
-    private $accessCols = null;
-
-    /**
-     * Row constructor.
-     */
-    public function __construct()
-    {
-        $this->accessCols = new GetItems($this->columns);
-    }
 
     /**
      * Adicionando colunas
@@ -44,7 +31,7 @@ final class Row implements PluginOutHtmlInterface
      */
     public function addCol($pluginName, $arguments)
     {
-        $this->columns[] = $col = app(Col::class); // CRIANDO COLUNA
+        $this->cols[] = $col = app(Col::class); // CRIANDO COLUNA
         $col->setRow($this); // ADICIONANDO REFERÊNCIA DA LINHA AO OBJETO DA COLUNA
         $plugin = $col->{"$pluginName"}($arguments); // CRIANDO PLUGIN
 
@@ -58,15 +45,15 @@ final class Row implements PluginOutHtmlInterface
      */
     public function totalColumns()
     {
-        return count($this->columns);
+        return count($this->cols);
     }
 
     /**
-     * @return GetItems|null
+     * @return \Illuminate\Support\Collection
      */
     public function cols()
     {
-        return $this->accessCols;
+        return collect($this->cols);
     }
 
     /**
@@ -91,7 +78,7 @@ final class Row implements PluginOutHtmlInterface
     public function getHtml(): string
     {
         $html = ''; // INICIANDO VARIAVEL HTML
-        foreach ($this->columns as $col)
+        foreach ($this->cols as $col)
             $html .= $col->getHtml();
 
         return "<div class='form-row'>$html</div>";
