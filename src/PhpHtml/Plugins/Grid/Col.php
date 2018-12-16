@@ -17,7 +17,7 @@ use PhpHtml\Interfaces\PluginOutHtmlInterface;
  * Class Col
  * @package PhpHtml\Plugins
  */
-final class Col implements PluginOutHtmlInterface
+class Col implements PluginOutHtmlInterface
 {
     /**
      * @var PluginAbstract|array Armazena um plugin ou linhas
@@ -32,7 +32,12 @@ final class Col implements PluginOutHtmlInterface
     /**
      * @var Row Referência da linha mãe
      */
-    private $row;
+    private $row = null;
+
+    /**
+     * @var Col Referência da coluna mãe
+     */
+    private $col = null;
 
     /**
      * Col constructor.
@@ -66,6 +71,9 @@ final class Col implements PluginOutHtmlInterface
                 if (!file_exists(__DIR__ . "/../$pluginClass.php"))
                     throw new PhpHtmlPluginNotFoundError("Plugin $class does not exist!");
 
+                while (is_array($arguments[0]))
+                    $arguments = $arguments[0];
+
                 // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
                 try {
                     $this->pluginOrRows = $obj = new $class(...$arguments); // CRIANDO OBJETO
@@ -87,6 +95,7 @@ final class Col implements PluginOutHtmlInterface
                     $currentPlugin = $this->pluginOrRows; // SALVANDO REFERÊNCIA DO PLUGIN ARMAZENADO ATUALMENTE NESTE COLUNA
                     $this->currentRow = new Row(); // CRIANDO UMA LINHA E DEFININDO COMO ATUAL
                     $auxCol = new Col($this->currentRow); // CRIANDO UMA COLUNA
+                    $this->currentRow->addColObj($auxCol);
                     $auxCol->pluginObj($currentPlugin); // ADICIONANDO O OBJETO DO PLUGIN Á NOVA COLUNA
                     $currentPlugin->setRow($this->currentRow); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
                     $currentPlugin->setCol($auxCol); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
@@ -94,25 +103,38 @@ final class Col implements PluginOutHtmlInterface
                     //                     *** FIM SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS ***
 
                     // ADICIONANDO O NOVO PLUGIN
-                    return $this->currentRow->addCol($name, ...$arguments);
+                    return $this->currentRow->addCol($name, $arguments);
                 } else {
                     /* CASO A COLUNA JÁ ESTEJA ARMAZENANDO LINHAS UMA NOVA COLUNA SERÁ ADICIONADA A LINHA ATUAL COM A
                      * SOLICITAÇÃO DE CRIAÇÃO DO PLUGIN
                      */
                     // CASO O TOTAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO A NOVA LINHA SERÁ CRIADA
-                    if (($this->currentRow->totalCols() == 12)
-                        or ($name == 'row'))
+                    if ($this->currentRow->totalCols() == 12)
                         $this->pluginOrRows[] = $this->currentRow = new Row();
 
-                    if ($name == 'row')
-                        return $this->currentRow;
-                    else // CASO O DESENVOLVEDOR ESTEJA CRIANDO NOVO PLUGIN ELE SERÁ ADICIONADO A UMA COLUNA
-                        return $this->currentRow->addCol($name, ...$arguments);
+                    // CASO O DESENVOLVEDOR ESTEJA CRIANDO NOVO PLUGIN ELE SERÁ ADICIONADO A UMA COLUNA
+                    return $this->currentRow->addCol($name, $arguments);
                 }
             }
-        } elseif($prefix == 'row') // ADICIONANDO NOVA LINHA SOLICITADA PELO DDESENVOLVEDOR
+        } elseif ($prefix == 'row') { // ADICIONANDO NOVA LINHA SOLICITADA PELO DDESENVOLVEDOR
+            if ($this->pluginOrRows instanceof PluginAbstract) {
+                /*======================================================================================================
+                 *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
+                 *======================================================================================================
+                 */
+                $currentPlugin = $this->pluginOrRows; // SALVANDO REFERÊNCIA DO PLUGIN ARMAZENADO ATUALMENTE NESTA COLUNA
+                $this->currentRow = new Row(); // CRIANDO UMA LINHA E DEFININDO COMO ATUAL
+                $auxCol = new Col($this->currentRow); // CRIANDO UMA COLUNA
+                $this->currentRow->addColObj($auxCol);
+                $auxCol->pluginObj($currentPlugin); // ADICIONANDO O OBJETO DO PLUGIN Á NOVA COLUNA
+                $currentPlugin->setRow($this->currentRow); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+                $currentPlugin->setCol($auxCol); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
+                $this->pluginOrRows = [$this->currentRow]; // SUBSTITUINDO O PLUGIN ATUAL PELA LINHA ATUAL
+                //                     *** FIM SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS ***
+            }
+
             return $this->pluginOrRows[] = $this->currentRow = new Row();
-        else
+        } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
             throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
     }
@@ -146,6 +168,28 @@ final class Col implements PluginOutHtmlInterface
     {
         $this->row = $row;
     }
+
+
+    /**
+     * Retorna a referência da coluna mãe
+     *
+     * @return Col
+     */
+    public function getCol()
+    {
+        return $this->col;
+    }
+
+    /**
+     * Guarda a referência da coluna mãe
+     *
+     * @param Row $col
+     */
+    public function setCol(Col $col)
+    {
+        $this->col = $col;
+    }
+
 
     /**
      * Retorna o array que armazena os plugins

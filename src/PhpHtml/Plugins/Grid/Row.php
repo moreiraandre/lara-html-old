@@ -32,10 +32,28 @@ final class Row implements PluginOutHtmlInterface
     public function addCol($pluginName, $arguments)
     {
         $this->cols[] = $col = new Col($this); // CRIANDO COLUNA
-        $col->setRow($this); // ADICIONANDO REFERÊNCIA DA LINHA AO OBJETO DA COLUNA
-        $plugin = $col->{"$pluginName"}(...$arguments); // CRIANDO PLUGIN
+        $col->setRow($this); // ADICIONANDO REFERÊNCIA DA LINHA MÃE
+        if ($this->getCol())
+            $col->setCol($this->getCol()); // ADICIONANDO REFERÊNCIA DA COLUNA MÃE SE HOUVER
+        $plugin = $col->{"$pluginName"}($arguments); // CRIANDO PLUGIN
 
         return $plugin;
+    }
+
+    /**
+     * Adicionando objetos de colunas
+     *
+     * @param Col $col
+     * @return Col
+     */
+    public function addColObj(Col $col)
+    {
+        $this->cols[] = $col; // ADICIONANDO COLUNA
+        $col->setRow($this); // ADICIONANDO REFERÊNCIA DA LINHA MÃE
+        if ($this->getCol())
+            $col->setCol($this->getCol()); // ADICIONANDO REFERÊNCIA DA COLUNA MÃE SE HOUVER
+
+        return $col;
     }
 
     /**

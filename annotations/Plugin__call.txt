@@ -37,6 +37,12 @@ PLUGINS
 
 ========================================================================================================================
 
+ALGUNS PLUGINS DEVEM SE COMPORTAR SEMELHANTES A COLUNAS, RECEBENDO OUTROS PLUGINS EM SI. CASO DOS:
+- FORMS
+- CARDS
+
+========================================================================================================================
+
 PLUGIN COLUMN
 =============
 GERA UMA COLUNA CSS COM PLUGIN DENTRO
