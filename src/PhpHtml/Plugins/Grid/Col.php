@@ -68,13 +68,15 @@ final class Col implements PluginOutHtmlInterface
 
                 // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
                 try {
-                    $this->pluginOrRow = $obj = new $class(...$arguments); // CRIANDO OBJETO
+                    $this->pluginOrRows = $obj = new $class(...$arguments); // CRIANDO OBJETO
+
                 } catch (\TypeError $e) {
                     throw new PhpHtmlParametersError($e->getMessage());
                 }
 
                 $obj->setCol($this); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
                 $obj->setRow($this->getRow()); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+
                 return $obj;
             } else { // CASO A COLUNA NÃO ESTEJA VAZIA
                 if ($this->pluginOrRows instanceof PluginAbstract) { // CASO UM PLUGIN ESTEJA ARMAZENADO DIRETAMENTE
