@@ -1,0 +1,9 @@
+ok  $attributes
+ok  $row
+ok  $col
+
+ok  getRow()
+ok  setRow(Row $row)
+ok  getCol()
+ok  setCol(Col $col)
+ok  getAttributesTag()

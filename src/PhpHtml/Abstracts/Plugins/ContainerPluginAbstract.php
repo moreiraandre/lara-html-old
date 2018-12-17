@@ -1,23 +1,20 @@
 <?php
 /**
  * Created by: André Moreira
- * Date: 21/11/18
- * Time: 02:06
+ * Date: 16/12/18
+ * Time: 22:50
  */
 
-namespace PhpHtml\Plugins\Grid;
+namespace PhpHtml\Abstracts\Plugins;
 
-use PhpHtml\Abstracts\PluginAbstract;
 use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
 use PhpHtml\Errors\PhpHtmlParametersError;
 use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
+use PhpHtml\Finals\Col;
+use PhpHtml\Finals\Row;
 
-/**
- * Class Col
- * @package PhpHtml\Plugins
- */
-class Col implements PluginOutHtmlInterface
+abstract class ContainerPluginAbstract extends PluginAbstract implements PluginOutHtmlInterface
 {
     /**
      * @var PluginAbstract|array Armazena um plugin ou linhas
@@ -28,25 +25,6 @@ class Col implements PluginOutHtmlInterface
      * @var null|Row Linha atual se não estiver armazenando somente um plugin
      */
     private $currentRow = null;
-
-    /**
-     * @var Row Referência da linha mãe
-     */
-    private $row = null;
-
-    /**
-     * @var Col Referência da coluna mãe
-     */
-    private $col = null;
-
-    /**
-     * Col constructor.
-     * @param Row $row Linha mãe
-     */
-    public function __construct(Row $row)
-    {
-        $this->row = $row;
-    }
 
     /**
      * Cria objetos de plugins
@@ -63,12 +41,12 @@ class Col implements PluginOutHtmlInterface
 
         // CRIANDO PLUGINS
         if ($prefix == 'add') { // NOVO PLUGIN
-            if ($this->pluginOrRows === null) { // CASO A COLUNA ESTEJA VAZIA SERÁ CRIADO UM PLUGIN
+            if (!($this instanceof Col) && ($this->pluginOrRows === null)) { // CASO A COLUNA ESTEJA VAZIA SERÁ CRIADO UM PLUGIN
                 $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
                 $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
                 // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
-                if (!file_exists(__DIR__ . "/../$pluginClass.php"))
+                if (!file_exists(__DIR__ . "/../../Plugins/$pluginClass.php"))
                     throw new PhpHtmlPluginNotFoundError("Plugin $class does not exist!");
 
                 while (is_array($arguments[0]))
@@ -150,48 +128,6 @@ class Col implements PluginOutHtmlInterface
     }
 
     /**
-     * Retorna a referência da linha
-     *
-     * @return Row
-     */
-    public function getRow()
-    {
-        return $this->row;
-    }
-
-    /**
-     * Guarda a referência da linha
-     *
-     * @param Row $row
-     */
-    public function setRow(Row $row)
-    {
-        $this->row = $row;
-    }
-
-
-    /**
-     * Retorna a referência da coluna mãe
-     *
-     * @return Col
-     */
-    public function getCol()
-    {
-        return $this->col;
-    }
-
-    /**
-     * Guarda a referência da coluna mãe
-     *
-     * @param Row $col
-     */
-    public function setCol(Col $col)
-    {
-        $this->col = $col;
-    }
-
-
-    /**
      * Retorna o array que armazena os plugins
      *
      * @return array
@@ -210,17 +146,33 @@ class Col implements PluginOutHtmlInterface
     }
 
     /**
+     * Retorna o HTML dos plugins filhos
+     *
      * @return string
      */
-    public function getHtml(): string
+    public function getHtmlPlugins()
     {
         $html = '';
         // APROVEITANDO REPETIÇÃO DE ARMAZENAMENTO DO HTML MESMO QUE ESTEJA ARMAZENDO UM PLUGIN AO INVÉS DE LINHAS
         $this->pluginOrRows = !is_array($this->pluginOrRows) ? [$this->pluginOrRows] : $this->pluginOrRows;
-        foreach ($this->pluginOrRows as $plugin)
-            $html .= $plugin->getHtml();
+        foreach ($this->pluginOrRows as $plugin) {
 
-        return "<div class='col-sm'>$html</div>";
+            // !!! SOMENTE PARA DESCOBERTA DE ERRO! DEVE SER RETIRADO!!!
+            try {
+                $html .= $plugin->getHtml();
+            } catch (\Error $error) {
+                echo $error->getMessage();
+                echo "<br>";
+                var_dump($plugin);
+                echo "<br>";
+                var_dump($this->pluginOrRows);
+                echo "<br>";
+                echo class_basename($plugin);
+                echo "<br>";
+            }
+        }
+
+        return $html;
     }
 
 }

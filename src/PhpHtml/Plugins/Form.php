@@ -7,16 +7,13 @@
 
 namespace PhpHtml\Plugins;
 
-
-use PhpHtml\Abstracts\PluginAbstract;
-use PhpHtml\Plugins\Grid\Col;
+use PhpHtml\Abstracts\Plugins\ContainerPluginAbstract;
 
 /**
  * Class Text
  * @package PhpHtml\Plugins
  */
-//class Form extends PluginAbstract
-class Form extends Col
+class Form extends ContainerPluginAbstract
 {
     /**
      * @var string
@@ -37,7 +34,7 @@ class Form extends Col
      */
     public function getHtml(): string
     {
-        $html = parent::getHtml();
+        $html = parent::getHtmlPlugins();
 
         return
             "<form action='$this->action'>$html</form>";

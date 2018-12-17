@@ -5,20 +5,21 @@
  * Time: 00:11
  */
 
-use PhpHtml\Abstracts\ScreenAbstract;
+use PhpHtml\PhpHtmlScreen;
 
-class SimpleForm extends ScreenAbstract
+class SimpleForm extends PhpHtmlScreen
 {
     public function run()
     {
+//        $this->addText('nome');
         $form = $this->addForm('/');
-        $form->addText('nome');
+        /*$form->addText('nome');
         $form->row();
         $form->addText('endereco');
         $form->row();
         $form->addText('fone');
         $colCel = $form->addText('cel')->getCol();
         $colCel->addText('cel2');
-        $colCel->addText('cel3');
+        $colCel->addText('cel3');*/
     }
 }

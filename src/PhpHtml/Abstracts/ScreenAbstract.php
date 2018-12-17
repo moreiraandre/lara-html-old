@@ -9,8 +9,9 @@
 
 namespace PhpHtml\Abstracts;
 
+use PhpHtml\Abstracts\Plugins\PluginAbstract;
 use PhpHtml\Interfaces\ScreenInterface;
-use PhpHtml\Plugins\Grid\Row;
+use PhpHtml\Finals\Row;
 
 abstract class ScreenAbstract implements ScreenInterface
 {

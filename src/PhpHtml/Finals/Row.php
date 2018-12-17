@@ -5,9 +5,9 @@
  * Time: 23:43
  */
 
-namespace PhpHtml\Plugins\Grid;
+namespace PhpHtml\Finals;
 
-use PhpHtml\Abstracts\PluginAbstract;
+use PhpHtml\Abstracts\Plugins\PluginAbstract;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 
 final class Row implements PluginOutHtmlInterface

@@ -7,18 +7,13 @@
  * Time: 23:40
  */
 
-namespace PhpHtml\Abstracts;
+namespace PhpHtml\Abstracts\Plugins;
 
 use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
-use PhpHtml\Plugins\Grid\Col;
-use PhpHtml\Plugins\Grid\Row;
-use PhpHtml\Traits\CreatePluginTrait;
+use PhpHtml\Finals\Col;
+use PhpHtml\Finals\Row;
 
-/**
- * Class PluginAbstract
- * @package PhpHtml\Abstracts
- */
 abstract class PluginAbstract implements PluginOutHtmlInterface
 {
     /**
@@ -31,19 +26,19 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
      *
      * @var Row
      */
-    private $row;
+    private $row = null;
 
     /**
      * Referência da coluna pai
      *
      * @var Col
      */
-    private $col;
+    private $col = null;
 
     /**
      * @return Row
      */
-    public function getRow(): Row
+    final public function getRow(): Row
     {
         return $this->row;
     }
@@ -51,7 +46,7 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     /**
      * @param Row $row
      */
-    public function setRow(Row $row): void
+    final public function setRow(Row $row): void
     {
         $this->row = $row;
     }
@@ -59,7 +54,7 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     /**
      * @return Col
      */
-    public function getCol(): Col
+    final public function getCol(): Col
     {
         return $this->col;
     }
@@ -67,7 +62,7 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     /**
      * @param Col $col
      */
-    public function setCol(Col $col): void
+    final public function setCol(Col $col): void
     {
         $this->col = $col;
     }
