@@ -17,6 +17,8 @@ class SimpleForm extends ScreenAbstract
         $form->addText('endereco');
         $form->row();
         $form->addText('fone');
-        $form->addText('cel');
+        $colCel = $form->addText('cel')->getCol();
+        $colCel->addText('cel2');
+        $colCel->addText('cel3');
     }
 }
