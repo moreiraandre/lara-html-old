@@ -41,7 +41,8 @@ abstract class ContainerPluginAbstract extends PluginAbstract implements PluginO
 
         // CRIANDO PLUGINS
         if ($prefix == 'add') { // NOVO PLUGIN
-            if (!($this instanceof Col) && ($this->pluginOrRows === null)) { // CASO A COLUNA ESTEJA VAZIA SERÁ CRIADO UM PLUGIN
+            // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
+            if (!($this instanceof Col) && ($this->pluginOrRows === null)) {
                 $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
                 $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
@@ -87,6 +88,7 @@ abstract class ContainerPluginAbstract extends PluginAbstract implements PluginO
                      * SOLICITAÇÃO DE CRIAÇÃO DO PLUGIN
                      */
                     // CASO O TOTAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO A NOVA LINHA SERÁ CRIADA
+                    dd($this);
                     if ($this->currentRow->totalCols() == 12)
                         $this->pluginOrRows[] = $this->currentRow = new Row();
 
@@ -115,6 +117,22 @@ abstract class ContainerPluginAbstract extends PluginAbstract implements PluginO
         } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
             throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
+    }
+
+    /**
+     * @return Row|null
+     */
+    public function getCurrentRow(): ?Row
+    {
+        return $this->currentRow;
+    }
+
+    /**
+     * @param Row $currentRow
+     */
+    public function setCurrentRow(Row $currentRow): void
+    {
+        $this->currentRow = $currentRow;
     }
 
     /**
