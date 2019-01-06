@@ -10,9 +10,8 @@
 namespace PhpHtml\Abstracts\Plugins;
 
 use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
-use PhpHtml\Interfaces\PluginOutHtmlInterface;
 
-abstract class SinglePluginAbstract extends PluginAbstract implements PluginOutHtmlInterface
+abstract class SinglePluginAbstract extends PluginAbstract
 {
     /**
      * Define atributos de tag
