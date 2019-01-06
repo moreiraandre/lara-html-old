@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 ?>
 
 <!doctype html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -29,7 +29,7 @@ error_reporting(E_ALL);
 <body>
 <h1>Hello, world!</h1>
 
-<a href="?class=SimpleForm">Form Simples</a>
+<a href="?class=SimpleForm">Simple Form</a>
 
 <div class="container-fluid">
 <?php
