@@ -1,5 +1,7 @@
 <?php
 /**
+ * Define o padrão de um plugin que armazena outros plugins
+ *
  * Created by: André Moreira
  * Date: 16/12/18
  * Time: 22:50
@@ -10,11 +12,10 @@ namespace PhpHtml\Abstracts\Plugins;
 use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
 use PhpHtml\Errors\PhpHtmlParametersError;
 use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
-use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
-abstract class ContainerPluginAbstract extends PluginAbstract implements PluginOutHtmlInterface
+abstract class ContainerPluginAbstract extends PluginAbstract
 {
     /**
      * @var PluginAbstract|array Armazena um plugin ou linhas
@@ -42,7 +43,7 @@ abstract class ContainerPluginAbstract extends PluginAbstract implements PluginO
         // CRIANDO PLUGINS
         if ($prefix == 'add') { // NOVO PLUGIN
             // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
-            if (!($this instanceof Col) && ($this->pluginOrRows === null)) {
+            if (($this instanceof Col) && ($this->pluginOrRows === null)) {
                 $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
                 $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
@@ -56,7 +57,6 @@ abstract class ContainerPluginAbstract extends PluginAbstract implements PluginO
                 // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
                 try {
                     $this->pluginOrRows = $obj = new $class(...$arguments); // CRIANDO OBJETO
-
                 } catch (\TypeError $e) {
                     throw new PhpHtmlParametersError($e->getMessage());
                 }
@@ -88,7 +88,7 @@ abstract class ContainerPluginAbstract extends PluginAbstract implements PluginO
                      * SOLICITAÇÃO DE CRIAÇÃO DO PLUGIN
                      */
                     // CASO O TOTAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO A NOVA LINHA SERÁ CRIADA
-                    dd($this);
+//                    dd($this);
                     if ($this->currentRow->totalCols() == 12)
                         $this->pluginOrRows[] = $this->currentRow = new Row();
 
