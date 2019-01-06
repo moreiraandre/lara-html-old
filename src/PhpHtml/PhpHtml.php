@@ -11,4 +11,4 @@ namespace PhpHtml;
 
 use PhpHtml\Abstracts\ScreenAbstract;
 
-abstract class PhpHtmlScreen extends ScreenAbstract {}
+abstract class PhpHtml extends ScreenAbstract {}
