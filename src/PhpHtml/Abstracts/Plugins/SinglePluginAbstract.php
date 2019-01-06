@@ -9,31 +9,4 @@
 
 namespace PhpHtml\Abstracts\Plugins;
 
-use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
-
-abstract class SinglePluginAbstract extends PluginAbstract
-{
-    /**
-     * Define atributos de tag
-     *
-     * @param $name
-     * @param $arguments
-     * @return $this
-     * @throws \Throwable
-     */
-    public function __call($name, $arguments)
-    {
-        $prefix = substr($name, 0, 4); // ARMAZENA OS 4 PRIMEIROS CARACTERES
-
-        // SE O PREFIXO DO COMANDO INVOCADO FOR attr ENTÃO NO ATRIBUTO SERÁ CRIADO
-        if ($prefix == 'attr') {
-            // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
-            $attribute = mb_strtolower(substr($name, 4));
-            $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
-
-            return $this; // RETORNA O PRÓPRIO PLUGIN
-        } else
-            // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA attr UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
-    }
-}
+abstract class SinglePluginAbstract extends PluginAbstract {}
