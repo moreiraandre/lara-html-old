@@ -17,6 +17,8 @@ use PhpHtml\Finals\Row;
 abstract class PluginAbstract implements PluginOutHtmlInterface
 {
     /**
+     * Armazena atributos de tag HTML
+     *
      * @var array
      */
     protected $attributes = [];
