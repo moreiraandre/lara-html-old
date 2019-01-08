@@ -9,7 +9,7 @@
 
 namespace PhpHtml\Abstracts;
 
-use PhpHtml\Abstracts\Plugins\PluginAbstract;
+use PhpHtml\Abstracts\Plugins\SinglePluginAbstract;
 use PhpHtml\Interfaces\ScreenInterface;
 use PhpHtml\Finals\Row;
 
@@ -41,7 +41,7 @@ abstract class ScreenAbstract implements ScreenInterface
      *
      * @param $name
      * @param $arguments
-     * @return PluginAbstract|Row
+     * @return SinglePluginAbstract|Row
      */
     final public function __call($name, $arguments)
     {

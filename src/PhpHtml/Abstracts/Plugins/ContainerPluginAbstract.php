@@ -15,10 +15,10 @@ use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
-abstract class ContainerPluginAbstract extends PluginAbstract
+abstract class ContainerPluginAbstract extends SinglePluginAbstract
 {
     /**
-     * @var PluginAbstract|array Armazena um plugin ou linhas
+     * @var SinglePluginAbstract|array Armazena um plugin ou linhas
      */
     private $pluginOrRows = null;
 
@@ -66,7 +66,7 @@ abstract class ContainerPluginAbstract extends PluginAbstract
 
                 return $obj;
             } else { // CASO A COLUNA NÃO ESTEJA VAZIA
-                if ($this->pluginOrRows instanceof PluginAbstract) { // CASO UM PLUGIN ESTEJA ARMAZENADO DIRETAMENTE
+                if ($this->pluginOrRows instanceof SinglePluginAbstract) { // CASO UM PLUGIN ESTEJA ARMAZENADO DIRETAMENTE
                     /*======================================================================================================
                      *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
                      *======================================================================================================
@@ -97,7 +97,7 @@ abstract class ContainerPluginAbstract extends PluginAbstract
                 }
             }
         } elseif ($prefix == 'row') { // ADICIONANDO NOVA LINHA SOLICITADA PELO DDESENVOLVEDOR
-            if ($this->pluginOrRows instanceof PluginAbstract) {
+            if ($this->pluginOrRows instanceof SinglePluginAbstract) {
                 /*======================================================================================================
                  *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
                  *======================================================================================================
@@ -138,9 +138,9 @@ abstract class ContainerPluginAbstract extends PluginAbstract
     /**
      * Armazena um plugin quando ele já é um objeto
      *
-     * @param PluginAbstract $plugin
+     * @param SinglePluginAbstract $plugin
      */
-    public function pluginObj(PluginAbstract $plugin)
+    public function pluginObj(SinglePluginAbstract $plugin)
     {
         $this->pluginOrRows = $plugin;
     }
