@@ -5,16 +5,17 @@
  * Time: 00:11
  */
 
-use PhpHtml\PhpHtmlScreen;
+use PhpHtml\PhpHtml;
 
-class SimpleForm extends PhpHtmlScreen
+class SimpleForm extends PhpHtml
 {
     public function run()
     {
-//        $this->addText('nome');
+        /*$this->addText('nome');
+        $this->addText('nome');*/
         $form = $this->addForm('/');
-        /*$form->addText('nome');
-        $form->row();
+        $form->addText('nome');
+        /*$form->row();
         $form->addText('endereco');
         $form->row();
         $form->addText('fone');

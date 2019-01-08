@@ -7,13 +7,14 @@
 
 namespace PhpHtml\Plugins;
 
-use PhpHtml\Abstracts\Plugins\ContainerPluginAbstract;
+use PhpHtml\Abstracts\Plugins\ContainerRowAbstract;
+use PhpHtml\Finals\Row;
 
 /**
  * Class Text
  * @package PhpHtml\Plugins
  */
-class Form extends ContainerPluginAbstract
+class Form extends ContainerRowAbstract
 {
     /**
      * @var string
@@ -26,6 +27,8 @@ class Form extends ContainerPluginAbstract
      */
     public function __construct(string $action)
     {
+        parent::__construct(new Row());
+
         $this->action = $action;
     }
 

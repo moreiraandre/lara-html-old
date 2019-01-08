@@ -15,7 +15,7 @@ use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
-abstract class ContainerPluginAbstract extends SinglePluginAbstract
+abstract class ContainerRowAbstract extends SinglePluginAbstract
 {
     /**
      * @var SinglePluginAbstract|array Armazena um plugin ou linhas
@@ -28,95 +28,13 @@ abstract class ContainerPluginAbstract extends SinglePluginAbstract
     private $currentRow = null;
 
     /**
-     * Cria objetos de plugins
+     * Inicia a Linha Atual
      *
-     * @param $name
-     * @param $arguments
-     * @return mixed
-     * @throws \Throwable
+     * @param Row $currentRow
      */
-    public function __call($name, $arguments)
+    public function __construct(Row $currentRow)
     {
-        // GUARDANDO O PREFIXO DO MÉTODO PARA VERIFICAR SE REALMENTE É DESEJADO CRIAR UM NOVO PLUGIN
-        $prefix = substr($name, 0, 3);
-
-        // CRIANDO PLUGINS
-        if ($prefix == 'add') { // NOVO PLUGIN
-            // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
-            if (($this instanceof Col) && ($this->pluginOrRows === null)) {
-                $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
-                $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
-
-                // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
-                if (!file_exists(__DIR__ . "/../../Plugins/$pluginClass.php"))
-                    throw new PhpHtmlPluginNotFoundError("Plugin $class does not exist!");
-
-                while (is_array($arguments[0]))
-                    $arguments = $arguments[0];
-
-                // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
-                try {
-                    $this->pluginOrRows = $obj = new $class(...$arguments); // CRIANDO OBJETO
-                } catch (\TypeError $e) {
-                    throw new PhpHtmlParametersError($e->getMessage());
-                }
-
-                $obj->setCol($this); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
-                $obj->setRow($this->getRow()); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
-
-                return $obj;
-            } else { // CASO A COLUNA NÃO ESTEJA VAZIA
-                if ($this->pluginOrRows instanceof SinglePluginAbstract) { // CASO UM PLUGIN ESTEJA ARMAZENADO DIRETAMENTE
-                    /*======================================================================================================
-                     *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
-                     *======================================================================================================
-                     */
-                    $currentPlugin = $this->pluginOrRows; // SALVANDO REFERÊNCIA DO PLUGIN ARMAZENADO ATUALMENTE NESTE COLUNA
-                    $this->currentRow = new Row(); // CRIANDO UMA LINHA E DEFININDO COMO ATUAL
-                    $auxCol = new Col($this->currentRow); // CRIANDO UMA COLUNA
-                    $this->currentRow->addColObj($auxCol);
-                    $auxCol->pluginObj($currentPlugin); // ADICIONANDO O OBJETO DO PLUGIN Á NOVA COLUNA
-                    $currentPlugin->setRow($this->currentRow); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
-                    $currentPlugin->setCol($auxCol); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
-                    $this->pluginOrRows = [$this->currentRow]; // SUBSTITUINDO O PLUGIN ATUAL PELA LINHA ATUAL
-                    //                     *** FIM SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS ***
-
-                    // ADICIONANDO O NOVO PLUGIN
-                    return $this->currentRow->addCol($name, $arguments);
-                } else {
-                    /* CASO A COLUNA JÁ ESTEJA ARMAZENANDO LINHAS UMA NOVA COLUNA SERÁ ADICIONADA A LINHA ATUAL COM A
-                     * SOLICITAÇÃO DE CRIAÇÃO DO PLUGIN
-                     */
-                    // CASO O TOTAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO A NOVA LINHA SERÁ CRIADA
-//                    dd($this);
-                    if ($this->currentRow->totalCols() == 12)
-                        $this->pluginOrRows[] = $this->currentRow = new Row();
-
-                    // CASO O DESENVOLVEDOR ESTEJA CRIANDO NOVO PLUGIN ELE SERÁ ADICIONADO A UMA COLUNA
-                    return $this->currentRow->addCol($name, $arguments);
-                }
-            }
-        } elseif ($prefix == 'row') { // ADICIONANDO NOVA LINHA SOLICITADA PELO DDESENVOLVEDOR
-            if ($this->pluginOrRows instanceof SinglePluginAbstract) {
-                /*======================================================================================================
-                 *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
-                 *======================================================================================================
-                 */
-                $currentPlugin = $this->pluginOrRows; // SALVANDO REFERÊNCIA DO PLUGIN ARMAZENADO ATUALMENTE NESTA COLUNA
-                $this->currentRow = new Row(); // CRIANDO UMA LINHA E DEFININDO COMO ATUAL
-                $auxCol = new Col($this->currentRow); // CRIANDO UMA COLUNA
-                $this->currentRow->addColObj($auxCol);
-                $auxCol->pluginObj($currentPlugin); // ADICIONANDO O OBJETO DO PLUGIN Á NOVA COLUNA
-                $currentPlugin->setRow($this->currentRow); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
-                $currentPlugin->setCol($auxCol); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
-                $this->pluginOrRows = [$this->currentRow]; // SUBSTITUINDO O PLUGIN ATUAL PELA LINHA ATUAL
-                //                     *** FIM SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS ***
-            }
-
-            return $this->pluginOrRows[] = $this->currentRow = new Row();
-        } else
-            // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
+        $this->currentRow = $currentRow;
     }
 
     /**
@@ -161,6 +79,99 @@ abstract class ContainerPluginAbstract extends SinglePluginAbstract
     public function rows()
     {
         return is_array($this->pluginOrRows) ? collect($this->pluginOrRows) : null;
+    }
+
+    /**
+     * Cria objetos de plugins
+     *
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     * @throws \Throwable
+     */
+    public function __call($name, $arguments)
+    {
+        // GUARDANDO O PREFIXO DO MÉTODO PARA VERIFICAR SE REALMENTE É DESEJADO CRIAR UM NOVO PLUGIN
+        $prefix = substr($name, 0, 3);
+
+        // CRIANDO PLUGINS
+        if ($prefix == 'add') { // NOVO PLUGIN
+            // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
+            if (($this instanceof Col) && ($this->pluginOrRows === null)) {
+                $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
+                $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
+
+                // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
+                if (!file_exists(__DIR__ . "/../../Plugins/$pluginClass.php"))
+                    throw new PhpHtmlPluginNotFoundError("Plugin $class does not exist!");
+
+                // RESOLVENDO A HIERARQUIA DE PARÂMETROS EM MÉTODOS DINÂMICOS
+                while (is_array($arguments[0]))
+                    $arguments = $arguments[0];
+
+                // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
+                try {
+                    $this->pluginOrRows = $obj = new $class(...$arguments); // CRIANDO OBJETO
+                } catch (\TypeError $e) {
+                    throw new PhpHtmlParametersError($e->getMessage());
+                }
+
+                $obj->setCol($this); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
+                $obj->setRow($this->getRow()); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+
+                return $obj;
+            } else { // CASO A COLUNA NÃO ESTEJA VAZIA
+                if ($this->pluginOrRows instanceof SinglePluginAbstract) { // CASO UM PLUGIN ESTEJA ARMAZENADO DIRETAMENTE
+                    /*======================================================================================================
+                     *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
+                     *======================================================================================================
+                     */
+                    $currentPlugin = $this->pluginOrRows; // SALVANDO REFERÊNCIA DO PLUGIN ARMAZENADO ATUALMENTE NESTE COLUNA
+                    $this->currentRow = new Row(); // CRIANDO UMA LINHA E DEFININDO COMO ATUAL
+                    $auxCol = new Col($this->currentRow); // CRIANDO UMA COLUNA
+                    $this->currentRow->addColObj($auxCol);
+                    $auxCol->pluginObj($currentPlugin); // ADICIONANDO O OBJETO DO PLUGIN Á NOVA COLUNA
+                    $currentPlugin->setRow($this->currentRow); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+                    $currentPlugin->setCol($auxCol); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
+                    $this->pluginOrRows = [$this->currentRow]; // SUBSTITUINDO O PLUGIN ATUAL PELA LINHA ATUAL
+                    //                     *** FIM SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS ***
+
+                    // ADICIONANDO O NOVO PLUGIN
+                    return $this->currentRow->addCol($name, $arguments);
+                } else {
+                    /* CASO A COLUNA JÁ ESTEJA ARMAZENANDO LINHAS UMA NOVA COLUNA SERÁ ADICIONADA A LINHA ATUAL COM A
+                     * SOLICITAÇÃO DE CRIAÇÃO DO PLUGIN
+                     */
+                    // CASO O TOTAL DE COLUNAS DA LINHA SEJA 12 OU O DESENVOLVEDOR SOLICITE NOVA LINHA ENTÃO A NOVA LINHA SERÁ CRIADA
+//                    dd($this, $this->getCurrentRow());
+                    if ($this->currentRow->totalCols() == 12)
+                        $this->pluginOrRows[] = $this->currentRow = new Row();
+
+                    // CASO O DESENVOLVEDOR ESTEJA CRIANDO NOVO PLUGIN ELE SERÁ ADICIONADO A UMA COLUNA
+                    return $this->currentRow->addCol($name, $arguments);
+                }
+            }
+        } elseif ($prefix == 'row') { // ADICIONANDO NOVA LINHA SOLICITADA PELO DDESENVOLVEDOR
+            if ($this->pluginOrRows instanceof SinglePluginAbstract) {
+                /*======================================================================================================
+                 *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
+                 *======================================================================================================
+                 */
+                $currentPlugin = $this->pluginOrRows; // SALVANDO REFERÊNCIA DO PLUGIN ARMAZENADO ATUALMENTE NESTA COLUNA
+                $this->currentRow = new Row(); // CRIANDO UMA LINHA E DEFININDO COMO ATUAL
+                $auxCol = new Col($this->currentRow); // CRIANDO UMA COLUNA
+                $this->currentRow->addColObj($auxCol);
+                $auxCol->pluginObj($currentPlugin); // ADICIONANDO O OBJETO DO PLUGIN Á NOVA COLUNA
+                $currentPlugin->setRow($this->currentRow); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+                $currentPlugin->setCol($auxCol); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
+                $this->pluginOrRows = [$this->currentRow]; // SUBSTITUINDO O PLUGIN ATUAL PELA LINHA ATUAL
+                //                     *** FIM SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS ***
+            }
+
+            return $this->pluginOrRows[] = $this->currentRow = new Row();
+        } else
+            // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
+            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
     }
 
     /**

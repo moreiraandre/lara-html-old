@@ -7,13 +7,13 @@
 
 namespace PhpHtml\Finals;
 
-use PhpHtml\Abstracts\Plugins\ContainerPluginAbstract;
+use PhpHtml\Abstracts\Plugins\ContainerRowAbstract;
 
 /**
  * Class Col
  * @package PhpHtml\Plugins
  */
-final class Col extends ContainerPluginAbstract
+final class Col extends ContainerRowAbstract
 {
     /**
      * Col constructor.
