@@ -1,8 +1,18 @@
 TELA
-    LINHA
+    LINHA 1
         COLUNA
             PLUGIN ÚNICO
             PLUGIN CONTAINER (MESMO CONCEITO DE COLUNA)
+                LINHA
+                    COLUNA 1
+                        PLUGIN 1
+                        PLUGIN 2
+                        ...
+                    COLUNA 2
+                        PLUGIN 1
+                        ...
+    LINHA 2
+        ...
 
 TELA
 ----
