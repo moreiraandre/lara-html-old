@@ -6,16 +6,19 @@
     "authors": [
         {
             "name": "André Moreira",
-            "email": "andre.mcx1@gmail.com"
+            "email": "andre.mcx1@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=7.2",
-        "laravel/framework": "5.7.*"
+        "laravel/laravel": "5.7.*"
     },
     "autoload": {
         "psr-4": {
             "PhpHtml\\": "src/PhpHtml/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
