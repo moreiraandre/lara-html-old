@@ -7,21 +7,35 @@
 
 namespace PhpHtml\Finals;
 
-use PhpHtml\Abstracts\Plugins\ContainerRowAbstract;
+use PhpHtml\Abstracts\ContainerRowsAbstract;
+use PhpHtml\Abstracts\PluginAbstract;
 
 /**
  * Class Col
  * @package PhpHtml\Plugins
  */
-final class Col extends ContainerRowAbstract
+final class Col extends ContainerRowsAbstract
 {
     /**
-     * Col constructor.
-     * @param Row $row Linha mãe
+     * @var null|PluginAbstract Plugin armazenado nesta coluna
      */
-    public function __construct(Row $row)
+    private $plugin = null;
+
+    /**
+     * @return PluginAbstract
+     * @return null Quando a coluna está armazenando linhas
+     */
+    public function getPlugin(): PluginAbstract
     {
-        $this->setRow($row);
+        return $this->plugin;
+    }
+
+    /**
+     * @param PluginAbstract $plugin
+     */
+    public function setPlugin(PluginAbstract $plugin): void
+    {
+        $this->plugin = $plugin;
     }
 
     /**

@@ -7,14 +7,14 @@
 
 namespace PhpHtml\Plugins;
 
-use PhpHtml\Abstracts\Plugins\ContainerRowAbstract;
+use PhpHtml\Abstracts\Plugins\ContainerRowsAbstract;
 use PhpHtml\Finals\Row;
 
 /**
  * Class Text
  * @package PhpHtml\Plugins
  */
-class Form extends ContainerRowAbstract
+class Form extends ContainerRowsAbstract
 {
     /**
      * @var string

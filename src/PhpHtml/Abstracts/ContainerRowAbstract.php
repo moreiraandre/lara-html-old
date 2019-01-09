@@ -15,10 +15,10 @@ use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
-abstract class ContainerRowAbstract extends SinglePluginAbstract
+abstract class ContainerRowAbstract extends PluginAbstract
 {
     /**
-     * @var SinglePluginAbstract|array Armazena um plugin ou linhas
+     * @var PluginAbstract|array Armazena um plugin ou linhas
      */
     private $pluginOrRows = null;
 
@@ -56,9 +56,9 @@ abstract class ContainerRowAbstract extends SinglePluginAbstract
     /**
      * Armazena um plugin quando ele já é um objeto
      *
-     * @param SinglePluginAbstract $plugin
+     * @param PluginAbstract $plugin
      */
-    public function pluginObj(SinglePluginAbstract $plugin)
+    public function pluginObj(PluginAbstract $plugin)
     {
         $this->pluginOrRows = $plugin;
     }
@@ -121,7 +121,7 @@ abstract class ContainerRowAbstract extends SinglePluginAbstract
 
                 return $obj;
             } else { // CASO A COLUNA NÃO ESTEJA VAZIA
-                if ($this->pluginOrRows instanceof SinglePluginAbstract) { // CASO UM PLUGIN ESTEJA ARMAZENADO DIRETAMENTE
+                if ($this->pluginOrRows instanceof PluginAbstract) { // CASO UM PLUGIN ESTEJA ARMAZENADO DIRETAMENTE
                     /*======================================================================================================
                      *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
                      *======================================================================================================
@@ -152,7 +152,7 @@ abstract class ContainerRowAbstract extends SinglePluginAbstract
                 }
             }
         } elseif ($prefix == 'row') { // ADICIONANDO NOVA LINHA SOLICITADA PELO DDESENVOLVEDOR
-            if ($this->pluginOrRows instanceof SinglePluginAbstract) {
+            if ($this->pluginOrRows instanceof PluginAbstract) {
                 /*======================================================================================================
                  *                           SUBSTITUINDO O PLUGIN ARMAZENADO POR LINHAS
                  *======================================================================================================

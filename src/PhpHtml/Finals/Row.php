@@ -7,7 +7,7 @@
 
 namespace PhpHtml\Finals;
 
-use PhpHtml\Abstracts\Plugins\SinglePluginAbstract;
+use PhpHtml\Abstracts\Plugins\PluginAbstract;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 
 final class Row implements PluginOutHtmlInterface
@@ -27,7 +27,7 @@ final class Row implements PluginOutHtmlInterface
      *
      * @param $pluginName
      * @param $arguments
-     * @return SinglePluginAbstract
+     * @return PluginAbstract
      */
     public function addCol($pluginName, $arguments)
     {

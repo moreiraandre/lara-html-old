@@ -7,13 +7,13 @@
 
 namespace PhpHtml\Plugins;
 
-use PhpHtml\Abstracts\Plugins\SinglePluginAbstract;
+use PhpHtml\Abstracts\Plugins\PluginAbstract;
 
 /**
  * Class Text
  * @package PhpHtml\Plugins
  */
-class Text extends SinglePluginAbstract
+class Text extends PluginAbstract
 {
     private
         /**
