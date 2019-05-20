@@ -10,7 +10,7 @@ namespace PhpHtml\Interfaces;
 interface ScreenInterface
 {
     /**
-     * Método onde será escrito a lógica de montagem da tela.
+     * Método onde será escrita a lógica de montagem da tela.
      */
     public function run();
 }
