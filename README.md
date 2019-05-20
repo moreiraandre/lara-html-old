@@ -20,3 +20,40 @@ $form = $this->phpHtml->form('/');
 $form->addText('apelido');
 ```
 > O exemplo acima adiciona o plugin `text` ao plugin `form`.
+
+```php
+class PessoasForm
+{
+    public function run(PhpHtml $phpHtml)
+    {
+        $form = $phpHtml->form('/');
+        $form->addText('nome');
+        $containerEndereco = $form->addText('endereco');
+        $containerEndereco->addText('numero');
+        $containerEndereco->addText('bairro');
+        $containerEndereco->addUF('uf');
+        $containerEndereco->addCidade('cidade');
+        $form->addDate('dt_nasc');
+        $containerDocs = $form->addCpf('cpf');
+        $containerDocs->addText('rg');
+    }
+}
+```
+
+```html
+<form>
+    <input name="nome">
+    <div class="row">
+        <input name="endereco">
+        <input name="numero">
+        <input name="bairro">
+        <input name="uf">
+        <input name="cidade">
+    </div>
+    <input name="dt_nasc">
+    <div class="row">
+        <input name="cpf">
+        <input name="rg">
+    </div>
+</form>
+```
