@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PhpHtml\\": "src/PhpHtml/"
+            "PhpHtml\\": "src/"
         }
     },
     "minimum-stability": "dev",
