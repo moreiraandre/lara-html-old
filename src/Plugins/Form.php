@@ -7,7 +7,7 @@
 
 namespace PhpHtml\Plugins;
 
-use PhpHtml\Abstracts\Plugins\ContainerRowsAbstract;
+use PhpHtml\Abstracts\ContainerRowsAbstract;
 use PhpHtml\Finals\Row;
 
 /**

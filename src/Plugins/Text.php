@@ -7,7 +7,8 @@
 
 namespace PhpHtml\Plugins;
 
-use PhpHtml\Abstracts\Plugins\PluginAbstract;
+
+use PhpHtml\Abstracts\PluginAbstract;
 
 /**
  * Class Text
