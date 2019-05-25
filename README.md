@@ -47,25 +47,27 @@ class PessoasForm
             <label>Nome</label>
             <input class="form-control form-control-sm" name="nome">
         </div>
-        <div class='form-group'>
-            <label>Endereco</label>
-            <input class="form-control form-control-sm" name="endereco">
-        </div>
-        <div class='form-group'>
-            <label>Numero</label>
-            <input class="form-control form-control-sm" name="numero">
-        </div>
-        <div class='form-group'>
-            <label>Bairro</label>
-            <input class="form-control form-control-sm" name="bairro">
-        </div>
-        <div class='form-group'>
-            <label>Uf</label>
-            <input class="form-control form-control-sm inputUf" name="uf">
-        </div>
-        <div class='form-group'>
-            <label>Cidade</label>
-            <input class="form-control form-control-sm inputCidade" name="cidade">
+        <div class="col-md-12">
+            <div class='form-group'>
+                <label>Endereco</label>
+                <input class="form-control form-control-sm" name="endereco">
+            </div>
+            <div class='form-group'>
+                <label>Numero</label>
+                <input class="form-control form-control-sm" name="numero">
+            </div>
+            <div class='form-group'>
+                <label>Bairro</label>
+                <input class="form-control form-control-sm" name="bairro">
+            </div>
+            <div class='form-group'>
+                <label>Uf</label>
+                <input class="form-control form-control-sm inputUf" name="uf">
+            </div>
+            <div class='form-group'>
+                <label>Cidade</label>
+                <input class="form-control form-control-sm inputCidade" name="cidade">
+            </div>
         </div>
     </div>
     <input name="dt_nasc">
