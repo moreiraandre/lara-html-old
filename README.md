@@ -36,24 +36,56 @@ class PessoasForm
         $form->addDate('dt_nasc');
         $containerDocs = $form->addCpf('cpf');
         $containerDocs->addText('rg');
+        $form->addSubmit('Salvar');
     }
 }
 ```
 
 ```html
-<form>
-    <input name="nome">
+<form method="POST" action="/">
     <div class="row">
-        <input name="endereco">
-        <input name="numero">
-        <input name="bairro">
-        <input name="uf">
-        <input name="cidade">
+        <div class='form-group'>
+            <label>Nome</label>
+            <input class="form-control form-control-sm" name="nome">
+        </div>
+        <div class="col-md-12">
+            <div class='form-group'>
+                <label>Endereco</label>
+                <input class="form-control form-control-sm" name="endereco">
+            </div>
+            <div class='form-group'>
+                <label>Numero</label>
+                <input class="form-control form-control-sm" name="numero">
+            </div>
+            <div class='form-group'>
+                <label>Bairro</label>
+                <input class="form-control form-control-sm" name="bairro">
+            </div>
+            <div class='form-group'>
+                <label>Uf</label>
+                <input class="form-control form-control-sm inputUf" name="uf">
+            </div>
+            <div class='form-group'>
+                <label>Cidade</label>
+                <input class="form-control form-control-sm inputCidade" name="cidade">
+            </div>
+        </div>
     </div>
     <input name="dt_nasc">
     <div class="row">
-        <input name="cpf">
-        <input name="rg">
+        <div class='form-group'>
+            <label>Cpf</label>
+            <input class="form-control form-control-sm inputCpf" name="cpf">
+        </div>
+        <div class='form-group'>
+            <label>Rg</label>
+            <input class="form-control form-control-sm inputRg" name="rg">
+        </div>
+    </div>
+    <div class="row">
+        <div class='form-group'>
+            <button type="submit">Salvar</button>
+        </div>
     </div>
 </form>
 ```
