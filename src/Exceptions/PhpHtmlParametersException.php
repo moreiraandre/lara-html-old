@@ -8,4 +8,4 @@
 namespace PhpHtml\Errors;
 
 
-class PhpHtmlParametersError extends \Exception {}
+class PhpHtmlParametersException extends \Exception {}

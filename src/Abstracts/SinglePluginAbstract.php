@@ -9,7 +9,7 @@
 
 namespace PhpHtml\Abstracts\Plugins;
 
-use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
+use PhpHtml\Errors\PhpHtmlMethodNotFoundException;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
@@ -90,7 +90,7 @@ abstract class SinglePluginAbstract implements PluginOutHtmlInterface
             return $this; // RETORNA O PRÓPRIO PLUGIN
         }  else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA attr UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
+            throw new PhpHtmlMethodNotFoundException("Method $name does not exist!");
     }
 
     /**

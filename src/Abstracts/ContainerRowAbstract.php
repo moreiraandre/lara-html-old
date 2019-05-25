@@ -9,9 +9,9 @@
 
 namespace PhpHtml\Abstracts\Plugins;
 
-use PhpHtml\Errors\PhpHtmlMethodNotFoundError;
-use PhpHtml\Errors\PhpHtmlParametersError;
-use PhpHtml\Errors\PhpHtmlPluginNotFoundError;
+use PhpHtml\Errors\PhpHtmlMethodNotFoundException;
+use PhpHtml\Errors\PhpHtmlParametersException;
+use PhpHtml\Errors\PhpHtmlPluginNotFoundException;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
@@ -103,7 +103,7 @@ abstract class ContainerRowAbstract extends PluginAbstract
 
                 // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
                 if (!file_exists(__DIR__ . "/../../Plugins/$pluginClass.php"))
-                    throw new PhpHtmlPluginNotFoundError("Plugin $class does not exist!");
+                    throw new PhpHtmlPluginNotFoundException("Plugin $class does not exist!");
 
                 // RESOLVENDO A HIERARQUIA DE PARÂMETROS EM MÉTODOS DINÂMICOS
                 while (is_array($arguments[0]))
@@ -113,7 +113,7 @@ abstract class ContainerRowAbstract extends PluginAbstract
                 try {
                     $this->pluginOrRows = $obj = new $class(...$arguments); // CRIANDO OBJETO
                 } catch (\TypeError $e) {
-                    throw new PhpHtmlParametersError($e->getMessage());
+                    throw new PhpHtmlParametersException($e->getMessage());
                 }
 
                 $obj->setCol($this); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
@@ -171,7 +171,7 @@ abstract class ContainerRowAbstract extends PluginAbstract
             return $this->pluginOrRows[] = $this->currentRow = new Row();
         } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new PhpHtmlMethodNotFoundError("Method $name does not exist!");
+            throw new PhpHtmlMethodNotFoundException("Method $name does not exist!");
     }
 
     /**
