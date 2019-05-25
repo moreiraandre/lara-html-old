@@ -35,7 +35,8 @@ error_reporting(E_ALL);
 <?php
 if ($_GET['class']) {
     require_once $_GET['class'] . '.php'; // INCLUI O ARQUIVO
-    $class = app($_GET['class']); // CRIA O OBJETO
+    $class = 'Examples\\'.$_GET['class'];
+    $class = new $class;
     echo $class->getHtml(); // EXIBE O HTML
 }
 ?>

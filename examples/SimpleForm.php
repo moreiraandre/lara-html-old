@@ -5,6 +5,8 @@
  * Time: 00:11
  */
 
+namespace Examples;
+
 use PhpHtml\PhpHtml;
 
 class SimpleForm extends PhpHtml
