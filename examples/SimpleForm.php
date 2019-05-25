@@ -9,13 +9,13 @@ namespace Examples;
 
 use PhpHtml\PhpHtml;
 
-class SimpleForm extends PhpHtml
+class SimpleForm
 {
-    public function run()
+    public function run(PhpHtml $phpHtml)
     {
         /*$this->addText('nome');
         $this->addText('nome');*/
-        $form = $this->addForm('/');
+        $form = $phpHtml->addForm('/');
         $form->addText('nome');
         /*$form->row();
         $form->addText('endereco');
