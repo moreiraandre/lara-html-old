@@ -36,6 +36,7 @@ class PessoasForm
         $form->addDate('dt_nasc');
         $containerDocs = $form->addCpf('cpf');
         $containerDocs->addText('rg');
+        $form->addSubmit('Salvar');
     }
 }
 ```
@@ -79,6 +80,11 @@ class PessoasForm
         <div class='form-group'>
             <label>Rg</label>
             <input class="form-control form-control-sm inputRg" name="rg">
+        </div>
+    </div>
+    <div class="row">
+        <div class='form-group'>
+            <button type="submit">Salvar</button>
         </div>
     </div>
 </form>
