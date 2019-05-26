@@ -27,8 +27,6 @@ class Form extends PluginContainerAbstract
      */
     public function __construct(string $action)
     {
-        parent::__construct(new Row());
-
         $this->action = $action;
     }
 
