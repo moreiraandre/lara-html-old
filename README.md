@@ -28,13 +28,13 @@ class PessoasForm
     {
         $form = $phpHtml->addForm('/');
         $form->addText('nome');
-        $containerEndereco = $form->addText('endereco');
+        $containerEndereco = $form->addText('endereco')->getCol();
         $containerEndereco->addText('numero');
         $containerEndereco->addText('bairro');
         $containerEndereco->addUF('uf');
         $containerEndereco->addCidade('cidade');
         $form->addDate('dt_nasc');
-        $containerDocs = $form->addCpf('cpf');
+        $containerDocs = $form->addCpf('cpf')->getCol();
         $containerDocs->addText('rg');
         $form->addSubmit('Salvar');
     }
