@@ -71,7 +71,10 @@ class PessoasForm
             </div>
         </div>
     </div>
-    <input name="dt_nasc">
+    <div class='form-group'>
+        <label>Data nascimento</label>
+        <input class="form-control form-control-sm" name="dt_nasc">
+    </div>
     <div class="row">
         <div class='form-group'>
             <label>Cpf</label>
