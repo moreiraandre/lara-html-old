@@ -7,14 +7,14 @@
 
 namespace PhpHtml\Plugins;
 
-use PhpHtml\Abstracts\ContainerRowsAbstract;
+use PhpHtml\Abstracts\PluginContainerAbstract;
 use PhpHtml\Finals\Row;
 
 /**
  * Class Text
  * @package PhpHtml\Plugins
  */
-class Form extends ContainerRowsAbstract
+class Form extends PluginContainerAbstract
 {
     /**
      * @var string
@@ -37,7 +37,7 @@ class Form extends ContainerRowsAbstract
      */
     public function getHtml(): string
     {
-        $html = parent::getHtmlPlugins();
+        $html = parent::getHtml();
 
         return
             "<form action='$this->action'>$html</form>";

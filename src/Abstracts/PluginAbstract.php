@@ -1,28 +1,21 @@
 <?php
 /**
- * Define o Padrão de um Plugin simples, o qual NÃO armazena outros plugins
+ * Define o Padrão de um Plugin
  *
  * Created by: André Moreira
  * Date: 20/11/18
  * Time: 23:40
  */
 
-namespace PhpHtml\Abstracts\Plugins;
+namespace PhpHtml\Abstracts;
 
 use PhpHtml\Errors\PhpHtmlMethodNotFoundException;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
-abstract class SinglePluginAbstract implements PluginOutHtmlInterface
+abstract class PluginAbstract implements PluginOutHtmlInterface
 {
-    /**
-     * Armazena atributos de tag HTML
-     *
-     * @var array
-     */
-    protected $attributes = [];
-
     /**
      * Referência da linha pai
      *
@@ -36,6 +29,13 @@ abstract class SinglePluginAbstract implements PluginOutHtmlInterface
      * @var Col
      */
     private $col = null;
+
+    /**
+     * Armazena atributos de tag HTML
+     *
+     * @var array
+     */
+    protected $attributes = [];
 
     /**
      * @return Row

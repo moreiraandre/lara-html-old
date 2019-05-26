@@ -1,84 +1,48 @@
 <?php
 /**
- * Define o padrão de um plugin que armazena outros plugins
+ * Define o padrão de um plugin outros
  *
  * Created by: André Moreira
  * Date: 16/12/18
  * Time: 22:50
  */
 
-namespace PhpHtml\Abstracts\Plugins;
+namespace PhpHtml\Abstracts;
 
+use PhpHtml\Abstracts\Plugins\PluginSingleAbstract;
 use PhpHtml\Errors\PhpHtmlMethodNotFoundException;
 use PhpHtml\Errors\PhpHtmlParametersException;
 use PhpHtml\Errors\PhpHtmlPluginNotFoundException;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
-abstract class ContainerRowAbstract extends PluginAbstract
+abstract class PluginContainerAbstract extends PluginAbstract
 {
-    /**
-     * @var PluginAbstract|array Armazena um plugin ou linhas
-     */
-    private $pluginOrRows = null;
 
     /**
-     * @var null|Row Linha atual se não estiver armazenando somente um plugin
+     * @var array Variável que armazena os plugins
      */
-    private $currentRow = null;
+    private $plugins = [];
 
     /**
-     * Inicia a Linha Atual
+     * Adiciona um plugin
      *
-     * @param Row $currentRow
+     * @param PluginSingleAbstract $plugin
+     * @return PluginSingleAbstract
      */
-    public function __construct(Row $currentRow)
+    public function addPlugin(PluginSingleAbstract $plugin): PluginSingleAbstract
     {
-        $this->currentRow = $currentRow;
+        return $this->plugins[] = $plugin;
     }
 
     /**
-     * @return Row|null
-     */
-    public function getCurrentRow(): ?Row
-    {
-        return $this->currentRow;
-    }
-
-    /**
-     * @param Row $currentRow
-     */
-    public function setCurrentRow(Row $currentRow): void
-    {
-        $this->currentRow = $currentRow;
-    }
-
-    /**
-     * Armazena um plugin quando ele já é um objeto
+     * Retorna os plugins armazenados
      *
-     * @param PluginAbstract $plugin
+     * @return array|null
      */
-    public function pluginObj(PluginAbstract $plugin)
+    public function getPlugins(): ?array
     {
-        $this->pluginOrRows = $plugin;
-    }
-
-    /**
-     * Retorna o array que armazena os plugins
-     *
-     * @return array
-     */
-    public function getPlugins()
-    {
-        return $this->pluginOrRows;
-    }
-
-    /**
-     * @return \Illuminate\Support\Collection|null
-     */
-    public function rows()
-    {
-        return is_array($this->pluginOrRows) ? collect($this->pluginOrRows) : null;
+        return $this->plugins;
     }
 
     /**
@@ -179,29 +143,13 @@ abstract class ContainerRowAbstract extends PluginAbstract
      *
      * @return string
      */
-    public function getHtmlPlugins()
+    public function getHtml(): string
     {
-        $html = '';
-        // APROVEITANDO REPETIÇÃO DE ARMAZENAMENTO DO HTML MESMO QUE ESTEJA ARMAZENDO UM PLUGIN AO INVÉS DE LINHAS
-        $this->pluginOrRows = !is_array($this->pluginOrRows) ? [$this->pluginOrRows] : $this->pluginOrRows;
-        foreach ($this->pluginOrRows as $plugin) {
+        $htmlPlugins = '';
+        foreach ($this->plugins as $plugin)
+            $htmlPlugins .= $plugin->getHtml();
 
-            // !!! SOMENTE PARA DESCOBERTA DE ERRO! DEVE SER RETIRADO!!!
-            try {
-                $html .= $plugin->getHtml();
-            } catch (\Error $error) {
-                echo $error->getMessage();
-                echo "<br>";
-                var_dump($plugin);
-                echo "<br>";
-                var_dump($this->pluginOrRows);
-                echo "<br>";
-                echo class_basename($plugin);
-                echo "<br>";
-            }
-        }
-
-        return $html;
+        return "<div>$htmlPlugins</div>";
     }
 
 }
