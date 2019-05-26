@@ -8,7 +8,6 @@
 namespace PhpHtml\Plugins;
 
 use PhpHtml\Abstracts\PluginContainerAbstract;
-use PhpHtml\Finals\Row;
 
 /**
  * Class Text
