@@ -16,7 +16,7 @@ parâmetros necessários para geração dinâmica.
 # Plugins recebendo plugins
 É padrão utilizar `add` antes do nome do plugin para adicioná-lo a outro.
 ```php
-$form = $this->phpHtml->form('/');
+$form = $this->phpHtml->addForm('/');
 $form->addText('apelido');
 ```
 > O exemplo acima adiciona o plugin `text` ao plugin `form`.
@@ -26,7 +26,7 @@ class PessoasForm
 {
     public function run(PhpHtml $phpHtml)
     {
-        $form = $phpHtml->form('/');
+        $form = $phpHtml->addForm('/');
         $form->addText('nome');
         $containerEndereco = $form->addText('endereco');
         $containerEndereco->addText('numero');
