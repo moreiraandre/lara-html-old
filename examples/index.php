@@ -33,6 +33,13 @@ error_reporting(E_ALL);
 
 <div class="container-fluid">
 <?php
+require_once "SimpleForm.php";
+$a = new \PhpHtml\PhpHtml();
+$b = new \Examples\SimpleForm();
+$b->run($a);
+var_dump($a);
+die();
+
 if ($_GET['class']) {
     require_once $_GET['class'] . '.php'; // INCLUI O ARQUIVO
     $class = 'Examples\\'.$_GET['class'];

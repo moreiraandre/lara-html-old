@@ -61,7 +61,7 @@ abstract class PluginContainerAbstract extends PluginAbstract
         // CRIANDO PLUGINS
         if ($prefix == 'add') { // NOVO PLUGIN
             // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
-            if (($this instanceof Col) && ($this->pluginOrRows === null)) {
+            if ($this instanceof Col) {
                 $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
                 $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
