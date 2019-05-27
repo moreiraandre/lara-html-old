@@ -5,7 +5,7 @@
  * Time: 11:00
  */
 
-namespace PhpHtml\Errors;
+namespace PhpHtml\Exceptions;
 
 
 class PhpHtmlParametersException extends \Exception {}

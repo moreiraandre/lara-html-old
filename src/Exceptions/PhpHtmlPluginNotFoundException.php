@@ -5,7 +5,7 @@
  * Time: 00:36
  */
 
-namespace PhpHtml\Errors;
+namespace PhpHtml\Exceptions;
 
 
 class PhpHtmlPluginNotFoundException extends \Exception {}
