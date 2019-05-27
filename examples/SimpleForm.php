@@ -17,6 +17,7 @@ class SimpleForm
         $this->addText('nome');*/
         $form = $phpHtml->addForm('/');
         $form->addText('nome');
+        $form->addText('endereco');
         /*$form->row();
         $form->addText('endereco');
         $form->row();

@@ -19,7 +19,10 @@
     "autoload": {
         "psr-4": {
             "PhpHtml\\": "src/"
-        }
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true

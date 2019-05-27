@@ -10,9 +10,9 @@
 namespace PhpHtml\Abstracts;
 
 use PhpHtml\Abstracts\Plugins\PluginSingleAbstract;
-use PhpHtml\Errors\PhpHtmlMethodNotFoundException;
-use PhpHtml\Errors\PhpHtmlParametersException;
-use PhpHtml\Errors\PhpHtmlPluginNotFoundException;
+use PhpHtml\Exceptions\PhpHtmlMethodNotFoundException;
+use PhpHtml\Exceptions\PhpHtmlParametersException;
+use PhpHtml\Exceptions\PhpHtmlPluginNotFoundException;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
@@ -61,6 +61,42 @@ abstract class PluginContainerAbstract extends PluginAbstract
         // CRIANDO PLUGINS
         if ($prefix == 'add') { // NOVO PLUGIN
             // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
+
+
+            $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
+            $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
+
+            // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
+            if (!file_exists(__DIR__ . "/../Plugins/$pluginClass.php"))
+                throw new PhpHtmlPluginNotFoundException("Plugin $class does not exist!");
+
+            // RESOLVENDO A HIERARQUIA DE PARÂMETROS EM MÉTODOS DINÂMICOS
+            while (is_array($arguments[0]))
+                $arguments = $arguments[0];
+
+            // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
+            try {
+                $this->plugins[] = $obj = new $class(...$arguments); // CRIANDO OBJETO
+            } catch (\TypeError $e) {
+                throw new PhpHtmlParametersException($e->getMessage());
+            }
+
+            // CRIANDO COLUNA
+            $col = new Col();
+
+            if ($this->getRow())
+                $col->setRow($this->getRow());
+            else {
+                $row = new Row();
+                $col->setRow($row);
+            }
+
+            $obj->setCol($col); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
+            $obj->setRow($col->getRow()); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+
+            return $obj;
+
+
             if ($this instanceof Col) {
                 $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
                 $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO

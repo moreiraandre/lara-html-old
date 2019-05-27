@@ -38,9 +38,9 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     protected $attributes = [];
 
     /**
-     * @return Row
+     * @return null|Row
      */
-    final public function getRow(): Row
+    final public function getRow(): ?Row
     {
         return $this->row;
     }
@@ -88,7 +88,7 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
             $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
 
             return $this; // RETORNA O PRÓPRIO PLUGIN
-        }  else
+        } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA attr UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
             throw new PhpHtmlMethodNotFoundException("Method $name does not exist!");
     }
