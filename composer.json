@@ -1,7 +1,8 @@
 {
     "name": "moreiraandre/php-html",
-    "description": "Classes PHP para gerar marcação HTML",
+    "description": "Classes PHP para gerar marcação HTML com abstração do sistema de grids responsivo.",
     "license": "MIT",
+    "keywords": ["php", "html", "responsive", "grid", "row", "column"],
     "authors": [
         {
             "name": "André Moreira",
