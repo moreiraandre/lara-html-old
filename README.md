@@ -24,6 +24,10 @@ $form->addText('apelido');
 ```php
 class PessoasForm
 {
+    /**
+     * Função padrão para declarar elementos
+     * @param $phpHtml PhpHtml
+     */
     public function run(PhpHtml $phpHtml)
     {
         $form = $phpHtml->addForm('/');
