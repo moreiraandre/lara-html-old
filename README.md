@@ -33,3 +33,5 @@ $form->addText('apelido');
 # Exemplos
 *  Declarando elementos em PHP $1862748
 *  Saida HTML $1862749
+
+![](NavegadorFormPessoas.png)
