@@ -21,6 +21,15 @@ $form->addText('apelido');
 ```
 > O exemplo acima adiciona o plugin `text` ao plugin `form`.
 
+# Escopo
+É responsabilidade desta biblioteca abstrair a logica de geração de **grids responsivas**
+ e gerar HTML de acordo com o **provider** escolhido.
+>>>
+*  **Grids responsivas**: lógica utilizada pelos frameworks CSS que definem linhas
+ e colunas para organizar conteúdo em diferentes tamanhos de tela.
+*  **Provider**: seletor do grupo que define os templates HTML
+>>>
+
 ```php
 class PessoasForm
 {
