@@ -28,11 +28,11 @@ class PessoasForm
     {
         $form = $phpHtml->addForm('/');
         $form->addText('nome');
-        $containerEndereco = $form->addText('endereco')->getCol();
-        $containerEndereco->addText('numero');
-        $containerEndereco->addText('bairro');
-        $containerEndereco->addUF('uf');
-        $containerEndereco->addCidade('cidade');
+        $colEndereco = $form->addText('endereco')->getCol();
+        $colEndereco->addText('numero');
+        $colEndereco->addText('bairro');
+        $colEndereco->addUF('uf');
+        $colEndereco->addCidade('cidade');
         $form->addDate('dt_nasc');
         $containerDocs = $form->addCpf('cpf')->getCol();
         $containerDocs->addText('rg');
