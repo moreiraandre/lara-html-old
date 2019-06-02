@@ -30,30 +30,8 @@ $form->addText('apelido');
 *  **Provider**: seletor do grupo que define os templates HTML
 >>>
 
-```php
-class PessoasForm
-{
-    /**
-     * Função padrão para declarar elementos
-     * @param $phpHtml PhpHtml
-     */
-    public function run(PhpHtml $phpHtml)
-    {
-        $form = $phpHtml->addForm('/');
-        $form->addText('nome');
-        $colEndereco = $form->addText('endereco')->getCol();
-        $colEndereco->addText('numero');
-        $colEndereco->addText('bairro');
-        $colEndereco->addUF('uf');
-        $colEndereco->addCidade('cidade');
-        $form->addDate('dt_nasc');
-        $colDocs = $form->addCpf('cpf')->getCol();
-        $colDocs->addText('rg');
-        $form->row();
-        $form->addSubmit('Salvar');
-    }
-}
-```
+# Exemplos
+*  Declarando elementos em PHP $1862748
 
 ```html
 <form method="POST" action="/">
