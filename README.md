@@ -40,6 +40,7 @@ class PessoasForm
         $form->addDate('dt_nasc');
         $colDocs = $form->addCpf('cpf')->getCol();
         $colDocs->addText('rg');
+        $form->row();
         $form->addSubmit('Salvar');
     }
 }
@@ -48,11 +49,13 @@ class PessoasForm
 ```html
 <form method="POST" action="/">
     <div class="row">
-        <div class='form-group'>
-            <label>Nome</label>
-            <input class="form-control form-control-sm" name="nome">
+        <div class="col-md-6">
+            <div class='form-group'>
+                <label>Nome</label>
+                <input class="form-control form-control-sm" name="nome">
+            </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class='form-group'>
                 <label>Endereco</label>
                 <input class="form-control form-control-sm" name="endereco">
