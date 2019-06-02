@@ -38,8 +38,8 @@ class PessoasForm
         $colEndereco->addUF('uf');
         $colEndereco->addCidade('cidade');
         $form->addDate('dt_nasc');
-        $containerDocs = $form->addCpf('cpf')->getCol();
-        $containerDocs->addText('rg');
+        $colDocs = $form->addCpf('cpf')->getCol();
+        $colDocs->addText('rg');
         $form->addSubmit('Salvar');
     }
 }
