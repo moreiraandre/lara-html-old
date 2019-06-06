@@ -14,4 +14,18 @@ use PhpHtml\Abstracts\PluginContainerAbstract;
  * @package PhpHtml\Plugins
  */
 final class Col extends PluginContainerAbstract
-{}
+{
+    /**
+     * Retorna o HTML dos plugins filhos
+     *
+     * @return string
+     */
+    public function getHtml(): string
+    {
+        $htmlPlugins = '';
+        foreach ($this->getPlugins() as $plugin)
+            $htmlPlugins .= $plugin->getHtml();
+
+        return "<div class=\"col\">$htmlPlugins</div>";
+    }
+}
