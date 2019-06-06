@@ -36,7 +36,15 @@ class Form extends PluginContainerAbstract
     {
         $html = parent::getHtml();
 
-        return
-            "<form action='$this->action'>$html</form>";
+        $search = [
+            '#ACTION#',
+            '#HTML#',
+        ];
+        $replace = [
+            $this->action,
+            $html,
+        ];
+
+        return $this->getTemplate('Form', $search, $replace);
     }
 }

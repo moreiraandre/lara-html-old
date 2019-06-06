@@ -70,6 +70,18 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     }
 
     /**
+     * @param array $search
+     * @param array $replace
+     * @return string
+     */
+    public function getTemplate(string $template, array $search, array $replace): string
+    {
+        $template = file_get_contents(__DIR__ . "/../Template/bootstrap4/$template.php");
+        $template = str_replace($search, $replace, $template);
+        return $template;
+    }
+
+    /**
      * Define atributos de tag
      *
      * @param $name

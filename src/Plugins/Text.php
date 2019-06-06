@@ -45,10 +45,17 @@ class Text extends PluginAbstract
      */
     public function getHtml(): string
     {
-        return
-            "<div class='form-group'>
-                <label>$this->label</label>
-                <input class='form-control form-control-sm' name='$this->name' " . $this->getAttributesTag() . ">
-            </div>";
+        $search = [
+            '#LABEL#',
+            '#NAME#',
+            '#ATTRIBUTES#',
+        ];
+        $replace = [
+            $this->label,
+            $this->name,
+            $this->getAttributesTag(),
+        ];
+
+        return $this->getTemplate('Text', $search, $replace);
     }
 }
