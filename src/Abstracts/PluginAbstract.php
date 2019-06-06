@@ -9,7 +9,7 @@
 
 namespace PhpHtml\Abstracts;
 
-use PhpHtml\Errors\PhpHtmlMethodNotFoundException;
+use PhpHtml\Exceptions\PhpHtmlMethodNotFoundException;
 use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;

@@ -1,2 +1,0 @@
-# Linha
-- Armazena **Colunas**.
