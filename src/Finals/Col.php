@@ -22,10 +22,8 @@ final class Col extends PluginContainerAbstract
      */
     public function getHtml(): string
     {
-        $htmlPlugins = '';
-        foreach ($this->getPlugins() as $plugin)
-            $htmlPlugins .= $plugin->getHtml();
-
-        return "<div class=\"col\">$htmlPlugins</div>";
+        require_once __DIR__."/../Template/bootstrap4/config.php";
+        $htmlPlugins = $this->getHtmlPlugins();
+        return "<div class=\"{$config['css']['col']}\">$htmlPlugins</div>";
     }
 }

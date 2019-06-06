@@ -34,7 +34,7 @@ error_reporting(E_ALL);
 <div class="container-fluid">
 <?php
 require_once "SimpleForm.php";
-$a = new \PhpHtml\PhpHtml();
+$a = new \PhpHtml\Finals\Row();
 $b = new \Examples\SimpleForm();
 $row = new \PhpHtml\Finals\Row();
 $col = new \PhpHtml\Finals\Col();

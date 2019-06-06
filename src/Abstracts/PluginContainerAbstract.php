@@ -18,7 +18,6 @@ use PhpHtml\Finals\Row;
 
 abstract class PluginContainerAbstract extends PluginAbstract
 {
-
     /**
      * @var array Variável que armazena os plugins
      */
@@ -43,6 +42,17 @@ abstract class PluginContainerAbstract extends PluginAbstract
     public function getPlugins(): ?array
     {
         return $this->plugins;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getHtmlPlugins(): string
+    {
+        $html = '';
+        foreach ($this->getPlugins() as $plugin)
+            $html .= $plugin->getHtml();
+        return $html;
     }
 
     /**
@@ -173,19 +183,4 @@ abstract class PluginContainerAbstract extends PluginAbstract
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
             throw new PhpHtmlMethodNotFoundException("Method $name does not exist!");
     }
-
-    /**
-     * Retorna o HTML dos plugins filhos
-     *
-     * @return string
-     */
-    public function getHtml(): string
-    {
-        $htmlPlugins = '';
-        foreach ($this->plugins as $plugin)
-            $htmlPlugins .= $plugin->getHtml();
-
-        return "<div>$htmlPlugins</div>";
-    }
-
 }

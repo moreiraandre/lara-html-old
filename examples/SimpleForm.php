@@ -7,15 +7,15 @@
 
 namespace Examples;
 
-use PhpHtml\PhpHtml;
+use PhpHtml\Finals\Row;
 
 class SimpleForm
 {
-    public function run(PhpHtml $phpHtml)
+    public function run(Row $row)
     {
         /*$this->addText('nome');
         $this->addText('nome');*/
-        $form = $phpHtml->addForm('/');
+        $form = $row->addForm('/');
         $form->addText('nome');
         $form->addText('endereco');
         /*$form->row();

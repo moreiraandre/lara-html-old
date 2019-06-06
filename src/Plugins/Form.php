@@ -34,7 +34,7 @@ class Form extends PluginContainerAbstract
      */
     public function getHtml(): string
     {
-        $html = parent::getHtml();
+        $html = parent::getHtmlPlugins();
 
         $search = [
             '#ACTION#',
