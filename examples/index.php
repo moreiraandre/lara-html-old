@@ -33,20 +33,13 @@ error_reporting(E_ALL);
 
 <div class="container-fluid">
 <?php
-require_once "SimpleForm.php";
-$a = new \PhpHtml\Finals\Row();
-$b = new \Examples\SimpleForm();
-$row = new \PhpHtml\Finals\Row();
-$col = new \PhpHtml\Finals\Col();
-$a->setRow($row);
-$a->setCol($col);
-$b->run($a);
-
 if (isset($_GET['class'])) {
     require_once $_GET['class'] . '.php'; // INCLUI O ARQUIVO
     $class = 'Examples\\'.$_GET['class'];
+    $firstRow = new \PhpHtml\Finals\Row;
     $class = new $class;
-    echo $a->getHtml(); // EXIBE O HTML
+    $class->run($firstRow);
+    echo $firstRow->getHtml();
 }
 ?>
 </div>

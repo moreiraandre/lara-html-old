@@ -18,7 +18,7 @@ final class Row extends PluginContainerAbstract
      */
     public function getHtml(): string
     {
-        require_once __DIR__."/../Template/bootstrap4/config.php";
+        require __DIR__."/../Template/bootstrap4/config.php";
         $htmlPlugins = $this->getHtmlPlugins();
         return "<div class=\"{$config['css']['row']}\">$htmlPlugins</div>";
     }

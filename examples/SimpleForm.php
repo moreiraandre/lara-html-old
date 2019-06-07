@@ -13,17 +13,10 @@ class SimpleForm
 {
     public function run(Row $row)
     {
-        /*$this->addText('nome');
-        $this->addText('nome');*/
-        $form = $row->addForm('/');
-        $form->addText('nome');
-        $form->addText('endereco');
-        /*$form->row();
-        $form->addText('endereco');
-        $form->row();
-        $form->addText('fone');
-        $colCel = $form->addText('cel')->getCol();
-        $colCel->addText('cel2');
-        $colCel->addText('cel3');*/
+        $row->addText('nome');
+        $row->addText('fone');
+        $row->addText('dt_nasc', 'Nascimento');
+        $r2 = $row->row();
+
     }
 }

@@ -2,7 +2,7 @@
 
 $config = [
     'css' => [
-        'col' => 'col-md',
+        'col' => 'col',
         'row' => 'row',
     ],
 ];

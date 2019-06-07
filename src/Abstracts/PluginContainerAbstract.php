@@ -9,12 +9,14 @@
 
 namespace PhpHtml\Abstracts;
 
+use phpDocumentor\Reflection\Types\This;
 use PhpHtml\Abstracts\Plugins\PluginSingleAbstract;
 use PhpHtml\Exceptions\PhpHtmlMethodNotFoundException;
 use PhpHtml\Exceptions\PhpHtmlParametersException;
 use PhpHtml\Exceptions\PhpHtmlPluginNotFoundException;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
+use Webmozart\Assert\Assert;
 
 abstract class PluginContainerAbstract extends PluginAbstract
 {
@@ -26,12 +28,21 @@ abstract class PluginContainerAbstract extends PluginAbstract
     /**
      * Adiciona um plugin
      *
-     * @param PluginSingleAbstract $plugin
-     * @return PluginSingleAbstract
+     * @param PluginAbstract $obj
+     * @return PluginAbstract
      */
-    public function addPlugin(PluginSingleAbstract $plugin): PluginSingleAbstract
+    public function addPlugin(PluginAbstract $obj): PluginAbstract
     {
-        return $this->plugins[] = $plugin;
+        /*echo "<pre style='color: #FFF;'>";
+        echo "addPlugin: " . get_class($obj) . ' - ' . get_class($this) . "<br>";
+        echo "</pre>";*/
+        if ($this instanceof Col) {
+            $obj->setCol($this);
+            $obj->setRow($this->getRow());
+        }
+        if ($this instanceof Row)
+            $obj->setRow($this);
+        return $this->plugins[] = $obj;
     }
 
     /**
@@ -52,8 +63,12 @@ abstract class PluginContainerAbstract extends PluginAbstract
     protected function getHtmlPlugins(): string
     {
         $html = '';
-        foreach ($this->getPlugins() as $plugin)
+        foreach ($this->getPlugins() as $plugin) {
+            /*echo "<pre style='color: #FFF;'>";
+            echo "getHtmlPlugins: " . get_class($this) . ' - ' . get_class($plugin) . "<br>";
+            echo "</pre>";*/
             $html .= $plugin->getHtml();
+        }
         return $html;
     }
 
@@ -88,23 +103,15 @@ abstract class PluginContainerAbstract extends PluginAbstract
 
             // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
             try {
-                $this->plugins[] = $obj = new $class(...$arguments); // CRIANDO OBJETO
+                $obj = new $class(...$arguments); // CRIANDO OBJETO
             } catch (\TypeError $e) {
                 throw new PhpHtmlParametersException($e->getMessage());
             }
 
             // CRIANDO COLUNA
             $col = new Col();
-
-            if ($this->getRow())
-                $col->setRow($this->getRow());
-            else {
-                $row = new Row();
-                $col->setRow($row);
-            }
-
-            $obj->setCol($col); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
-            $obj->setRow($col->getRow()); // GUARDANDO REFERÊNCIA DA LINHA NO PLUGIN
+            $this->addPlugin($col);
+            $col->addPlugin($obj);
 
             return $obj;
 
