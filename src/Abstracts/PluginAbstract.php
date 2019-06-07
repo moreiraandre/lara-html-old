@@ -14,6 +14,8 @@ use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
+use Illuminate\Support\Facades\View;
+
 abstract class PluginAbstract implements PluginOutHtmlInterface
 {
     /**
@@ -70,14 +72,14 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     }
 
     /**
-     * @param array $search
-     * @param array $replace
+     * @param string $template
+     * @param array $data
      * @return string
      */
-    public function getTemplate(string $template, array $search, array $replace): string
+    protected function getTemplate(string $template, array $data): string
     {
-        $template = file_get_contents(__DIR__ . "/../Template/bootstrap4/$template.php");
-        $template = str_replace($search, $replace, $template);
+//        $template = file_get_contents(__DIR__ . "/../Template/bootstrap4/$template.php");
+        $template = View::first(['php-html.Form', 'Form'], $data);
         return $template;
     }
 
