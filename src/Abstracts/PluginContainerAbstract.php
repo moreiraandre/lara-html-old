@@ -45,6 +45,8 @@ abstract class PluginContainerAbstract extends PluginAbstract
     }
 
     /**
+     * Retorna o HTML de todos os plugins
+     *
      * @return string
      */
     protected function getHtmlPlugins(): string
