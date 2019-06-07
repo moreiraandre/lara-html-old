@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Created by: André Moreira
- * Date: 21/11/18
- * Time: 02:06
+ * Date: 06/06/19
+ * Time: 23:56
  */
 
 namespace PhpHtml\Finals;
@@ -10,10 +11,10 @@ namespace PhpHtml\Finals;
 use PhpHtml\Abstracts\PluginContainerAbstract;
 
 /**
- * Class Col
+ * Class Container
  * @package PhpHtml\Finals
  */
-final class Col extends PluginContainerAbstract
+final class Container extends PluginContainerAbstract
 {
     /**
      * Retorna o HTML dos plugins filhos
@@ -22,8 +23,9 @@ final class Col extends PluginContainerAbstract
      */
     public function getHtml(): string
     {
-        require __DIR__."/../Template/bootstrap4/config.php";
+//        require __DIR__."/../Template/bootstrap4/config.php";
         $htmlPlugins = $this->getHtmlPlugins();
-        return "<div class=\"{$config['css']['col']}\">$htmlPlugins</div>";
+//        return "<div class=\"{$config['css']['col']}\">$htmlPlugins</div>";
+        return "<div class=\"container\">$htmlPlugins</div>";
     }
 }

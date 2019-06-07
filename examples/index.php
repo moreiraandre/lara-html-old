@@ -37,9 +37,12 @@ if (isset($_GET['class'])) {
     require_once $_GET['class'] . '.php'; // INCLUI O ARQUIVO
     $class = 'Examples\\'.$_GET['class'];
     $firstRow = new \PhpHtml\Finals\Row;
+//    $container = new \PhpHtml\Finals\Container;
     $class = new $class;
     $class->run($firstRow);
+//    $class->run($container);
     echo $firstRow->getHtml();
+//    echo $container->getHtml();
 }
 ?>
 </div>

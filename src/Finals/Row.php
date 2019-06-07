@@ -9,6 +9,10 @@ namespace PhpHtml\Finals;
 
 use PhpHtml\Abstracts\PluginContainerAbstract;
 
+/**
+ * Class Row
+ * @package PhpHtml\Finals
+ */
 final class Row extends PluginContainerAbstract
 {
     /**

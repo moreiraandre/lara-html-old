@@ -108,8 +108,7 @@ abstract class PluginContainerAbstract extends PluginAbstract
                 throw new PhpHtmlParametersException($e->getMessage());
             }
 
-            // CRIANDO COLUNA
-            $col = new Col();
+            $col = new Col(); // CRIANDO COLUNA
             $this->addPlugin($col);
             $col->addPlugin($obj);
 
