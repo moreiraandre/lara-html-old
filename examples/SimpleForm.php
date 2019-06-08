@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by: André Moreira
  * Date: 21/11/18
@@ -7,7 +8,6 @@
 
 namespace Examples;
 
-use PhpHtml\Finals\Container;
 use PhpHtml\Finals\Row;
 
 class SimpleForm

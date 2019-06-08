@@ -6,7 +6,9 @@
 
 namespace PhpHtml;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use PhpHtml\Finals\Row;
 
 class PhpHtmlProvider extends ServiceProvider
 {
@@ -18,11 +20,29 @@ class PhpHtmlProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/Template/bootstrap4', 'php-html');
+
+        $this->publishes([
+            __DIR__.'/path/to/views' => resource_path('views/vendor/courier'),
+        ]);
+
+        /*View::creator('profile', 'App\Http\View\Creators\ProfileCreator');
+
+        View::composer('php-html', function ($view) {
+            //
+        });
+
+        $this->app->singleton(PhpHtmlScreen::class, function ($app) {
+            return new PhpHtmlScreen;
+        });
+        $this->app->singleton(Row::class, function ($app) {
+            return new Row;
+        });*/
+        /*
         $this->publishes([
             __DIR__.'/path/to/config/courier.php' => config_path('courier.php'),
         ]);
-
-        $this->loadViewsFrom(__DIR__.'/path/to/views', 'courier');
+        */
     }
 
 }

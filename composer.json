@@ -25,6 +25,14 @@
             "src/Helpers/helpers.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "PhpHtml\\": "src/"
+        },
+        "files": [
+            "src/Helpers/helpers.php"
+        ]
+    },
     "extra": {
         "laravel": {
             "providers": [

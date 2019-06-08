@@ -79,7 +79,7 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     protected function getTemplate(string $template, array $data): string
     {
 //        $template = file_get_contents(__DIR__ . "/../Template/bootstrap4/$template.php");
-        $template = View::first(['php-html.Form', 'Form'], $data);
+        $template = ''/*View::first(['php-html.Form', 'Form'], $data)*/;
         return $template;
     }
 
