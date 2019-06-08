@@ -8,7 +8,11 @@ namespace PhpHtml;
 
 use PhpHtml\Abstracts\PluginContainerAbstract;
 
-class PhpHtmlScreen extends PluginContainerAbstract
+/**
+ * Class PhpHtmlScreen
+ * @package PhpHtml
+ */
+final class PhpHtmlScreen extends PluginContainerAbstract
 {
     /**
      * @return string
