@@ -23,7 +23,7 @@ class PhpHtmlProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/Template/bootstrap4', 'php-html');
 
         $this->publishes([
-            __DIR__.'/path/to/views' => resource_path('views/vendor/courier'),
+            __DIR__.'/Template' => resource_path('views/vendor/php-html'),
         ]);
 
         /*View::creator('profile', 'App\Http\View\Creators\ProfileCreator');
