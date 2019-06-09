@@ -20,11 +20,14 @@ class PhpHtmlProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadViewsFrom(__DIR__.'/Template/bootstrap4', 'php-html');
+
+        $this->loadViewsFrom(__DIR__ . '/Template/bootstrap4', 'phphtml');
 
         $this->publishes([
-            __DIR__.'/Template' => resource_path('views/vendor/php-html'),
+            __DIR__ . '/Template' => resource_path('views/vendor/php-html'),
         ]);
+
+        $this->app->alias(PhpHtmlScreen::class, 'phphtml');
 
         /*View::creator('profile', 'App\Http\View\Creators\ProfileCreator');
 

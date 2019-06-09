@@ -14,7 +14,8 @@ use PhpHtml\Interfaces\PluginOutHtmlInterface;
 use PhpHtml\Finals\Col;
 use PhpHtml\Finals\Row;
 
-use Illuminate\Support\Facades\View;
+use Illuminate\Container\Container as Container;
+use Illuminate\Support\Facades\Facade as Facade;
 
 abstract class PluginAbstract implements PluginOutHtmlInterface
 {
@@ -79,7 +80,16 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     protected function getTemplate(string $template, array $data): string
     {
 //        $template = file_get_contents(__DIR__ . "/../Template/bootstrap4/$template.php");
-        $template = ''/*View::first(['php-html.Form', 'Form'], $data)*/;
+//        $template = View::first(['php-html.Form', 'Form'], $data);
+
+        $app = new Container();
+        $app->singleton('app', 'Illuminate\Container\Container');
+
+        Facade::setFacadeApplication($app);
+//        $app->bind(View::class, 'Illuminate\Support\Facades\View');
+
+//        $template = View::make('Form', $data);
+        $template = $app->make('view')->make('mi-vista');
         return $template;
     }
 
