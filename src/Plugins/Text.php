@@ -33,6 +33,8 @@ class Text extends PluginAbstract
      */
     public function __construct(string $name, string $label = null)
     {
+        parent::__construct();
+
         // Caso $label não seja informado ele recebe o valor de $name com a primeira letra maiúscula.
         $label = $label ?: ucfirst($name);
 
@@ -45,17 +47,12 @@ class Text extends PluginAbstract
      */
     public function getHtml(): string
     {
-        $search = [
-            '#LABEL#',
-            '#NAME#',
-            '#ATTRIBUTES#',
-        ];
-        $replace = [
-            $this->label,
-            $this->name,
-            $this->getAttributesTag(),
+        $data = [
+            'label' => $this->label,
+            'name' => $this->name,
+            'attributes' => $this->getAttributesTag(),
         ];
 
-        return $this->getTemplate('Text', $search, $replace);
+        return $this->getView('text', $data);
     }
 }

@@ -64,7 +64,7 @@ abstract class PluginContainerAbstract extends PluginAbstract
     {
         $html = '';
         foreach ($this->getPlugins() as $plugin) {
-            dd("getHtmlPlugins: " . get_class($this) . ' - ' . get_class($plugin));
+//            dd("getHtmlPlugins: " . get_class($this) . ' - ' . get_class($plugin));
             $html .= $plugin->getHtml();
         }
         return $html;

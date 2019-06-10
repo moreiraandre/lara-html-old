@@ -22,8 +22,7 @@ final class Col extends PluginContainerAbstract
      */
     public function getHtml(): string
     {
-        require __DIR__."/../Template/bootstrap4/config.php";
         $htmlPlugins = $this->getHtmlPlugins();
-        return "<div class=\"{$config['css']['col']}\">$htmlPlugins</div>";
+        return "<div class=\"".config('larahtml.templates.'.$this->getTemplate().'.col.sm')."\">$htmlPlugins</div>";
     }
 }

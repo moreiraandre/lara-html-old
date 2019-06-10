@@ -19,6 +19,10 @@ final class LaraHtmlScreen extends PluginContainerAbstract
      */
     public function getHtml(): string
     {
-        return "<div class='php-html-screen'>{$this->getHtmlPlugins()}</div>";
+        $data = [
+            'rows' => $this->getHtmlPlugins(),
+        ];
+
+        return $this->getView('screen', $data);
     }
 }

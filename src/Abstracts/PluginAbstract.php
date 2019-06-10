@@ -14,9 +14,6 @@ use LaraHtml\Interfaces\PluginOutHtmlInterface;
 use LaraHtml\Finals\Col;
 use LaraHtml\Finals\Row;
 
-use Illuminate\Container\Container as Container;
-use Illuminate\Support\Facades\Facade as Facade;
-
 abstract class PluginAbstract implements PluginOutHtmlInterface
 {
     /**
@@ -32,6 +29,13 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
      * @var Col
      */
     private $col = null;
+
+    /**
+     * Template para a definição do HTML
+     *
+     * @var string
+     */
+    private $template = null;
 
     /**
      * Armazena atributos de tag HTML
@@ -73,24 +77,32 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
     }
 
     /**
-     * @param string $template
-     * @param array $data
+     * PluginAbstract constructor.
+     */
+    public function __construct()
+    {
+        $this->template = config('larahtml.default');
+    }
+
+    /**
      * @return string
      */
-    protected function getTemplate(string $template, array $data): string
+    protected function getTemplate(): string
     {
-//        $template = file_get_contents(__DIR__ . "/../Template/bootstrap4/$template.php");
-//        $template = View::first(['php-html.Form', 'Form'], $data);
+//        echo get_class($this).' - '.$this->template.'<br>';
+        return $this->template;
+    }
 
-        $app = new Container();
-        $app->singleton('app', 'Illuminate\Container\Container');
-
-        Facade::setFacadeApplication($app);
-//        $app->bind(View::class, 'Illuminate\Support\Facades\View');
-
-//        $template = View::make('Form', $data);
-        $template = $app->make('view')->make('mi-vista');
-        return $template;
+    /**
+     * Retorna a view blade.
+     *
+     * @param string $viewName
+     * @param array $data
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function getView(string $viewName, array $data)
+    {
+        return view('larahtml::' . $this->getTemplate() . '.' . $viewName, $data);
     }
 
     /**
