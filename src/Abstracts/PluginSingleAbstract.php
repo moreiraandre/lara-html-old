@@ -7,9 +7,9 @@
  * Time: 23:40
  */
 
-namespace PhpHtml\Abstracts\Plugins;
+namespace LaraHtml\Abstracts\Plugins;
 
-use PhpHtml\Abstracts\PluginAbstract;
+use LaraHtml\Abstracts\PluginAbstract;
 
 abstract class PluginSingleAbstract extends PluginAbstract
 {}

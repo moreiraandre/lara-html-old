@@ -5,13 +5,13 @@
  * Time: 23:41
  */
 
-namespace PhpHtml\Plugins;
+namespace LaraHtml\Plugins;
 
-use PhpHtml\Abstracts\PluginContainerAbstract;
+use LaraHtml\Abstracts\PluginContainerAbstract;
 
 /**
  * Class Text
- * @package PhpHtml\Plugins
+ * @package LaraHtml\Plugins
  */
 class Form extends PluginContainerAbstract
 {

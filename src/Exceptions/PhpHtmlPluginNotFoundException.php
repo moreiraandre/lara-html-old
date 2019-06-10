@@ -5,7 +5,7 @@
  * Time: 00:36
  */
 
-namespace PhpHtml\Exceptions;
+namespace LaraHtml\Exceptions;
 
 
-class PhpHtmlPluginNotFoundException extends \Exception {}
+class LaraHtmlPluginNotFoundException extends \Exception {}

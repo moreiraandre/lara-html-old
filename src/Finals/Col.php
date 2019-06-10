@@ -5,13 +5,13 @@
  * Time: 02:06
  */
 
-namespace PhpHtml\Finals;
+namespace LaraHtml\Finals;
 
-use PhpHtml\Abstracts\PluginContainerAbstract;
+use LaraHtml\Abstracts\PluginContainerAbstract;
 
 /**
  * Class Col
- * @package PhpHtml\Finals
+ * @package LaraHtml\Finals
  */
 final class Col extends PluginContainerAbstract
 {

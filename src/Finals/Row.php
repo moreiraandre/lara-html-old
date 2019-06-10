@@ -5,13 +5,13 @@
  * Time: 23:43
  */
 
-namespace PhpHtml\Finals;
+namespace LaraHtml\Finals;
 
-use PhpHtml\Abstracts\PluginContainerAbstract;
+use LaraHtml\Abstracts\PluginContainerAbstract;
 
 /**
  * Class Row
- * @package PhpHtml\Finals
+ * @package LaraHtml\Finals
  */
 final class Row extends PluginContainerAbstract
 {

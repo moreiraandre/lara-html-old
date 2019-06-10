@@ -5,7 +5,7 @@
  * Time: 23:38
  */
 
-namespace PhpHtml\Interfaces;
+namespace LaraHtml\Interfaces;
 
 
 interface PluginOutHtmlInterface

@@ -36,8 +36,8 @@ error_reporting(E_ALL);
 if (isset($_GET['class'])) {
     require_once $_GET['class'] . '.php'; // INCLUI O ARQUIVO
     $class = 'Examples\\'.$_GET['class'];
-    $firstRow = new \PhpHtml\Finals\Row;
-//    $container = new \PhpHtml\Finals\Container;
+    $firstRow = new \LaraHtml\Finals\Row;
+//    $container = new \LaraHtml\Finals\Container;
     $class = new $class;
     $class->run($firstRow);
 //    $class->run($container);

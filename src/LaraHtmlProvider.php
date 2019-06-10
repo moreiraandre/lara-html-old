@@ -4,13 +4,11 @@
  * Ponto de partida para criação de telas
  */
 
-namespace PhpHtml;
+namespace LaraHtml;
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use PhpHtml\Finals\Row;
 
-class PhpHtmlProvider extends ServiceProvider
+class LaraHtmlProvider extends ServiceProvider
 {
 
     /**
@@ -21,13 +19,13 @@ class PhpHtmlProvider extends ServiceProvider
     public function boot()
     {
 
-        $this->loadViewsFrom(__DIR__ . '/Template/bootstrap4', 'phphtml');
+        $this->loadViewsFrom(__DIR__ . '/Template/bootstrap4', 'larahtml');
 
         $this->publishes([
-            __DIR__ . '/Template' => resource_path('views/vendor/php-html'),
+            __DIR__ . '/Template' => resource_path('views/vendor/larahtml'),
         ]);
 
-        $this->app->alias(PhpHtmlScreen::class, 'phphtml');
+        $this->app->alias(LaraHtmlScreen::class, 'larahtml');
 
         /*View::creator('profile', 'App\Http\View\Creators\ProfileCreator');
 
@@ -35,8 +33,8 @@ class PhpHtmlProvider extends ServiceProvider
             //
         });
 
-        $this->app->singleton(PhpHtmlScreen::class, function ($app) {
-            return new PhpHtmlScreen;
+        $this->app->singleton(LaraHtmlScreen::class, function ($app) {
+            return new LaraHtmlScreen;
         });
         $this->app->singleton(Row::class, function ($app) {
             return new Row;

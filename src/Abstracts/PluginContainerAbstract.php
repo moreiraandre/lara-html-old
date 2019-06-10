@@ -7,15 +7,15 @@
  * Time: 22:50
  */
 
-namespace PhpHtml\Abstracts;
+namespace LaraHtml\Abstracts;
 
 use phpDocumentor\Reflection\Types\This;
-use PhpHtml\Abstracts\Plugins\PluginSingleAbstract;
-use PhpHtml\Exceptions\PhpHtmlMethodNotFoundException;
-use PhpHtml\Exceptions\PhpHtmlParametersException;
-use PhpHtml\Exceptions\PhpHtmlPluginNotFoundException;
-use PhpHtml\Finals\Col;
-use PhpHtml\Finals\Row;
+use LaraHtml\Abstracts\Plugins\PluginSingleAbstract;
+use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
+use LaraHtml\Exceptions\LaraHtmlParametersException;
+use LaraHtml\Exceptions\LaraHtmlPluginNotFoundException;
+use LaraHtml\Finals\Col;
+use LaraHtml\Finals\Row;
 use Webmozart\Assert\Assert;
 
 abstract class PluginContainerAbstract extends PluginAbstract
@@ -91,11 +91,11 @@ abstract class PluginContainerAbstract extends PluginAbstract
 
 
             $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
-            $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
+            $class = "LaraHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
             // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
             if (!file_exists(__DIR__ . "/../Plugins/$pluginClass.php"))
-                throw new PhpHtmlPluginNotFoundException("Plugin $class does not exist!");
+                throw new LaraHtmlPluginNotFoundException("Plugin $class does not exist!");
 
             // RESOLVENDO A HIERARQUIA DE PARÂMETROS EM MÉTODOS DINÂMICOS
             while (is_array($arguments[0]))
@@ -105,7 +105,7 @@ abstract class PluginContainerAbstract extends PluginAbstract
             try {
                 $obj = new $class(...$arguments); // CRIANDO OBJETO
             } catch (\TypeError $e) {
-                throw new PhpHtmlParametersException($e->getMessage());
+                throw new LaraHtmlParametersException($e->getMessage());
             }
 
             $col = new Col(); // CRIANDO COLUNA
@@ -117,11 +117,11 @@ abstract class PluginContainerAbstract extends PluginAbstract
 
             if ($this instanceof Col) {
                 $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
-                $class = "PhpHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
+                $class = "LaraHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
                 // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
                 if (!file_exists(__DIR__ . "/../../Plugins/$pluginClass.php"))
-                    throw new PhpHtmlPluginNotFoundException("Plugin $class does not exist!");
+                    throw new LaraHtmlPluginNotFoundException("Plugin $class does not exist!");
 
                 // RESOLVENDO A HIERARQUIA DE PARÂMETROS EM MÉTODOS DINÂMICOS
                 while (is_array($arguments[0]))
@@ -131,7 +131,7 @@ abstract class PluginContainerAbstract extends PluginAbstract
                 try {
                     $this->pluginOrRows = $obj = new $class(...$arguments); // CRIANDO OBJETO
                 } catch (\TypeError $e) {
-                    throw new PhpHtmlParametersException($e->getMessage());
+                    throw new LaraHtmlParametersException($e->getMessage());
                 }
 
                 $obj->setCol($this); // GUARDANDO REFERÊNCIA DA COLUNA NO PLUGIN
@@ -189,6 +189,6 @@ abstract class PluginContainerAbstract extends PluginAbstract
             return $this->pluginOrRows[] = $this->currentRow = new Row();
         } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA add UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new PhpHtmlMethodNotFoundException("Method $name does not exist!");
+            throw new LaraHtmlMethodNotFoundException("Method $name does not exist!");
     }
 }

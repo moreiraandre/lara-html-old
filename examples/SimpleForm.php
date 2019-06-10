@@ -8,7 +8,7 @@
 
 namespace Examples;
 
-use PhpHtml\Finals\Row;
+use LaraHtml\Finals\Row;
 
 class SimpleForm
 {

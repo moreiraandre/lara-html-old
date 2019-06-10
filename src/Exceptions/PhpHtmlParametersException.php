@@ -5,7 +5,7 @@
  * Time: 11:00
  */
 
-namespace PhpHtml\Exceptions;
+namespace LaraHtml\Exceptions;
 
 
-class PhpHtmlParametersException extends \Exception {}
+class LaraHtmlParametersException extends \Exception {}

@@ -7,12 +7,12 @@
  * Time: 23:40
  */
 
-namespace PhpHtml\Abstracts;
+namespace LaraHtml\Abstracts;
 
-use PhpHtml\Exceptions\PhpHtmlMethodNotFoundException;
-use PhpHtml\Interfaces\PluginOutHtmlInterface;
-use PhpHtml\Finals\Col;
-use PhpHtml\Finals\Row;
+use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
+use LaraHtml\Interfaces\PluginOutHtmlInterface;
+use LaraHtml\Finals\Col;
+use LaraHtml\Finals\Row;
 
 use Illuminate\Container\Container as Container;
 use Illuminate\Support\Facades\Facade as Facade;
@@ -114,7 +114,7 @@ abstract class PluginAbstract implements PluginOutHtmlInterface
             return $this; // RETORNA O PRÓPRIO PLUGIN
         } else
             // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA attr UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
-            throw new PhpHtmlMethodNotFoundException("Method $name does not exist!");
+            throw new LaraHtmlMethodNotFoundException("Method $name does not exist!");
     }
 
     /**
