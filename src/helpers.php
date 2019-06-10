@@ -11,11 +11,11 @@ if (!function_exists('lhtml')) {
     function lhtml($customScreen)
     {
         if (!is_object($customScreen))
-            throw new \Exception('Parameter is not an object!');
+            throw new Exception('Parameter is not an object!');
 
-        $screen = new \LaraHtml\LaraHtmlScreen;
-        $customScreen->run($screen);
+        $firstRow = new LaraHtml\Finals\Row;
+        $customScreen->run($firstRow);
 
-        return $screen->getHtml();
+        return $customScreen->getHtml();
     }
 }

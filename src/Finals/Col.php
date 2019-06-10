@@ -23,6 +23,6 @@ final class Col extends PluginContainerAbstract
     public function getHtml(): string
     {
         $htmlPlugins = $this->getHtmlPlugins();
-        return "<div class=\"".config('larahtml.templates.'.$this->getTemplate().'.col.sm')."\">$htmlPlugins</div>";
+        return "<div class=\"col-".config('larahtml.templates.'.$this->getTemplate().'.css.col.sm')."\">$htmlPlugins</div>";
     }
 }

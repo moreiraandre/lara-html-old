@@ -4,15 +4,13 @@
  * Ponto de partida para criação de telas
  */
 
-namespace LaraHtml;
-
-use LaraHtml\Abstracts\PluginContainerAbstract;
+namespace LaraHtml\Abstracts;
 
 /**
  * Class LaraHtmlScreen
  * @package LaraHtml
  */
-final class LaraHtmlScreen extends PluginContainerAbstract
+abstract class LaraHtmlScreen extends PluginContainerAbstract
 {
     /**
      * @return string

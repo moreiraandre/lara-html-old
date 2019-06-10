@@ -25,6 +25,10 @@ class LaraHtmlProvider extends ServiceProvider
             __DIR__ . '/Templates' => resource_path('views/vendor/larahtml'),
         ]);
 
+        $this->publishes([
+            __DIR__ . '/config.php' => config_path('larahtml.php'),
+        ]);
+
     }
 
 }
