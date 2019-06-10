@@ -33,15 +33,15 @@ abstract class PluginContainerAbstract extends PluginAbstract
      */
     public function addPlugin(PluginAbstract $obj): PluginAbstract
     {
-        /*echo "<pre style='color: #FFF;'>";
-        echo "addPlugin: " . get_class($obj) . ' - ' . get_class($this) . "<br>";
-        echo "</pre>";*/
+//        dd("addPlugin: " . get_class($obj) . ' - ' . get_class($this));
         if ($this instanceof Col) {
             $obj->setCol($this);
-            $obj->setRow($this->getRow());
+            if ($obj->getRow() instanceof Row)
+                $obj->setRow($this->getRow());
         }
         if ($this instanceof Row)
             $obj->setRow($this);
+
         return $this->plugins[] = $obj;
     }
 
@@ -64,9 +64,7 @@ abstract class PluginContainerAbstract extends PluginAbstract
     {
         $html = '';
         foreach ($this->getPlugins() as $plugin) {
-            /*echo "<pre style='color: #FFF;'>";
-            echo "getHtmlPlugins: " . get_class($this) . ' - ' . get_class($plugin) . "<br>";
-            echo "</pre>";*/
+            dd("getHtmlPlugins: " . get_class($this) . ' - ' . get_class($plugin));
             $html .= $plugin->getHtml();
         }
         return $html;

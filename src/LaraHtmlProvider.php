@@ -19,7 +19,7 @@ class LaraHtmlProvider extends ServiceProvider
     public function boot()
     {
 
-        $this->loadViewsFrom(__DIR__ . '/Template/bootstrap4', 'larahtml');
+        $this->loadViewsFrom(__DIR__ . '/Templates/bootstrap4', 'larahtml');
 
         $this->publishes([
             __DIR__ . '/Template' => resource_path('views/vendor/larahtml'),

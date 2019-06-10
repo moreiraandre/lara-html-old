@@ -15,6 +15,7 @@ if (!function_exists('lhtml')) {
 
         $screen = new \LaraHtml\LaraHtmlScreen;
         $customScreen->run($screen);
+
         return $screen->getHtml();
     }
 }
