@@ -32,13 +32,13 @@ return [
         'bootstrap4' => [
             'max_cols' => 12,
             'css' => [
-                'screen' => 'container',
+                'screen' => 'container-fluid',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'sm',
-                    'md' => 'md',
-                    'lg' => 'lg',
-                    'xl' => 'xl',
+                    'sm' => 'col-sm',
+                    'md' => 'col-md',
+                    'lg' => 'col-lg',
+                    'xl' => 'col-xl',
                 ],
             ]
         ],
@@ -49,10 +49,10 @@ return [
                 'screen' => 'container',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'sm',
-                    'md' => 'md',
-                    'lg' => 'lg',
-                    'xl' => 'xl',
+                    'sm' => 'col-sm',
+                    'md' => 'col-md',
+                    'lg' => 'col-lg',
+                    'xl' => 'col-xl',
                 ],
             ]
         ],

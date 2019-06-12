@@ -14,13 +14,9 @@ use LaraHtml\Grid\Plugin\Simple;
  * Class Text
  * @package LaraHtml\Plugins
  */
-class Text extends Simple
+class Button extends Simple
 {
     private
-        /**
-         * @var string
-         */
-        $name,
         /**
          * @var string
          */
@@ -28,17 +24,12 @@ class Text extends Simple
 
     /**
      * Text constructor.
-     * @param string $name
      * @param string|null $label
      */
-    public function __construct(string $name, string $label = null)
+    public function __construct(string $label = null)
     {
         parent::__construct();
 
-        // Caso $label não seja informado ele recebe o valor de $name com a primeira letra maiúscula.
-        $label = $label ?: ucfirst($name);
-
-        $this->name = $name;
         $this->label = $label;
     }
 
@@ -49,10 +40,9 @@ class Text extends Simple
     {
         $data = [
             'label' => $this->label,
-            'name' => $this->name,
             'attributes' => $this->getAttributesTag(),
         ];
 
-        return $this->getView('text', $data);
+        return $this->getView('button', $data);
     }
 }

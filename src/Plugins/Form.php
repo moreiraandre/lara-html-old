@@ -7,13 +7,14 @@
 
 namespace LaraHtml\Plugins;
 
-use LaraHtml\Abstracts\PluginContainerAbstract;
+
+use LaraHtml\Grid\Plugin\Container;
 
 /**
  * Class Text
  * @package LaraHtml\Plugins
  */
-class Form extends PluginContainerAbstract
+class Form extends Container
 {
     /**
      * @var string
@@ -36,17 +37,12 @@ class Form extends PluginContainerAbstract
      */
     public function getHtml(): string
     {
-        $html = parent::getHtmlPlugins();
-
-        $search = [
-            '#ACTION#',
-            '#HTML#',
-        ];
-        $replace = [
-            $this->action,
-            $html,
+        $data = [
+            'action' => $this->action,
+            'elements' => $this->getHtmlElements($this->getRows()),
+            'attributes' => $this->getAttributesTag(),
         ];
 
-        return $this->getTemplate('Form', $search, $replace);
+        return $this->getView('form', $data);
     }
 }

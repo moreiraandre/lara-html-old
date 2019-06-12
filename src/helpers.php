@@ -13,8 +13,8 @@ if (!function_exists('lhtml')) {
         if (!is_object($customScreen))
             throw new Exception('Parameter is not an object!');
 
-        $firstRow = new LaraHtml\Finals\Row;
-        $customScreen->run($firstRow);
+        $customScreen->row(new LaraHtml\Grid\Row);
+        $customScreen->run();
 
         return $customScreen->getHtml();
     }
