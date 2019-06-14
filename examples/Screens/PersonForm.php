@@ -1,6 +1,6 @@
 <?php
 
-namespace Examples;
+namespace App\Screens;
 
 use LaraHtml\Grid\Screen;
 
