@@ -11,6 +11,7 @@ return [
 
 //    'default' => env('LARA_HTML_DEFAULT', 'materialize'),
     'default' => env('LARA_HTML_DEFAULT', 'bootstrap4'),
+    'extend_view' => env('LARA_HTML_EXTEND_VIEW', 'welcome'),
 
     /*
     |--------------------------------------------------------------------------
