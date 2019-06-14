@@ -21,6 +21,7 @@ abstract class Screen extends General
     {
         $data = [
             'class' => $this->config('css.screen'),
+            'extend_view' => config('larahtml.extend_view'),
             'elements' => $this->getHtmlElements($this->rows),
             'attributes' => $this->getAttributesTag(),
         ];
