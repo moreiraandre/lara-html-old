@@ -9,6 +9,7 @@ return [
     |
     */
 
+//    'default' => env('LARA_HTML_DEFAULT', 'materialize'),
     'default' => env('LARA_HTML_DEFAULT', 'bootstrap4'),
 
     /*
@@ -93,6 +94,34 @@ return [
                 'col' => [
                     'sm' => 'sm',
                     'md' => 'md',
+                    'lg' => 'lg',
+                    'xl' => 'xl',
+                ],
+            ]
+        ],
+
+        'foundation' => [
+            'max_cols' => 12,
+            'css' => [
+                'screen' => 'grid-container',
+                'row' => 'grid-x',
+                'col' => [
+                    'sm' => 'sm',
+                    'md' => 'cell',
+                    'lg' => 'lg',
+                    'xl' => 'xl',
+                ],
+            ]
+        ],
+
+        'materialize' => [
+            'max_cols' => 12,
+            'css' => [
+                'screen' => 'container',
+                'row' => 'row',
+                'col' => [
+                    'sm' => 'sm',
+                    'md' => 'col',
                     'lg' => 'lg',
                     'xl' => 'xl',
                 ],

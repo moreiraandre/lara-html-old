@@ -70,7 +70,7 @@ abstract class General implements PluginOutHtmlInterface
     /**
      * @return string
      */
-    protected function getTemplate(): string
+    public function getTemplate(): string
     {
         return $this->template;
     }
