@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Referenciam linha e coluna do elemento
+ * Referência da linha e coluna do elemento.
  */
 
 namespace LaraHtml\Traits;
