@@ -35,7 +35,7 @@ class Form extends Container
     /**
      * @return string
      */
-    public function getHtml(): string
+    public function getHtml(?array $data = null): string
     {
         $data = [
             'action' => $this->action,

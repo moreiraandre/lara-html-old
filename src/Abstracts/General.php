@@ -110,9 +110,13 @@ abstract class General implements PluginOutHtmlInterface
     {
         $html = '';
         $elements = $elements ?: [];
-        foreach ($elements as $e) {
+        $total = count($elements);
+        foreach ($elements as $idx => $e) {
 //            dd("getHtmlPlugins: " . get_class($this) . ' - ' . get_class($plugin));
-            $html .= $e->getHtml();
+            $html .= $e->getHtml([
+                'total' => $total,
+                'idx' => $idx,
+            ]);
         }
         return $html;
     }

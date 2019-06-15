@@ -52,11 +52,12 @@ final class Row extends General
     }
 
     /**
-     * Retorna o HTML da classe.
+     * Gera e retorna o HTML do plugin.
      *
+     * @param array|null $data
      * @return string
      */
-    public function getHtml(): string
+    public function getHtml(?array $data = null): string
     {
         $data = [
             'class' => $this->config('css.row'),

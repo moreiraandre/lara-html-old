@@ -49,7 +49,8 @@ final class Col extends General
         return $this->plugins[] = $plugin;
     }
 
-    protected function changePluginRows() {
+    protected function changePluginRows()
+    {
         $this->newRow(new Row);
         $col = new Col($this->currentRow); // CRIANDO COLUNA
         $this->currentRow->newCol($col);
@@ -58,14 +59,28 @@ final class Col extends General
     }
 
     /**
-     * Retorna o HTML da classe.
+     * Gera e retorna o HTML do plugin.
      *
+     * @param array|null $data
      * @return string
      */
-    public function getHtml(): string
+    public function getHtml(?array $data = null): string
     {
+        $countCols = $this->getRow()->countCols();
+        $maxCols = $this->config('max_cols');
+        $numCol = $maxCols / $countCols; // QTS COLUNAS ESTA COLUNA OCUPARÁ
+        if (!is_int($numCol)) // SE O RESULTADO NÃO FOR INTEIRO
+            // CALCULE A QUANTIDADE DE COLUNAS DA ÚLTIMA COLUNA
+            if ($data['total'] - 1 == ($data['idx'])) {
+                $numCol = (int)$numCol;
+                $oldNumCol = $numCol;
+                $numCol = $numCol * $countCols; // TOTAL DE COLUNAS OCUPADAS
+                $numCol = $maxCols - $numCol; // QUANTAS COLUNAS VAGAS EXISTEM
+                $numCol = $oldNumCol + $numCol; // ADICIONE AS COLUNAS VAGAS A ÚLTIMA COLUNA
+            }
+        $numCol = (int)$numCol; // SE O RESULTADO NÃO FOR INTEIRO E NÃO FOR A ÚLTIMA COLUNA
         $data = [
-            'class' => $this->config('css.col.md'),
+            'class' => $this->config('css.col.md') . '-' . $numCol,
             'elements' => $this->getHtmlElements($this->plugins ?: $this->rows),
             'attributes' => $this->getAttributesTag(),
         ];

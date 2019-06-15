@@ -45,7 +45,7 @@ class Text extends Simple
     /**
      * @return string
      */
-    public function getHtml(): string
+    public function getHtml(?array $data = null): string
     {
         $data = [
             'label' => $this->label,
