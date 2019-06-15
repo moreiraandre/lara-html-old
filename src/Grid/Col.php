@@ -84,7 +84,7 @@ final class Col extends General
             }
         $numCol = (int)$numCol; // SE O RESULTADO NÃO FOR INTEIRO E NÃO FOR A ÚLTIMA COLUNA
         $data = [
-            'class' => $this->config('css.col.md') . '-' . $numCol,
+            'class' => $this->config('css.col.md') . $numCol,
             'elements' => $this->getHtmlElements($this->plugins ?: $this->rows),
             'attributes' => $this->getAttributesTag(),
         ];

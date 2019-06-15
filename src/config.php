@@ -37,10 +37,10 @@ return [
                 'screen' => 'container-fluid',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'col-sm',
-                    'md' => 'col-md',
-                    'lg' => 'col-lg',
-                    'xl' => 'col-xl',
+                    'sm' => 'col-sm-',
+                    'md' => 'col-md-',
+                    'lg' => 'col-lg-',
+                    'xl' => 'col-xl-',
                 ],
             ]
         ],
@@ -51,10 +51,10 @@ return [
                 'screen' => 'container',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'col-sm',
-                    'md' => 'col-md',
-                    'lg' => 'col-lg',
-                    'xl' => 'col-xl',
+                    'sm' => 'col-sm-',
+                    'md' => 'col-md-',
+                    'lg' => 'col-lg-',
+                    'xl' => 'col-xl-',
                 ],
             ]
         ],
@@ -65,10 +65,10 @@ return [
                 'screen' => 'container',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'sm',
-                    'md' => 'md',
-                    'lg' => 'lg',
-                    'xl' => 'xl',
+                    'sm' => 'sm-',
+                    'md' => 'md-',
+                    'lg' => 'lg-',
+                    'xl' => 'xl-',
                 ],
             ]
         ],
@@ -79,10 +79,10 @@ return [
                 'screen' => 'container',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'sm',
-                    'md' => 'md',
-                    'lg' => 'lg',
-                    'xl' => 'xl',
+                    'sm' => 'sm-',
+                    'md' => 'md-',
+                    'lg' => 'lg-',
+                    'xl' => 'xl-',
                 ],
             ]
         ],
@@ -93,10 +93,10 @@ return [
                 'screen' => 'container',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'sm',
-                    'md' => 'md',
-                    'lg' => 'lg',
-                    'xl' => 'xl',
+                    'sm' => 'sm-',
+                    'md' => 'md-',
+                    'lg' => 'lg-',
+                    'xl' => 'xl-',
                 ],
             ]
         ],
@@ -122,7 +122,7 @@ return [
                 'row' => 'row',
                 'col' => [
                     'sm' => 'sm',
-                    'md' => 'col',
+                    'md' => 'col m',
                     'lg' => 'lg',
                     'xl' => 'xl',
                 ],
