@@ -49,13 +49,16 @@ final class Col extends General
         return $this->plugins[] = $plugin;
     }
 
+    /**
+     * Troca o plugin armazenado por linhas.
+     */
     protected function changePluginRows()
     {
-        $this->newRow(new Row);
+        $this->newRow(new Row); // NOVA LINHA
         $col = new Col($this->currentRow); // CRIANDO COLUNA
-        $this->currentRow->newCol($col);
-        $col->newPlugin($this->plugins[0]);
-        $this->plugins = null;
+        $this->currentRow->newCol($col); // ADICIONANDO COLUNA NA LINHA ATUAL
+        $col->newPlugin($this->plugins[0]); // ADICIONANDO PLUGIN ATUAL NA COLUNA
+        $this->plugins = null; // EXCLUINDO PLUGIN ANTIGO DA COLUNA
     }
 
     /**
@@ -66,15 +69,15 @@ final class Col extends General
      */
     public function getHtml(?array $data = null): string
     {
-        $countCols = $this->getRow()->countCols();
-        $maxCols = $this->config('max_cols');
-        $numCol = $maxCols / $countCols; // QTS COLUNAS ESTA COLUNA OCUPARÁ
+        $countCols = $this->getRow()->countCols(); // TOTAL DE COLUNAS DA LINHA PAI
+        $maxCols = $this->config('max_cols'); // MÁXIMO DE COLUNAS DO TEMPLATE EM USO
+        $numCol = $maxCols / $countCols; // QUANTAS COLUNAS ESTA COLUNA OCUPARÁ
         if (!is_int($numCol)) // SE O RESULTADO NÃO FOR INTEIRO
             // CALCULE A QUANTIDADE DE COLUNAS DA ÚLTIMA COLUNA
-            if ($data['total'] - 1 == ($data['idx'])) {
-                $numCol = (int)$numCol;
-                $oldNumCol = $numCol;
-                $numCol = $numCol * $countCols; // TOTAL DE COLUNAS OCUPADAS
+            if ($data['total'] - 1 == ($data['idx'])) { // SE A COLUNA ATUAL FOR A ÚLTIMA ARMAZENADA NA LINHA PAI
+                $numCol = (int)$numCol; // PARTE INTEIRA DA QUANTIDADE DE COLUNAS OCUPADAS PELA ATUAL
+                $oldNumCol = $numCol; // ARMAZENA EM UMA VARIÁVEL AUXILIAR
+                $numCol = $numCol * $countCols; // TOTAL GERAL DE COLUNAS OCUPADAS NA LINHA PAI
                 $numCol = $maxCols - $numCol; // QUANTAS COLUNAS VAGAS EXISTEM
                 $numCol = $oldNumCol + $numCol; // ADICIONE AS COLUNAS VAGAS A ÚLTIMA COLUNA
             }
