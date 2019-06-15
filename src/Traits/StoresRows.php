@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Armazena linhas
+ * Armazena linhas.
  */
 
 namespace LaraHtml\Traits;
