@@ -10,8 +10,8 @@ if (!function_exists('lhtml')) {
      */
     function lhtml($customScreen)
     {
-        if (!is_object($customScreen))
-            throw new Exception('Parameter is not an object!');
+        if (!$customScreen instanceof LaraHtml\Grid\Screen)
+            throw new Exception('Parameter is not an instance of LaraHtml\Grid\Screen!');
 
         $customScreen->row(new LaraHtml\Grid\Row);
         $customScreen->run();
