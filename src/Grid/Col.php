@@ -46,6 +46,7 @@ final class Col extends General
     public function newPlugin(Plugin $plugin)
     {
         $plugin->setCol($this);
+        $plugin->setRow($this->getRow());
         return $this->plugins[] = $plugin;
     }
 

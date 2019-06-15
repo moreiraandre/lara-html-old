@@ -112,7 +112,8 @@ trait StoresRows
             $col->newPlugin($obj); // INSERINDO O NOVO PLUGIN NA COLUNA
 
             return $obj;
-        }
+        } else
+            parent::__call($name, $arguments);
     }
 
 }
