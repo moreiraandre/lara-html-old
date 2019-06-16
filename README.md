@@ -102,6 +102,17 @@ php artisan make:lhtml PersonForm
 ```
 > As classes de _telas_ serão criadas no diretório _app/Screens_.
 
+## Gerando o HTML
+```php
+// No seu controller.
+
+public function create()
+{
+    return lhtml(new App\PersonForm);
+}
+```
+> O helper `lhtml` retorna o HTML da classe de tela.
+
 # Desenvolvimento
 ### André Moreira 
 ![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100)  Projetista e desenvolvedor
