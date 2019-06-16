@@ -6,6 +6,11 @@ $form = $this->addForm('/');
 $form->addText('apelido');
 ```
 
+# Instalação
+```bash
+composer require moreiraandre/php-html
+```
+
 # Desenvolvimento
 ### André Moreira 
 ![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100)  Projetista e desenvolvedor
