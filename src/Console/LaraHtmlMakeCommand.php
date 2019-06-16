@@ -32,27 +32,7 @@ class LaraHtmlMakeCommand extends GeneratorCommand
         if (parent::handle() === false && ! $this->option('force')) {
             return;
         }
-
-        /*if ($this->option('markdown')) {
-            $this->writeMarkdownTemplate();
-        }*/
     }
-
-    /**
-     * Write the Markdown template for the mailable.
-     *
-     * @return void
-     */
-    /*protected function writeMarkdownTemplate()
-    {
-        $path = resource_path('views/'.str_replace('.', '/', $this->option('markdown'))).'.blade.php';
-
-        if (! $this->files->isDirectory(dirname($path))) {
-            $this->files->makeDirectory(dirname($path), 0755, true);
-        }
-
-        $this->files->put($path, file_get_contents(__DIR__.'/stubs/markdown.stub'));
-    }*/
 
     /**
      * Build the class with the given name.
