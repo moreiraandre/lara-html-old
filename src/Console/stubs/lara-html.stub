@@ -1,0 +1,18 @@
+<?php
+
+namespace DummyNamespace;
+
+use LaraHtml\Grid\Screen;
+
+class DummyClass extends Screen
+{
+    /**
+     * Escreva aqui os elementos da sua tela.
+     */
+    public function run()
+    {
+        $form = $this->addForm('/');
+        $form->addText('nome');
+        $form->addButton('Enviar');
+    }
+}
