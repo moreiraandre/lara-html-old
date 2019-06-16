@@ -10,6 +10,14 @@ return [
     */
 
     'default' => env('LARA_HTML_DEFAULT', 'bootstrap4'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Extend View Blade
+    |--------------------------------------------------------------------------
+    |
+    */
+
     'extend_view' => env('LARA_HTML_EXTEND_VIEW', 'welcome'),
 
     /*
