@@ -9,7 +9,6 @@ return [
     |
     */
 
-//    'default' => env('LARA_HTML_DEFAULT', 'materialize'),
     'default' => env('LARA_HTML_DEFAULT', 'bootstrap4'),
     'extend_view' => env('LARA_HTML_EXTEND_VIEW', 'welcome'),
 
@@ -31,6 +30,20 @@ return [
 
     'templates' => [
 
+        'bootstrap3' => [
+            'max_cols' => 12,
+            'css' => [
+                'screen' => 'container',
+                'row' => 'row',
+                'col' => [
+                    'sm' => 'col-sm-',
+                    'md' => 'col-md-',
+                    'lg' => 'col-lg-',
+                    'xl' => 'col-xl-',
+                ],
+            ]
+        ],
+
         'bootstrap4' => [
             'max_cols' => 12,
             'css' => [
@@ -45,16 +58,30 @@ return [
             ]
         ],
 
-        'bootstrap3' => [
+        'foundation' => [
+            'max_cols' => 12,
+            'css' => [
+                'screen' => 'grid-container',
+                'row' => 'grid-x',
+                'col' => [
+                    'sm' => 'sm',
+                    'md' => 'cell medium-',
+                    'lg' => 'lg',
+                    'xl' => 'xl',
+                ],
+            ]
+        ],
+
+        'materialize' => [
             'max_cols' => 12,
             'css' => [
                 'screen' => 'container',
                 'row' => 'row',
                 'col' => [
-                    'sm' => 'col-sm-',
-                    'md' => 'col-md-',
-                    'lg' => 'col-lg-',
-                    'xl' => 'col-xl-',
+                    'sm' => 'sm',
+                    'md' => 'col m',
+                    'lg' => 'lg',
+                    'xl' => 'xl',
                 ],
             ]
         ],
@@ -97,34 +124,6 @@ return [
                     'md' => 'md-',
                     'lg' => 'lg-',
                     'xl' => 'xl-',
-                ],
-            ]
-        ],
-
-        'foundation' => [
-            'max_cols' => 12,
-            'css' => [
-                'screen' => 'grid-container',
-                'row' => 'grid-x',
-                'col' => [
-                    'sm' => 'sm',
-                    'md' => 'cell',
-                    'lg' => 'lg',
-                    'xl' => 'xl',
-                ],
-            ]
-        ],
-
-        'materialize' => [
-            'max_cols' => 12,
-            'css' => [
-                'screen' => 'container',
-                'row' => 'row',
-                'col' => [
-                    'sm' => 'sm',
-                    'md' => 'col m',
-                    'lg' => 'lg',
-                    'xl' => 'xl',
                 ],
             ]
         ],
