@@ -88,7 +88,7 @@ $form->addButton('Enviar');
 
 # Instalação
 ```bash
-composer require moreiraandre/php-html
+composer require moreiraandre/lara-html
 ```
 
 ## Exportando configuração
