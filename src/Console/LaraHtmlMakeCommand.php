@@ -22,6 +22,13 @@ class LaraHtmlMakeCommand extends GeneratorCommand
     protected $description = 'Create a new lara-html class';
 
     /**
+     * The type of class being generated.
+     *
+     * @var string
+     */
+//    protected $type = 'LaraHtml';
+
+    /**
      * Execute the console command.
      *
      * @return bool|void|null
@@ -43,6 +50,7 @@ class LaraHtmlMakeCommand extends GeneratorCommand
      */
     protected function buildClass($name)
     {
+        $this->type = "$name"; // ARMAZENANDO NOME DA CLASSE PARA EXIBIR AO USUÁRIO
         $class = parent::buildClass($name);
 
         return $class;
@@ -66,7 +74,9 @@ class LaraHtmlMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Screens';
+        $rootNamespace .= '\Screens';
+        $this->type = $rootNamespace.'\\'.$this->type; // CONCATENANDO NOME DA CLASSE COM O NAMESPACE PARA EXIBIR AO USUÁRIO
+        return $rootNamespace;
     }
 
     /**
