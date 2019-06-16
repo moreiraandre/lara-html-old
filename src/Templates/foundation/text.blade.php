@@ -1,4 +1,3 @@
-<div class="medium">
-    <label>{{$label}}</label>
-    <input name="{{$name}}" {!! $attributes !!}>
-</div>
+<label>{{$label}}
+    <input type="text" name="{{$name}}" {!! $attributes !!}>
+</label>

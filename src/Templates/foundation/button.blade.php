@@ -1,1 +1,1 @@
-<button class="btn" {!! $attributes !!}>{!! $label !!}</button>
+<button class="button" {!! $attributes !!}>{!! $label !!}</button>
