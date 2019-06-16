@@ -91,6 +91,17 @@ $form->addButton('Enviar');
 composer require moreiraandre/php-html
 ```
 
+## Exportando configuração
+```bash
+php artisan vendor:publish --tag=lhtmlconfig
+```
+
+## Criando classe de tela
+```bash
+php artisan make:lhtml PersonForm
+```
+> As classes de _telas_ serão criadas no diretório _app/Screens_.
+
 # Desenvolvimento
 ### André Moreira 
 ![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100)  Projetista e desenvolvedor
