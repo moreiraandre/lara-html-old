@@ -8,6 +8,11 @@
             "name": "André Moreira",
             "email": "andre.mcx1+lara-html@gmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "Tom Benevides",
+            "email": "eltonfelixbenevides+lara-html@gmail.com",
+            "role": "Documentation manager"
         }
     ],
     "require": {
