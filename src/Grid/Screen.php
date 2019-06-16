@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Esta classe deve ser extendida pelas classes de tela da aplicação.
+ */
 
 namespace LaraHtml\Grid;
 
