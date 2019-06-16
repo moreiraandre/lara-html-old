@@ -1,9 +1,89 @@
 # Laravel HTML (Em desenvolvimento)
 Abstração do sistema de **grid responsiva** dos _frameworks CSS_ e seus **templates**.
 
+## Classe LaraHtml
 ```php
-$form = $this->addForm('/');
-$form->addText('apelido');
+$form = $this->addForm('/'); // ADD FORM
+$colNome = $form->addText('nome')->getCol(); // STORE COLUMN OF FIELD NOME
+$colNome->row(); // NEW ROW
+$colNome->addText('endereco'); // ADD FIELD IN COLUMN OF NOME
+$colCpf = $form->addText('cpf')->getCol(); // STORE COLUMN OF FIELD CPF
+$colCpf->addText('rg');
+$colCpf->addText('titulo');
+$colCpf->row();
+$colCpf->addText('dtNasc');
+$form->row(); // NEW ROW IN FORM
+$form->addButton('Enviar');
+```
+
+## Browser
+![](docs/BrowserPersonForm.png)
+
+## Saída HTML
+```html
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Nome</label> 
+                                    <input name="nome"class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Endereco</label> 
+                                    <input name="endereco" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Cpf</label> 
+                                    <input name="cpf" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Rg</label> 
+                                    <input name="rg" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Titulo</label> 
+                                    <input name="titulo" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>DtNasc</label> 
+                                    <input name="dtNasc" class="form-control form-control-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn">Enviar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 ```
 
 # Instalação
