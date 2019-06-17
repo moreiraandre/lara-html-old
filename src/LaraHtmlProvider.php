@@ -22,19 +22,21 @@ class LaraHtmlProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/Templates', 'larahtml');
 
-        $this->publishes([
-            __DIR__ . '/Templates' => resource_path('views/vendor/larahtml'),
-        ], 'lhtmltemplates');
-
-        $this->publishes([
-            __DIR__ . '/config.php' => config_path('larahtml.php'),
-        ], 'lhtmlconfig');
-
         if ($this->app->runningInConsole()) {
             $this->commands([
                 LaraHtmlMakeCommand::class,
             ]);
         }
+
+        $this->publishes([
+            __DIR__ . '/Config' => config_path('larahtml'),
+        ], 'lhtmlcfg');
+
+        $this->publishes([
+            __DIR__ . '/Templates' => resource_path('views/vendor/larahtml'),
+        ], 'lhtmltpl');
+
+        config('larahtml.config');
 
     }
 

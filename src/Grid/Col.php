@@ -83,8 +83,9 @@ final class Col extends General
                 $numCol = $oldNumCol + $numCol; // ADICIONE AS COLUNAS VAGAS A ÚLTIMA COLUNA
             }
         $numCol = (int)$numCol; // SE O RESULTADO NÃO FOR INTEIRO E NÃO FOR A ÚLTIMA COLUNA
+
+        $this->attrClass($this->config('css.grid.col') . $numCol);
         $data = [
-            'class' => $this->config('css.col.md') . $numCol,
             'elements' => $this->getHtmlElements($this->plugins ?: $this->rows),
             'attributes' => $this->getAttributesTag(),
         ];

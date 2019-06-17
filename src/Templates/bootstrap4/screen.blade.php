@@ -1,5 +1,5 @@
 @extends($extend_view)
 
 @section('lhtml')
-    <div class="{{$class}}" {!! $attributes !!}>{!! $elements !!}</div>
+    <div {!! $attributes !!}>{!! $elements !!}</div>
 @endsection
