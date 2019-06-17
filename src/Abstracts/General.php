@@ -7,7 +7,7 @@
 namespace LaraHtml\Abstracts;
 
 
-use Dotenv\Dotenv;
+use LaraHtml\Exceptions\LaraHtmlConfigNotFoundException;
 use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
 use LaraHtml\Interfaces\PluginOutHtmlInterface;
 use LaraHtml\Traits\RowCol;
@@ -41,7 +41,9 @@ abstract class General implements PluginOutHtmlInterface
      */
     public function __construct()
     {
-        $this->template = $this->template ?: config('larahtml.default');
+        $this->template = $this->template ?: config('larahtml.config.default');
+        if (!file_exists(config_path("larahtml/{$this->template}.php")))
+            throw new LaraHtmlConfigNotFoundException("Config 'larahtml/{$this->template}.php' not found!");
     }
 
     /**
