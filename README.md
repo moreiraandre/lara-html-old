@@ -93,7 +93,13 @@ composer require moreiraandre/lara-html
 
 ## Exportando configuração
 ```bash
-php artisan vendor:publish --tag=lhtmlconfig
+php artisan vendor:publish --tag=lhtmlcfg
+```
+
+## Exportando views blade
+_Necessário somente se você quiser customizar algum template ou criar o seu próprio._
+```bash
+php artisan vendor:publish --tag=lhtmltpl
 ```
 
 ## Criando classe de tela
@@ -112,6 +118,8 @@ public function create()
 }
 ```
 > O helper `lhtml` retorna o HTML da classe de tela.
+
+> Na sua view de template é necessário chamar `yield('html')` onde você quer que o HTML seja exibido. 
 
 # Desenvolvimento
 ### André Moreira 
