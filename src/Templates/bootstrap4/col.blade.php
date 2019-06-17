@@ -1,1 +1,1 @@
-<div class="{{$class}}" {!! $attributes !!}>{!! $elements !!}</div>
+<div {!! $attributes !!}>{!! $elements !!}</div>

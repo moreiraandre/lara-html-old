@@ -16,15 +16,10 @@ use LaraHtml\Grid\Plugin\Simple;
  */
 class Text extends Simple
 {
-    private
-        /**
-         * @var string
-         */
-        $name,
-        /**
-         * @var string
-         */
-        $label;
+    /**
+     * @var string
+     */
+    private $label;
 
     /**
      * Text constructor.
@@ -36,20 +31,20 @@ class Text extends Simple
         parent::__construct();
 
         // Caso $label não seja informado ele recebe o valor de $name com a primeira letra maiúscula.
-        $label = $label ?: ucfirst($name);
+        $this->label = $label ?: ucfirst($name);
 
-        $this->name = $name;
-        $this->label = $label;
+        $this->attrClass($this->config('css.plugins.input'));
+        $this->attrName($name);
     }
 
     /**
+     * @param array|null $data
      * @return string
      */
     public function getHtml(?array $data = null): string
     {
         $data = [
             'label' => $this->label,
-            'name' => $this->name,
             'attributes' => $this->getAttributesTag(),
         ];
 
