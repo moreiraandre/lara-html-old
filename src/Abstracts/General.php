@@ -7,6 +7,7 @@
 namespace LaraHtml\Abstracts;
 
 
+use Dotenv\Dotenv;
 use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
 use LaraHtml\Interfaces\PluginOutHtmlInterface;
 use LaraHtml\Traits\RowCol;
@@ -59,7 +60,10 @@ abstract class General implements PluginOutHtmlInterface
         if ($prefix == 'attr') {
             // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
             $attribute = mb_strtolower(substr($name, 4));
-            $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
+            if (!empty($this->attributes[$attribute])) // SE O ATRIBUTO JÁ POSSUIR VALOR
+                $this->attributes[$attribute] .= " {$arguments[0]}"; // O NOVO VALOR SERÁ CONCATENADO NO FIM
+            else
+                $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
 
             return $this; // RETORNA O PRÓPRIO PLUGIN
         } else
@@ -129,6 +133,6 @@ abstract class General implements PluginOutHtmlInterface
      */
     protected function config(string $config)
     {
-        return config("larahtml.templates." . $this->getTemplate() . ".$config");
+        return config("larahtml." . $this->getTemplate() . ".$config");
     }
 }
