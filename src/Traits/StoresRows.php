@@ -43,11 +43,12 @@ trait StoresRows
      * Método para o dev criar nova linha.
      *
      * @return Row
+     * @throws \LaraHtml\Exceptions\LaraHtmlConfigNotFoundException
      */
     public function row()
     {
         // SE FOR UMA COLUNA QUE AINDA NÃO ESTÁ ARMAZENANDO LINHAS, A TROCA SERÁ FEITA
-        if (($this instanceof Col) && ($this->countPlugins()))
+        if (($this instanceof Col) && ($this->isStoredPlugin()))
             self::changePluginRows();
 
         return $this->newRow(new Row);
@@ -80,7 +81,7 @@ trait StoresRows
         // CRIANDO PLUGINS
         if ($prefix == 'add') { // NOVO PLUGIN
             // SE FOR UMA COLUNA QUE AINDA NÃO ESTÁ ARMAZENANDO LINHAS, A TROCA SERÁ FEITA
-            if (($this instanceof Col) && ($this->countPlugins()))
+            if (($this instanceof Col) && ($this->isStoredPlugin()))
                 self::changePluginRows();
             // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
 

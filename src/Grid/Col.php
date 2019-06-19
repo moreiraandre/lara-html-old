@@ -32,9 +32,14 @@ final class Col extends General
         $this->setRow($row);
     }
 
-    public function countPlugins()
+    /**
+     * Informa se a coluna está armazenando um plugin ao invés de linhas.
+     *
+     * @return bool
+     */
+    public function isStoredPlugin()
     {
-        return count($this->plugins ?: []);
+        return $this->plugins !== null;
     }
 
     /**
