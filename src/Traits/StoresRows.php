@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Armazena linhas.
+ * Armazena linhas. Faz a gestão das linhas, bem como criação de plugins e suas colunas.
  */
 
 namespace LaraHtml\Traits;
