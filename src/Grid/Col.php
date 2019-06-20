@@ -89,7 +89,7 @@ final class Col extends General
             }
         $numCol = (int)$numCol; // SE O RESULTADO NÃO FOR INTEIRO E NÃO FOR A ÚLTIMA COLUNA
 
-        $this->attrClass($this->config('css.grid.col') . $numCol);
+        $this->attrClass($this->config('grid-css.col') . $numCol);
         $data = [
             'elements' => $this->getHtmlElements($this->plugins ?: $this->rows),
             'attributes' => $this->getAttributesTag(),

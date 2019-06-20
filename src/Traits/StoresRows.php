@@ -10,7 +10,7 @@ namespace LaraHtml\Traits;
 use LaraHtml\Exceptions\LaraHtmlParametersException;
 use LaraHtml\Exceptions\LaraHtmlPluginNotFoundException;
 use LaraHtml\Grid\Col;
-use LaraHtml\Grid\Plugin\General;
+use LaraHtml\Grid\Plugin\Container;
 use LaraHtml\Grid\Row;
 
 /**
@@ -89,7 +89,7 @@ trait StoresRows
 
             $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
 //            $class = "LaraHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
-            $class = General::class; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
+            $class = Container::class; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
             // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
             if (!file_exists(__DIR__ . "/../Plugins/$pluginClass.php"))
@@ -101,7 +101,7 @@ trait StoresRows
 
             // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
             try {
-                $obj = new $class(...$arguments); // CRIANDO OBJETO
+                $obj = new $class($pluginClass, $arguments); // CRIANDO OBJETO
             } catch (\TypeError $e) {
                 throw new LaraHtmlParametersException($e->getMessage());
             }

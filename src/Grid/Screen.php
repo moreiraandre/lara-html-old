@@ -23,7 +23,7 @@ abstract class Screen extends General
      */
     public function getHtml(?array $data = null): string
     {
-        $this->attrClass($this->config('css.grid.screen'));
+        $this->attrClass($this->config('grid-css.screen'));
         $data = [
             'extend_view' => config('larahtml.extend_view'),
             'elements' => $this->getHtmlElements($this->rows),

@@ -32,7 +32,14 @@ abstract class General implements PluginOutHtmlInterface
      *
      * @var array
      */
-    protected $attributes = [];
+    private $attributes = [];
+
+    /**
+     * Todos os atributos definidos na configuração.
+     *
+     * @var array
+     */
+    private $metaAttributes = [];
 
     /**
      * Se o Template não for definido por troca do valor na classe filha ele será chamado da configuração.
@@ -79,6 +86,36 @@ abstract class General implements PluginOutHtmlInterface
     public function getTemplate(): string
     {
         return $this->template;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMeta()
+    {
+        return $this->metaAttributes;
+    }
+
+    /**
+     * Se o meta atributo já existir o próximo valor será concatenado com um espaço no prefixo.
+     *
+     * @param $attribute
+     * @param $value
+     */
+    public function addMetaAttributes($attribute, $value)
+    {
+        if (isset($this->metaAttributes[$attribute]))
+            $this->metaAttributes[$attribute] .= trim(" $value");
+        else
+            $this->metaAttributes[$attribute] = $value;
     }
 
     /**

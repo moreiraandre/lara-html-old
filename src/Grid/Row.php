@@ -59,7 +59,7 @@ final class Row extends General
      */
     public function getHtml(?array $data = null): string
     {
-        $this->attrClass($this->config('css.grid.row'));
+        $this->attrClass($this->config('grid-css.row'));
 
         $data = [
             'elements' => $this->getHtmlElements($this->cols),
