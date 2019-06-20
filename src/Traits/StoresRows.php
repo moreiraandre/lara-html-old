@@ -49,7 +49,7 @@ trait StoresRows
     {
         // SE FOR UMA COLUNA QUE AINDA NÃO ESTÁ ARMAZENANDO LINHAS, A TROCA SERÁ FEITA
         if (($this instanceof Col) && ($this->isStoredPlugin()))
-            self::changePluginRows();
+            self::replacePluginForRows();
 
         return $this->newRow(new Row);
     }
@@ -82,7 +82,7 @@ trait StoresRows
         if ($prefix == 'add') { // NOVO PLUGIN
             // SE FOR UMA COLUNA QUE AINDA NÃO ESTÁ ARMAZENANDO LINHAS, A TROCA SERÁ FEITA
             if (($this instanceof Col) && ($this->isStoredPlugin()))
-                self::changePluginRows();
+                self::replacePluginForRows();
             // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
 
 

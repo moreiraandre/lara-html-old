@@ -58,7 +58,7 @@ final class Col extends General
     /**
      * Troca o plugin armazenado por linhas.
      */
-    protected function changePluginRows()
+    protected function replacePluginForRows()
     {
         $this->newRow(new Row); // NOVA LINHA
         $col = new Col($this->currentRow); // CRIANDO COLUNA
