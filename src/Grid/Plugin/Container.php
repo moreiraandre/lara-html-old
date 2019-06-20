@@ -1,13 +1,11 @@
 <?php
 
 /**
- * Plugin que armazena linhas
+ * Plugin que armazena linhas.
  */
 
 namespace LaraHtml\Grid\Plugin;
 
-
-use LaraHtml\Grid\Row;
 use LaraHtml\Traits\StoresRows;
 
 /**

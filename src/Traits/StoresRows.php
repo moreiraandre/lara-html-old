@@ -10,6 +10,7 @@ namespace LaraHtml\Traits;
 use LaraHtml\Exceptions\LaraHtmlParametersException;
 use LaraHtml\Exceptions\LaraHtmlPluginNotFoundException;
 use LaraHtml\Grid\Col;
+use LaraHtml\Grid\Plugin\General;
 use LaraHtml\Grid\Row;
 
 /**
@@ -87,7 +88,8 @@ trait StoresRows
 
 
             $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
-            $class = "LaraHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
+//            $class = "LaraHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
+            $class = General::class; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
             // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
             if (!file_exists(__DIR__ . "/../Plugins/$pluginClass.php"))
