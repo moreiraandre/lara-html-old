@@ -106,7 +106,7 @@ trait StoresRows
                 throw new LaraHtmlParametersException($e->getMessage());
             }
 
-            // VERIFICA SE AQUANTIDADE DE COLUNAS CHEGOU AO MÁXIMO PARA CRIAR NOVA LINHA
+            // VERIFICA SE A QUANTIDADE DE COLUNAS CHEGOU AO MÁXIMO PARA CRIAR NOVA LINHA
             if ($this->currentRow->countCols() >= parent::config('max_cols'))
                 $this->newRow(new Row);
 

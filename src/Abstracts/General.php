@@ -54,7 +54,7 @@ abstract class General implements PluginOutHtmlInterface
     }
 
     /**
-     * Define atributos de tag
+     * Define atributos de tag concatenando com os valores da configuração.
      *
      * @param $name
      * @param $arguments
@@ -73,6 +73,30 @@ abstract class General implements PluginOutHtmlInterface
                 $this->attributes[$attribute] .= " {$arguments[0]}"; // O NOVO VALOR SERÁ CONCATENADO NO FIM
             else
                 $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
+
+            return $this; // RETORNA O PRÓPRIO PLUGIN
+        } else
+            // CASO O PREFIXO DO MÉTODO CHAMADO NÃO SEJA attr UM ERRO DE MÉTODO INEXISTENTE É LANÇADO
+            throw new LaraHtmlMethodNotFoundException("Method $name does not exist!");
+    }
+
+    /**
+     * Define atributos de tag substituindo os valores da configuração.
+     *
+     * @param $name
+     * @param $value
+     * @return $this
+     * @throws LaraHtmlMethodNotFoundException
+     */
+    public function __set($name, $value)
+    {
+        $prefix = substr($name, 0, 4); // ARMAZENA OS 4 PRIMEIROS CARACTERES
+
+        // SE O PREFIXO DO COMANDO INVOCADO FOR attr ENTÃO NO ATRIBUTO SERÁ CRIADO
+        if ($prefix == 'attr') {
+            // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
+            $attribute = mb_strtolower(substr($name, 4));
+            $this->attributes[$attribute] = $value; // ARMAZENA O ATRIBUTO E SEU VALOR
 
             return $this; // RETORNA O PRÓPRIO PLUGIN
         } else
