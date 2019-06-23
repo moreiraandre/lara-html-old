@@ -6,7 +6,6 @@
 
 namespace LaraHtml\Abstracts;
 
-
 use LaraHtml\Exceptions\LaraHtmlConfigNotFoundException;
 use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
 use LaraHtml\Interfaces\PluginOutHtmlInterface;
@@ -44,7 +43,7 @@ abstract class General implements PluginOutHtmlInterface
     /**
      * Se o Template não for definido por troca do valor na classe filha ele será chamado da configuração.
      *
-     * General constructor.
+     * @throws LaraHtmlConfigNotFoundException
      */
     public function __construct()
     {
@@ -129,12 +128,12 @@ abstract class General implements PluginOutHtmlInterface
     }
 
     /**
-     * Se o meta atributo já existir o próximo valor será concatenado com um espaço no prefixo.
+     * Se o meta atributo já existir o próximo valor será concatenado com um espaço no início.
      *
      * @param $attribute
      * @param $value
      */
-    public function addMetaAttributes($attribute, $value)
+    public function addMeta($attribute, $value)
     {
         if (isset($this->metaAttributes[$attribute]))
             $this->metaAttributes[$attribute] .= trim(" $value");

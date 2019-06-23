@@ -50,7 +50,7 @@ class Container extends General
             foreach ($arguments as $argumentIndex => $argumentValue) {
                 if (isset($configPlugin[$argumentIndex])) {
                     $this->{"attr{$configPlugin[$argumentIndex]}"}($argumentValue);
-                    $this->addMetaAttributes($configPlugin[$argumentIndex], $argumentValue);
+                    $this->addMeta($configPlugin[$argumentIndex], $argumentValue);
                 }
             }
         }
@@ -58,7 +58,7 @@ class Container extends General
         // DEFININDO META ATRIBUTOS
         foreach ($configPlugin as $configPluginIndex => $configPluginValue) {
             if (is_int($configPluginIndex))
-                $this->addMetaAttributes($configPluginValue, '');
+                $this->addMeta($configPluginValue, '');
             else {
                 $valueHelp = '';
 
@@ -67,7 +67,7 @@ class Container extends General
                 } catch (\Throwable $exception) {
                     $valueHelp = $configPluginValue;
                 } finally {
-                    $this->addMetaAttributes($configPluginIndex, $valueHelp);
+                    $this->addMeta($configPluginIndex, $valueHelp);
                     $this->{"attr{$configPluginIndex}"}($valueHelp);
                 }
             }
