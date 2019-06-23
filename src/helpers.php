@@ -13,7 +13,7 @@ if (!function_exists('lhtml')) {
         if (!$customScreen instanceof LaraHtml\Grid\Screen)
             throw new Exception('Parameter is not an instance of LaraHtml\Grid\Screen!');
 
-        $customScreen->row(new LaraHtml\Grid\Row);
+        $customScreen->row();
         $customScreen->run();
 
         return $customScreen->getHtml();
