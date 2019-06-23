@@ -12,6 +12,10 @@ if (!function_exists('lhtml')) {
      */
     function lhtml(Object $customScreen)
     {
+        // Verificando se a função para popular a tela está presente na tela customizada.
+        if (!in_array('run', get_class_methods($customScreen)))
+            throw new Exception("'Run' function not found!");
+
         $screen = new Screen; // CRIANDO NOVA TELA
         $screen->row(); // ADICIONANDO LINHA INICIAL NA TELA
         $customScreen->run($screen); // POPULANDO TELA COM PLUGINS DEFINIDOS PELO DEV

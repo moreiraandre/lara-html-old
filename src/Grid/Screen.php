@@ -6,11 +6,9 @@
 
 namespace LaraHtml\Grid;
 
-
 use LaraHtml\Abstracts\General;
 use LaraHtml\Traits\StoresRows;
 
-//abstract class Screen extends General
 class Screen extends General
 {
 
