@@ -1,5 +1,7 @@
 <?php
 
+use LaraHtml\Grid\Screen;
+
 if (!function_exists('lhtml')) {
     /**
      * Retorna o HTML
@@ -8,14 +10,12 @@ if (!function_exists('lhtml')) {
      * @return string
      * @throws Exception
      */
-    function lhtml($customScreen)
+    function lhtml(Object $customScreen)
     {
-        if (!$customScreen instanceof LaraHtml\Grid\Screen)
-            throw new Exception('Parameter is not an instance of LaraHtml\Grid\Screen!');
+        $screen = new Screen; // CRIANDO NOVA TELA
+        $screen->row(); // ADICIONANDO LINHA INICIAL NA TELA
+        $customScreen->run($screen); // POPULANDO TELA COM PLUGINS DEFINIDOS PELO DEV
 
-        $customScreen->row();
-        $customScreen->run();
-
-        return $customScreen->getHtml();
+        return $screen->getHtml(); // RETORNANDO HTML DA TELA
     }
 }
