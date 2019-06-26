@@ -121,6 +121,13 @@ public function create()
 
 > Na sua view de template é necessário chamar `yield('html')` onde você quer que o HTML seja exibido. 
 
+## Definindo atributos de tag
+```php
+$colNome->attrClass('input-mask'); // CONCATENA COM O VALOR DA CONFIGURAÇÃO
+$colNome->attrClass = 'input-mask'; // SUBSTITUI O VALOR DA CONFIGURAÇÃO
+```
+> O prefixo `attr` indica a definição de atributos, o atributo deve ser escrito no padrão _StudlyCase_.
+
 # Desenvolvimento
 ### André Moreira 
 ![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100)  Projetista e desenvolvedor
