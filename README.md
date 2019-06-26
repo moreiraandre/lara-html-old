@@ -115,6 +115,9 @@ php artisan make:lhtml PersonForm
 public function create()
 {
     return lhtml(new App\PersonForm);
+    
+    // PASSANDO DADOS PARA A CLASSE
+    // return lhtml(new App\PersonForm($data));
 }
 ```
 > O helper `lhtml` retorna o HTML da classe de tela.
