@@ -101,7 +101,7 @@ trait StoresRows
 
             // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
             try {
-                $obj = new $class($pluginClass, $arguments); // CRIANDO OBJETO
+                $obj = new $class($pluginClass, $arguments, $this->getTemplate()); // CRIANDO OBJETO
             } catch (\TypeError $e) {
                 throw new LaraHtmlParametersException($e->getMessage());
             }
@@ -110,7 +110,7 @@ trait StoresRows
             if ($this->currentRow->countCols() >= parent::config('max_cols'))
                 $this->newRow(new Row);
 
-            $col = new Col($this->currentRow); // CRIANDO COLUNA
+            $col = new Col($this->currentRow, $this->getTemplate()); // CRIANDO COLUNA
             $this->currentRow->newCol($col); // INSERINDO ANOVA COLUNA NA LINHA ATUAL
             $col->newPlugin($obj); // INSERINDO O NOVO PLUGIN NA COLUNA
 

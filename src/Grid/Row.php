@@ -25,6 +25,7 @@ final class Row extends General
      * Método para o dev criar nova coluna.
      *
      * @return Col
+     * @throws \LaraHtml\Exceptions\LaraHtmlConfigNotFoundException
      */
     public function col()
     {

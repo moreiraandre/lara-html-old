@@ -4,7 +4,7 @@ use LaraHtml\Grid\Screen;
 
 if (!function_exists('lhtml')) {
     /**
-     * Retorna o HTML
+     * Retorna o HTML.
      *
      * @param $customScreen
      * @return string
@@ -16,7 +16,8 @@ if (!function_exists('lhtml')) {
         if (!in_array('run', get_class_methods($customScreen)))
             throw new Exception("'Run' function not found!");
 
-        $screen = new Screen; // CRIANDO NOVA TELA
+        $screen = new Screen($customScreen->template ?? null,
+            $customScreen->extendView ?? null); // CRIANDO NOVA TELA
         $screen->row(); // ADICIONANDO LINHA INICIAL NA TELA
         $customScreen->run($screen); // POPULANDO TELA COM PLUGINS DEFINIDOS PELO DEV
 

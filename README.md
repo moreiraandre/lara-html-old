@@ -133,7 +133,7 @@ $colNome->attrClass = 'input-mask'; // SUBSTITUI O VALOR DA CONFIGURAÇÃO
 
 # Desenvolvimento
 ### André Moreira 
-![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100)  Projetista e desenvolvedor
+![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100) Projetista e desenvolvedor
   * andre.mcx1+lara-html@gmail.com
   * https://github.com/moreiraandre
 

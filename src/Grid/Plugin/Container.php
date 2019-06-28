@@ -7,10 +7,11 @@
 namespace LaraHtml\Grid\Plugin;
 
 use LaraHtml\Traits\StoresRows;
-use League\Flysystem\Plugin\PluginNotFoundException;
+use LaraHtml\Exceptions\LaraHtmlPluginNotFoundException;
 
 /**
  * Class Container
+ *
  * @package LaraHtml\Grid\Plugin
  */
 class Container extends General
@@ -33,45 +34,62 @@ class Container extends General
         return $this->pluginName;
     }
 
-    public function __construct(string $pluginName, array $arguments = [])
+    public function __construct(string $pluginName, array $arguments = [], string $template = null)
     {
-        parent::__construct();
+        parent::__construct($template);
 
         $this->pluginName = $pluginName;
 
         $configPlugin = $this->config("plugins.{$this->pluginName}");
 
         if (!$configPlugin)
-            throw new PluginNotFoundException("Plugin '{$this->pluginName}' not found in config file 
+            throw new LaraHtmlPluginNotFoundException("Plugin '{$this->pluginName}' not found in config file 
             'config/larahtml/{$this->getTemplate()}.php'");
 
         // DEFININDO ATRIBUTOS DO CONSTRUTOR
         if (count($arguments) > 0) {
             foreach ($arguments as $argumentIndex => $argumentValue) {
+
+
+
                 if (isset($configPlugin[$argumentIndex])) {
                     $this->{"attr{$configPlugin[$argumentIndex]}"}($argumentValue);
-                    $this->addMeta($configPlugin[$argumentIndex], $argumentValue);
+//                    $this->addMeta($configPlugin[$argumentIndex], $argumentValue);
+
+                    echo "<pre>";
+//                print_r([$arguments, $argumentIndex, $argumentValue]);
+                    print_r($this->getAttr());
+                    echo "</pre>";
                 }
+
+
             }
         }
 
         // DEFININDO META ATRIBUTOS
         foreach ($configPlugin as $configPluginIndex => $configPluginValue) {
-            if (is_int($configPluginIndex))
-                $this->addMeta($configPluginValue, '');
-            else {
-                $valueHelp = '';
+            if (is_int($configPluginIndex)) {
+                $metaName = explode('.', $configPluginValue);
+                if (count($metaName) == 2)
+                    $this->addMeta($metaName[1], '');
+            } else {
+                $metaName = explode('.', $configPluginIndex);
+                if (count($metaName) == 2) {
+                    $valueHelp = '';
 
-                try {
-                    eval('$valueHelp = ' . $configPluginValue . ';');
-                } catch (\Throwable $exception) {
-                    $valueHelp = $configPluginValue;
-                } finally {
-                    $this->addMeta($configPluginIndex, $valueHelp);
-                    $this->{"attr{$configPluginIndex}"}($valueHelp);
+                    try {
+                        eval('$valueHelp = ' . $configPluginValue . ';');
+                    } catch (\Throwable $exception) {
+                        $valueHelp = $configPluginValue;
+                    } finally {
+                        $this->addMeta($metaName[1], $valueHelp);
+                    }
                 }
             }
         }
+
+        /*if ($pluginName == 'Text')
+            dd($this->getMeta());*/
 
         $this->row();
     }
@@ -81,7 +99,7 @@ class Container extends General
         $data = [
             'elements' => $this->getHtmlElements($this->getRows()),
             'attributes' => $this->getAttributesTag(),
-            'attr' => $this->getAttributes(),
+            'attr' => $this->getAttr(),
             'meta' => $this->getMeta(),
         ];
 

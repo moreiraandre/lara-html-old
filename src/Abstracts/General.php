@@ -6,6 +6,7 @@
 
 namespace LaraHtml\Abstracts;
 
+use Illuminate\Support\Str;
 use LaraHtml\Exceptions\LaraHtmlConfigNotFoundException;
 use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
 use LaraHtml\Interfaces\PluginOutHtmlInterface;
@@ -34,20 +35,21 @@ abstract class General implements PluginOutHtmlInterface
     private $attributes = [];
 
     /**
-     * Todos os atributos definidos na configuração.
+     * Meta dados.
      *
      * @var array
      */
-    private $metaAttributes = [];
+    private $metas = [];
 
     /**
-     * Se o Template não for definido por troca do valor na classe filha ele será chamado da configuração.
+     * Se o Template não for definido por troca do valor na classe CustomScreen ele será chamado da configuração.
      *
+     * @param string|null $template
      * @throws LaraHtmlConfigNotFoundException
      */
-    public function __construct()
+    public function __construct(string $template = null)
     {
-        $this->template = $this->template ?: config('larahtml.config.default');
+        $this->template = $template ?: config('larahtml.config.default');
         if (!file_exists(config_path("larahtml/{$this->template}.php")))
             throw new LaraHtmlConfigNotFoundException("Config 'larahtml/{$this->template}.php' not found!");
     }
@@ -67,11 +69,20 @@ abstract class General implements PluginOutHtmlInterface
         // SE O PREFIXO DO COMANDO INVOCADO FOR attr ENTÃO NO ATRIBUTO SERÁ CRIADO
         if ($prefix == 'attr') {
             // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
-            $attribute = mb_strtolower(substr($name, 4));
+            $attribute = Str::kebab(substr($name, 4));
             if (!empty($this->attributes[$attribute])) // SE O ATRIBUTO JÁ POSSUIR VALOR
                 $this->attributes[$attribute] .= " {$arguments[0]}"; // O NOVO VALOR SERÁ CONCATENADO NO FIM
             else
                 $this->attributes[$attribute] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
+
+            return $this; // RETORNA O PRÓPRIO PLUGIN
+        } elseif ($prefix == 'meta') {
+            // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
+            $meta = Str::kebab(substr($name, 4));
+            if (!empty($this->metas[$meta])) // SE O ATRIBUTO JÁ POSSUIR VALOR
+                $this->metas[$meta] .= " {$arguments[0]}"; // O NOVO VALOR SERÁ CONCATENADO NO FIM
+            else
+                $this->metas[$meta] = $arguments[0]; // ARMAZENA O ATRIBUTO E SEU VALOR
 
             return $this; // RETORNA O PRÓPRIO PLUGIN
         } else
@@ -94,8 +105,14 @@ abstract class General implements PluginOutHtmlInterface
         // SE O PREFIXO DO COMANDO INVOCADO FOR attr ENTÃO NO ATRIBUTO SERÁ CRIADO
         if ($prefix == 'attr') {
             // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
-            $attribute = mb_strtolower(substr($name, 4));
+            $attribute = Str::kebab(substr($name, 4));
             $this->attributes[$attribute] = $value; // ARMAZENA O ATRIBUTO E SEU VALOR
+
+            return $this; // RETORNA O PRÓPRIO PLUGIN
+        } elseif ($prefix == 'meta') {
+            // PULA OS 4 CARACTERES DO PREFIXO E ARMAZENA O RESTANTE EM CAIXA BAIXA
+            $meta = Str::kebab(substr($name, 4));
+            $this->metas[$meta] = $value; // ARMAZENA O ATRIBUTO E SEU VALOR
 
             return $this; // RETORNA O PRÓPRIO PLUGIN
         } else
@@ -114,7 +131,7 @@ abstract class General implements PluginOutHtmlInterface
     /**
      * @return array
      */
-    public function getAttributes()
+    public function getAttr()
     {
         return $this->attributes;
     }
@@ -124,21 +141,21 @@ abstract class General implements PluginOutHtmlInterface
      */
     public function getMeta()
     {
-        return $this->metaAttributes;
+        return $this->metas;
     }
 
     /**
      * Se o meta atributo já existir o próximo valor será concatenado com um espaço no início.
      *
-     * @param $attribute
+     * @param $meta
      * @param $value
      */
-    public function addMeta($attribute, $value)
+    public function addMeta($meta, $value)
     {
-        if (isset($this->metaAttributes[$attribute]))
-            $this->metaAttributes[$attribute] .= trim(" $value");
+        if (isset($this->metas[$meta]))
+            $this->metas[$meta] .= trim(" $value");
         else
-            $this->metaAttributes[$attribute] = $value;
+            $this->metas[$meta] = $value;
     }
 
     /**

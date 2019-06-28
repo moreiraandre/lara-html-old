@@ -25,9 +25,16 @@ final class Col extends General
      */
     private $plugins = null;
 
-    public function __construct(Row $row)
+    /**
+     * Col constructor.
+     *
+     * @param Row $row
+     * @param string|null $template
+     * @throws \LaraHtml\Exceptions\LaraHtmlConfigNotFoundException
+     */
+    public function __construct(Row $row, string $template = null)
     {
-        parent::__construct();
+        parent::__construct($template);
 
         $this->setRow($row);
     }
