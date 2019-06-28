@@ -4,14 +4,32 @@ namespace DummyNamespace;
 
 use LaraHtml\Grid\Screen;
 
-class DummyClass extends Screen
+class DummyClass
 {
+    /*
+     * Sobrescrevendo a configuração.
+     */
+//    public $template = '';
+//    public $extendView = '';
+
+    /**
+     * @var null|mixed Dados para a tela.
+     */
+    private $data;
+
+    public function __construct($data = null)
+    {
+        $this->data = $data;
+    }
+
     /**
      * Escreva aqui os elementos da sua tela.
+     *
+     * @param Screen $screen
      */
-    public function run()
+    public function run(Screen $screen)
     {
-        $form = $this->addForm('/');
+        $form = $screen->addForm('/');
         $form->addText('nome');
         $form->addButton('Enviar');
     }

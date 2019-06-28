@@ -3,17 +3,49 @@ Abstração do sistema de **grid responsiva** dos _frameworks CSS_ e seus **temp
 
 ## Classe LaraHtml
 ```php
-$form = $this->addForm('/'); // ADD FORM
-$colNome = $form->addText('nome')->getCol(); // STORE COLUMN OF FIELD NOME
-$colNome->row(); // NEW ROW
-$colNome->addText('endereco'); // ADD FIELD IN COLUMN OF NOME
-$colCpf = $form->addText('cpf')->getCol(); // STORE COLUMN OF FIELD CPF
-$colCpf->addText('rg');
-$colCpf->addText('titulo');
-$colCpf->row();
-$colCpf->addText('dtNasc');
-$form->row(); // NEW ROW IN FORM
-$form->addButton('Enviar');
+namespace App\Screens;
+
+use LaraHtml\Grid\Screen;
+
+class PersonForm
+{
+
+    /*
+     * Sobrescrevendo a configuração.
+     */
+//    public $template = '';
+//    public $extendView = '';
+
+    /**
+     * @var null|mixed Dados para a tela.
+     */
+    private $data;
+
+    public function __construct($data = null)
+    {
+        $this->data = $data;
+    }
+
+    /**
+     * Escreva aqui os elementos da sua tela.
+     *
+     * @param Screen $screen
+     */
+    public function run(Screen $screen)
+    {
+        $form = $screen->addForm('/'); // ADD FORM
+        $colNome = $form->addText('nome')->getCol(); // STORE COLUMN OF FIELD NOME
+        $colNome->row(); // NEW ROW
+        $colNome->addText('endereco'); // ADD FIELD IN COLUMN OF NOME
+        $colCpf = $form->addText('cpf')->getCol(); // STORE COLUMN OF FIELD CPF
+        $colCpf->addText('rg');
+        $colCpf->addText('titulo');
+        $colCpf->row();
+        $colCpf->addText('dtNasc');
+        $form->row(); // NEW ROW IN FORM
+        $form->addButton('Enviar');
+    }
+}
 ```
 
 ## Browser
