@@ -34,6 +34,15 @@ class Container extends General
         return $this->pluginName;
     }
 
+    /**
+     * Container constructor.
+     *
+     * @param string $pluginName
+     * @param array $arguments
+     * @param string|null $template
+     * @throws LaraHtmlPluginNotFoundException
+     * @throws \LaraHtml\Exceptions\LaraHtmlConfigNotFoundException
+     */
     public function __construct(string $pluginName, array $arguments = [], string $template = null)
     {
         parent::__construct($template);
@@ -42,24 +51,33 @@ class Container extends General
 
         $configPlugin = $this->config("plugins.{$this->pluginName}");
 
+        $auxCfg = [];
+        foreach ($configPlugin as $idx => $item) {
+            if (is_int($idx))
+                $auxCfg[] = $item;
+            else
+                $auxCfg[] = [$idx => $item];
+        }
+
         if (!$configPlugin)
             throw new LaraHtmlPluginNotFoundException("Plugin '{$this->pluginName}' not found in config file 
             'config/larahtml/{$this->getTemplate()}.php'");
 
-        // DEFININDO ATRIBUTOS DO CONSTRUTOR
+        // DEFININDO CONFIGURAÇÃO DO CONSTRUTOR
         if (count($arguments) > 0) {
             foreach ($arguments as $argumentIndex => $argumentValue) {
 
-
+                echo "<pre>";
+                print_r([$arguments, $argumentIndex, $argumentValue]);
+//                    print_r($this->getAttr());
+                echo "</pre>";
 
                 if (isset($configPlugin[$argumentIndex])) {
+
                     $this->{"attr{$configPlugin[$argumentIndex]}"}($argumentValue);
 //                    $this->addMeta($configPlugin[$argumentIndex], $argumentValue);
 
-                    echo "<pre>";
-//                print_r([$arguments, $argumentIndex, $argumentValue]);
-                    print_r($this->getAttr());
-                    echo "</pre>";
+
                 }
 
 
@@ -87,9 +105,6 @@ class Container extends General
                 }
             }
         }
-
-        /*if ($pluginName == 'Text')
-            dd($this->getMeta());*/
 
         $this->row();
     }
