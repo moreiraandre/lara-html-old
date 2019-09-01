@@ -154,7 +154,7 @@ public function create()
 ```
 > O helper `lhtml` retorna o HTML da classe de tela.
 
-> Na sua view de template é necessário chamar `yield('html')` onde você quer que o HTML seja exibido. 
+> Na sua view de template é necessário chamar `yield('lhtml')` onde você quer que o HTML seja exibido. 
 
 ## Definindo atributos de tag
 ```php
