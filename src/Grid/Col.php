@@ -6,10 +6,8 @@
 
 namespace LaraHtml\Grid;
 
-
 use LaraHtml\Abstracts\General;
 use LaraHtml\Traits\StoresRows;
-use LaraHtml\Grid\Plugin\General as Plugin;
 
 /**
  * Class Col

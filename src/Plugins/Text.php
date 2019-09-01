@@ -8,13 +8,13 @@
 namespace LaraHtml\Plugins;
 
 
-use LaraHtml\Grid\Plugin\Simple;
+use LaraHtml\Grid\Plugin;
 
 /**
  * Class Text
  * @package LaraHtml\Plugins
  */
-class Text extends Simple
+class Text extends Plugin
 {
     /**
      * @var string

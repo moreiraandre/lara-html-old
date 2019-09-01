@@ -8,13 +8,13 @@
 namespace LaraHtml\Plugins;
 
 
-use LaraHtml\Grid\Plugin\Container;
+use LaraHtml\Grid\Plugin;
 
 /**
  * Class Text
  * @package LaraHtml\Plugins
  */
-class Form extends Container
+class Form extends Plugin
 {
     /**
      * @var string
