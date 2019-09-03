@@ -9,8 +9,8 @@ class DummyClass
     /*
      * Sobrescrevendo a configuração.
      */
-//    public $template = '';
-//    public $extendView = '';
+    // public $template = '';
+    // public $extendView = '';
 
     /**
      * @var null|mixed Dados para a tela.

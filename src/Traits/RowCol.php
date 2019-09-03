@@ -6,7 +6,6 @@
 
 namespace LaraHtml\Traits;
 
-
 use LaraHtml\Grid\Col;
 use LaraHtml\Grid\Row;
 

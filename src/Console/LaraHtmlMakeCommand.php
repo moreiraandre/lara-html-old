@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Cria nova classe para tela customizada.
+ */
+
 namespace LaraHtml\Console;
 
 use Illuminate\Console\GeneratorCommand;

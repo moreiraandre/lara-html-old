@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by: André Moreira
  * Date: 20/11/18
@@ -6,7 +7,6 @@
  */
 
 namespace LaraHtml\Interfaces;
-
 
 interface PluginOutHtmlInterface
 {

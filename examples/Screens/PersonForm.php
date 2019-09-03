@@ -2,24 +2,50 @@
 
 namespace App\Screens;
 
+use App\User;
 use LaraHtml\Grid\Screen;
 
-class PersonForm extends Screen
+class PersonForm
 {
-    public function run()
+
+    /*
+     * Sobrescrevendo a configuração.
+     */
+//    public $template = '';
+//    public $extendView = '';
+
+    /**
+     * @var null|mixed Dados para a tela.
+     */
+    private $data;
+
+    public function __construct($data = null)
     {
-        $form = $this->addForm('/');
-        $form->addText('nome');
-        $form->addText('fone');
-        $form->row();
-        $form->addButton('Enviar');
-        /*$colFone = $this->addText('fone')->getCol();
-        $colFone->addText('cel');
-        $colFone->row();
-        $colFone->addText('trabalho');
-        $this->row();
-        $col = $this->addText('endereco')->getCol();
-        $col->row();
-        $col->addText('j');*/
+        $this->data = $data;
+    }
+
+    /**
+     * Escreva aqui os elementos da sua tela.
+     *
+     * @param Screen $screen
+     */
+    public function run(Screen $screen)
+    {
+        // COL ESQ
+        $colNome = $screen->addText('nome')->getCol();
+        $colNome->addText('endereco', 'Endereço');
+        $colNome->row();
+        $colNome->addText('dt_nasc', 'Data de nascimento');
+        // COL DIR
+        $colCpf = $screen->addText('cpf')->getCol();
+        $colCpf->row();
+        $colCpf->addText('rg');
+        $colCpf->row();
+        $colCpf->addText('tit_eleitor');
+        $colCpf->row();
+        $colCpf->addText('certidao_nasc');
+        $colCpf->addText('certidao_nasc_ano');
+        $screen->row();
+        $screen->addButton('Salvar');
     }
 }
