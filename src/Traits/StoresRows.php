@@ -8,7 +8,6 @@ namespace LaraHtml\Traits;
 
 
 use LaraHtml\Exceptions\LaraHtmlParametersException;
-use LaraHtml\Exceptions\LaraHtmlPluginNotFoundException;
 use LaraHtml\Grid\Col;
 use LaraHtml\Grid\Plugin;
 use LaraHtml\Grid\Row;
