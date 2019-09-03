@@ -139,7 +139,7 @@ class Plugin extends General
                     } else {
                         if (strpos($configPluginValue,'eval..') !== false) { // 1.2.2.1
                             $configValue = str_replace('eval..', '', $configPluginValue);
-                            $configValue = eval("$configValue;");
+                            eval("\$configValue = $configValue;"); // INTERPRETANDO VALOR COMO COMANDO PHP
                             $this->addMeta($configName, $configValue);
                         } else { // 1.2.2.2
                             $this->addMeta($configName, $configPluginValue);
@@ -151,7 +151,7 @@ class Plugin extends General
                     } else { // 1.1.2.2
                         if (strpos($configPluginValue, 'eval..') !== false) { // 1.2.2.1
                             $configValue = str_replace('eval..', '', $configPluginValue);
-                            $configValue = eval("$configValue;");
+                            eval("\$configValue = $configValue;"); // INTERPRETANDO VALOR COMO COMANDO PHP
                             $this->{"attr{$configName}"}($configValue);
                         } else { // 1.2.2.2
                             $this->{"attr{$configName}"}($configPluginValue);
