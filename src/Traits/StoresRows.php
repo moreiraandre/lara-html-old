@@ -86,14 +86,9 @@ trait StoresRows
                 self::replacePluginForRows();
             // CASO O OBJETO SEJA UMA COLUNA E NÃO CONTENHA PLUGINS FILHOS SERÁ CRIADO UM PLUGIN
 
-
             $pluginClass = substr($name, 3); // IGNORANDO O PREFIXO add
 //            $class = "LaraHtml\Plugins\\$pluginClass"; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
             $class = Plugin::class; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
-
-            // LANÇA UM ERRO CASO O ARQUIVO DA CLASSE NÃO EXISTA
-            if (!file_exists(__DIR__ . "/../Plugins/$pluginClass.php"))
-                throw new LaraHtmlPluginNotFoundException("Plugin $class does not exist!");
 
             // RESOLVENDO A HIERARQUIA DE PARÂMETROS EM MÉTODOS DINÂMICOS
             while (is_array($arguments[0]))
