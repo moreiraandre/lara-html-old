@@ -119,7 +119,7 @@ class Plugin extends General
 
             if (is_int($configPluginIndex)) { // 1.1
                 $configName = $configPluginValue;
-                if (strpos($configName,'meta.') !== false) { // 1.1.1
+                if (strpos($configName, 'meta.') !== false) { // 1.1.1
                     if (isset($arguments[$configIndex])) { // 1.1.1.1
                         $configName = explode('.', $configName)[1];
                         $this->addMeta($configName, $arguments[$configIndex]);
@@ -137,7 +137,7 @@ class Plugin extends General
                     if (isset($arguments[$configIndex])) { // 1.2.1.1
                         $this->addMeta($configName, $arguments[$configIndex]);
                     } else {
-                        if (strpos($configPluginValue,'eval..') !== false) { // 1.2.2.1
+                        if (strpos($configPluginValue, 'eval..') !== false) { // 1.2.2.1
                             $configValue = str_replace('eval..', '', $configPluginValue);
                             eval("\$configValue = $configValue;"); // INTERPRETANDO VALOR COMO COMANDO PHP
                             $this->addMeta($configName, $configValue);
@@ -170,8 +170,20 @@ class Plugin extends General
 
     public function getHtml(?array $data = null): string
     {
+        // TRIBUINDO DADOS EM MASSA.
+        // ESTÁ FUNCIONANDO SÓ PARA ELEMENTOS INPUT
+        if ($data['storeData'] && $this instanceof Plugin) {
+            foreach ($data['storeData'] as $sdIndex => $sdValue) {
+                if (isset($this->getAttr()['name'])) {
+                    if ($this->getAttr()['name'] == $sdIndex) {
+                        $this->attrValue = $sdValue;
+                    }
+                }
+            }
+        }
+
         $data = [
-            'elements' => $this->getHtmlElements($this->getRows()),
+            'elements' => $this->getHtmlElements($this->getRows(), $data['storeData'] ?? null),
             'attributes' => $this->getAttributesTag(),
             'attr' => $this->getAttr(),
             'meta' => $this->getMeta(),

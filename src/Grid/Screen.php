@@ -59,7 +59,7 @@ class Screen extends General
         $this->attrClass($this->config('grid-css.screen'));
         $data = [
             'extend_view' => config('larahtml.extend_view'),
-            'elements' => $this->getHtmlElements($this->rows),
+            'elements' => $this->getHtmlElements($this->rows, $this->getStoreData()),
             'attributes' => $this->getAttributesTag(),
             'extendView' => $this->getExtendView(),
         ];

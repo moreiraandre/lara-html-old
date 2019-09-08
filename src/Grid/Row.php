@@ -63,7 +63,7 @@ final class Row extends General
         $this->attrClass($this->config('grid-css.row'));
 
         $data = [
-            'elements' => $this->getHtmlElements($this->cols),
+            'elements' => $this->getHtmlElements($this->cols, $data['storeData'] ?? null),
             'attributes' => $this->getAttributesTag(),
         ];
 

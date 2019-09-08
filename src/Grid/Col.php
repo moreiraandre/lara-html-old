@@ -11,6 +11,7 @@ use LaraHtml\Traits\StoresRows;
 
 /**
  * Class Col
+ *
  * @package LaraHtml\Grid
  */
 final class Col extends General
@@ -96,7 +97,7 @@ final class Col extends General
 
         $this->attrClass($this->config('grid-css.col') . $numCol);
         $data = [
-            'elements' => $this->getHtmlElements($this->plugins ?: $this->rows),
+            'elements' => $this->getHtmlElements($this->plugins ?: $this->rows, $data['storeData'] ?? null),
             'attributes' => $this->getAttributesTag(),
         ];
 

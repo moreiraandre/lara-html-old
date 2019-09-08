@@ -9,16 +9,21 @@ namespace LaraHtml\Abstracts;
 use Illuminate\Support\Str;
 use LaraHtml\Exceptions\LaraHtmlConfigNotFoundException;
 use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
+use LaraHtml\Grid\Plugin;
 use LaraHtml\Interfaces\PluginOutHtmlInterface;
 use LaraHtml\Traits\RowCol;
+use LaraHtml\Traits\StoreData;
 
 /**
  * Class General
+ *
  * @package LaraHtml\Abstracts
  */
 abstract class General implements PluginOutHtmlInterface
 {
-    use RowCol;
+    use
+        RowCol, // Definições de Linha e Coluna do Objeto.
+        StoreData; // Armazenando Dados em Massa.
 
     /**
      * Template para a definição do HTML.
@@ -187,9 +192,10 @@ abstract class General implements PluginOutHtmlInterface
      * Retorna o HTML de todos os elementos passados.
      *
      * @param array|null $elements
+     * @param array|null $storeData
      * @return string
      */
-    protected function getHtmlElements(?array $elements): string
+    protected function getHtmlElements(?array $elements, ?array $storeData = null): string
     {
         $html = '';
         $elements = $elements ?: [];
@@ -199,6 +205,7 @@ abstract class General implements PluginOutHtmlInterface
             $html .= $e->getHtml([
                 'total' => $total,
                 'idx' => $idx,
+                'storeData' => $storeData,
             ]);
         }
         return $html;
