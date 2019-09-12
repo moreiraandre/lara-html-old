@@ -170,17 +170,13 @@ class Plugin extends General
 
     public function getHtml(?array $data = null): string
     {
-        // TRIBUINDO DADOS EM MASSA.
+        // ATRIBUINDO DADOS EM MASSA.
         // ESTÁ FUNCIONANDO SÓ PARA ELEMENTOS INPUT
-        if ($data['storeData'] && $this instanceof Plugin) {
-            foreach ($data['storeData'] as $sdIndex => $sdValue) {
-                if (isset($this->getAttr()['name'])) {
-                    if ($this->getAttr()['name'] == $sdIndex) {
-                        $this->attrValue = $sdValue;
-                    }
-                }
-            }
-        }
+        if ($data['storeData'] && $this instanceof Plugin)
+            foreach ($data['storeData'] as $sdIndex => $sdValue)
+                if (isset($this->getAttr()[$this->getAttrFind()]))
+                    if ($this->getAttr()[$this->getAttrFind()] == $sdIndex)
+                        $this->{"attr{$this->getAttrValue()}"} = $sdValue;
 
         $data = [
             'elements' => $this->getHtmlElements($this->getRows(), $data['storeData'] ?? null),
