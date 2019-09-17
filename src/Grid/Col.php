@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Colunas
+ * Definições de Colunas.
+ * Podem armazenar um plugin ou outras colunas.
  */
 
 namespace LaraHtml\Grid;
