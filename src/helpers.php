@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Funções auxiliares.
+ */
+
 use LaraHtml\Grid\Screen;
 
 if (!function_exists('lhtml')) {
