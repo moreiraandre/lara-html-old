@@ -1,1 +1,1 @@
-<div {!! $attributes !!}>{!! $elements !!}</div>
+<div {!! $attrTag !!}>{!! $elements !!}</div>

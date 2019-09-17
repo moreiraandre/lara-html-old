@@ -1,5 +1,4 @@
-{{--{!! Form::model($meta['form-data'], $attr) !!}--}}
-<form {!! $attributes !!}>
-{!! $elements !!}
-{{--{!! Form::close() !!}--}}
+<form {!! $attrTag !!}>
+    {!! csrf_field() !!}
+    {!! $elements !!}
 </form>

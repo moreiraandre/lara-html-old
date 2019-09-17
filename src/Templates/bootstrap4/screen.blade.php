@@ -2,5 +2,5 @@
 @extends($extendView)
 
 @section('lhtml')
-    <div {!! $attributes !!}>{!! $elements !!}</div>
+    <div {!! $attrTag !!}>{!! $elements !!}</div>
 @endsection

@@ -50,13 +50,11 @@ final class Plugin extends General
 
         $this->pluginName = $pluginName;
 
+        // VERIFICANDO SE A CONFIGURAÇÃO DO PLUGIN EXISTE.
         $configPlugin = $this->config("plugins.{$this->pluginName}");
-
         if (!$configPlugin)
             throw new LaraHtmlPluginNotFoundException("Plugin '{$this->pluginName}' not found in config file 
             'config/larahtml/{$this->getTemplate()}.php'");
-
-//        PERCORRER OS VETORES DE CONFIGURAÇÃO DO PLUGIN E ARGUMENTOS, SOMENTE MANIPULANDO OS PONTEIROS INTERNOS DO ARRAY
 
         $configIndex = 0; // ÍNDICE DA CONFIGURAÇÃO ATUAL
         /*
