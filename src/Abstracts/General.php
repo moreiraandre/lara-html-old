@@ -9,7 +9,6 @@ namespace LaraHtml\Abstracts;
 use Illuminate\Support\Str;
 use LaraHtml\Exceptions\LaraHtmlConfigNotFoundException;
 use LaraHtml\Exceptions\LaraHtmlMethodNotFoundException;
-use LaraHtml\Grid\Plugin;
 use LaraHtml\Interfaces\PluginOutHtmlInterface;
 use LaraHtml\Traits\RowCol;
 use LaraHtml\Traits\StoreData;
