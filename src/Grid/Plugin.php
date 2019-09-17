@@ -15,7 +15,7 @@ use LaraHtml\Exceptions\LaraHtmlPluginNotFoundException;
  *
  * @package LaraHtml\Grid\Plugin
  */
-class Plugin extends General
+final class Plugin extends General
 {
 
     use StoresRows;
