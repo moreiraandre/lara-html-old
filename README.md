@@ -163,6 +163,22 @@ $colNome->attrClass = 'input-mask'; // SUBSTITUI O VALOR DA CONFIGURAÇÃO
 ```
 > O prefixo `attr` indica a definição de atributos, o atributo deve ser escrito no padrão _StudlyCase_.
 
+## Atribuindo dados em massa.
+```php
+$form = $screen->addForm('/post');
+
+// ATRIBUINDO DADOS EM MASSA
+$form->setData([
+    'nome' => 'Nome do fulano',
+    'cpf' => '929.999.999-99',
+]);
+//--------------------------
+
+$form->addText('nome');
+$form->addText('cpf');
+```
+> Pode ser feito em qualquer plugin!
+
 # Desenvolvimento
 ### André Moreira 
 ![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100) Projetista e desenvolvedor
