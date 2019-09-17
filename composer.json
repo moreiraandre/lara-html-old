@@ -1,7 +1,7 @@
 {
     "name": "moreiraandre/lara-html",
     "description": "Pacote Laravel para gerar marcação HTML com abstração do sistema de grids responsivo.",
-    "license": "gpl",
+    "license": "MIT",
     "keywords": ["laravel", "php", "html", "responsive", "grid", "row", "column"],
     "authors": [
         {
