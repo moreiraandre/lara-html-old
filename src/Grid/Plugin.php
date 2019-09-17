@@ -170,18 +170,19 @@ class Plugin extends General
 
     public function getHtml(?array $data = null): string
     {
-        // ATRIBUINDO DADOS EM MASSA.
+        /*--------------------------------------------------------------------------------------------------------------
+         *                                       ATRIBUINDO DADOS EM MASSA
+         *--------------------------------------------------------------------------------------------------------------
+         * Somente os campos que foram informados na Atribuição em Massa terão seus valores conservados, caso haja algum
+         * campo no formulário por exemplo, que não tenha sido informado na atribuição em massa seu valor antigo não
+         * será conservado.
+         */
         if ($data['storeData'] && $this instanceof Plugin)
             foreach ($data['storeData'] as $sdIndex => $sdValue)
-                if (isset($this->getAttr()[$this->getAttrFind()])) {
-                    !!! NÃO ESTÁ FUNCIONANDO O PREENCHIMENTO DOS CAMPOS COM VALOR ANTIGO
-//                    dd(old());
-//                    dd(old($this->getAttr()[$this->getAttrFind()]), $this->getAttr()[$this->getAttrFind()]);
-
+                if (isset($this->getAttr()[$this->getAttrFind()]))
                     if ($this->getAttr()[$this->getAttrFind()] == $sdIndex)
                         $this->{"attr{$this->getAttrValue()}"} = old($this->getAttr()[$this->getAttrFind()]) ?: $sdValue;
-//                        $this->{"attr{$this->getAttrValue()}"} = $sdValue;
-                }
+        //==================================== FIM ATRIBUINDO DADOS EM MASSA ===========================================
 
         $data = [
             'elements' => $this->getHtmlElements($this->getRows(), $this->getStoreData() ?? $data['storeData'] ?? null),
