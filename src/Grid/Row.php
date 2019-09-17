@@ -64,7 +64,7 @@ final class Row extends General
 
         $data = [
             'elements' => $this->getHtmlElements($this->cols, $data['storeData'] ?? null),
-            'attributes' => $this->getAttributesTag(),
+            'attrTag' => $this->getAttributesTag(),
         ];
 
         return $this->getView('row', $data);

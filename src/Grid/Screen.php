@@ -60,7 +60,7 @@ class Screen extends General
         $data = [
             'extend_view' => config('larahtml.extend_view'),
             'elements' => $this->getHtmlElements($this->rows, $this->getStoreData()),
-            'attributes' => $this->getAttributesTag(),
+            'attrTag' => $this->getAttributesTag(),
             'extendView' => $this->getExtendView(),
         ];
 

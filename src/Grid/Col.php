@@ -99,7 +99,7 @@ final class Col extends General
         $this->attrClass($this->config('grid-css.col') . $numCol);
         $data = [
             'elements' => $this->getHtmlElements($this->plugins ?: $this->rows, $data['storeData'] ?? null),
-            'attributes' => $this->getAttributesTag(),
+            'attrTag' => $this->getAttributesTag(),
         ];
 
         return $this->getView('col', $data);

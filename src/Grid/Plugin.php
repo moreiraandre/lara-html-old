@@ -186,7 +186,7 @@ class Plugin extends General
 
         $data = [
             'elements' => $this->getHtmlElements($this->getRows(), $this->getStoreData() ?? $data['storeData'] ?? null),
-            'attributes' => $this->getAttributesTag(),
+            'attrTag' => $this->getAttributesTag(),
             'attr' => $this->getAttr(),
             'meta' => $this->getMeta(),
         ];
