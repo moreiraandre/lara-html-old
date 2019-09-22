@@ -179,6 +179,22 @@ $form->addText('cpf');
 ```
 > Pode ser feito em qualquer plugin!
 
+## Configurando o nome da view blade do plugin
+Configurar o nome da blade no plugin lhe permitirá reutilizar a mesma blade paa vários plugins, pois em muitos dos casos a variação entre eles não é de estrutura (que é definida na blade), mas sim de classes CSS (que é definida na configuração).
+```php
+// No arquivo de configuração.
+
+return [
+    'plugins' => [
+        'AlertPrimary' => [
+            // A chave 'config.blade' indica o nome da blade que será carregada da pasta correspondente ao template utilizado.
+            'config.blade' => 'Alert',
+        ],
+    ],
+];
+```
+> Caso a chave 'config.blade' não esteja presente na configuração do plugin o nome de sua blade será o mesmo nome do plugin! Por exemplo, se no caso acima o nome da blade não fosse definido, o nome que a biblioteca assumiria para a blade seria `AlertPrimary.blade.php`.
+
 # Desenvolvimento
 ### André Moreira 
 ![André Moreira](https://avatars3.githubusercontent.com/u/11823149?s=100) Projetista e desenvolvedor

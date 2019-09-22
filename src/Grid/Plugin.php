@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin que armazena linhas.
+ * Plugin que pode armazenar linhas.
  */
 
 namespace LaraHtml\Grid;
@@ -26,6 +26,13 @@ final class Plugin extends General
      * @var string
      */
     private $pluginName = '';
+
+    /**
+     * Nome da view blade do plugin.
+     *
+     * @var string
+     */
+    private $bladeViewName = null;
 
     /**
      * @return string
@@ -115,26 +122,25 @@ final class Plugin extends General
             print_r([$configPluginIndex, $configPluginValue, gettype($configPluginIndex), gettype($configPluginValue)]);
             echo "</pre>---";*/
 
-            if (is_int($configPluginIndex)) { // 1.1
+            if (is_int($configPluginIndex)) { // 1.1 - "NÃO" POSSUI VALOR PRÉ-DEFINIDO
                 $configName = $configPluginValue;
-                if (strpos($configName, 'meta.') !== false) { // 1.1.1
-                    if (isset($arguments[$configIndex])) { // 1.1.1.1
-                        $configName = explode('.', $configName)[1];
-                        $this->addMeta($configName, $arguments[$configIndex]);
-                    }
+                if (strpos($configName, 'meta.') !== false) { // 1.1.1 **1
+                    $configName = explode('.', $configName)[1]; // **4
+                    if (isset($arguments[$configIndex])) // 1.1.1.1 **2
+                        $this->addMeta($configName, $arguments[$configIndex]); // **3
                 } else { // 1.1.2
                     if (isset($arguments[$configIndex])) { // 1.1.2.1
                         $this->{"attr{$configName}"}($arguments[$configIndex]);
                     }
                 }
 
-            } elseif (is_string($configPluginIndex)) { // 1.2
+            } elseif (is_string($configPluginIndex)) { // 1.2 - "POSSUI" VALOR PRÉ-DEFINIDO
                 $configName = $configPluginIndex;
-                if (strpos($configName, 'meta.') !== false) { // 1.2.1
-                    $configName = explode('.', $configName)[1];
-                    if (isset($arguments[$configIndex])) { // 1.2.1.1
-                        $this->addMeta($configName, $arguments[$configIndex]);
-                    } else {
+                if (strpos($configName, 'meta.') !== false) { // 1.2.1 **1
+                    $configName = explode('.', $configName)[1]; // **4
+                    if (isset($arguments[$configIndex])) // 1.2.1.1 **2
+                        $this->addMeta($configName, $arguments[$configIndex]); // **3
+                    else {
                         if (strpos($configPluginValue, 'eval..') !== false) { // 1.2.2.1
                             $configValue = str_replace('eval..', '', $configPluginValue);
                             eval("\$configValue = $configValue;"); // INTERPRETANDO VALOR COMO COMANDO PHP
@@ -143,6 +149,9 @@ final class Plugin extends General
                             $this->addMeta($configName, $configPluginValue);
                         }
                     }
+                } elseif (strpos($configName, 'config.blade') !== false) { // 1.2.1 **1
+                    $this->bladeViewName = $configPluginValue;
+                    $configIndex--;
                 } else { // 1.1.2
                     if (isset($arguments[$configIndex])) { // 1.1.2.1
                         $this->{"attr{$configName}"}($arguments[$configIndex]);
@@ -189,7 +198,10 @@ final class Plugin extends General
             'meta' => $this->getMeta(),
         ];
 
-        return $this->getView($this->getPluginName(), $data);
+        // SE O NOME DA BLADE DO PLUGIN NÃO FOI INFORMADA NA CONFIGUARAÇÃO, O NOME DELA SERÁ O NOME DO PLUGIN.
+        $this->bladeViewName = $this->bladeViewName ?: $this->getPluginName();
+
+        return $this->getView($this->bladeViewName, $data);
     }
 
 }
