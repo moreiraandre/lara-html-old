@@ -13,6 +13,7 @@ use LaraHtml\Grid\Row;
 
 /**
  * Trait StoresRows
+ *
  * @package LaraHtml\Traits
  */
 trait StoresRows
@@ -89,8 +90,9 @@ trait StoresRows
             $class = Plugin::class; // NOME DA CLASSE COM NAMESPACE PARA CRIAR O OBJETO
 
             // RESOLVENDO A HIERARQUIA DE PARÂMETROS EM MÉTODOS DINÂMICOS
-            while (is_array($arguments[0]))
-                $arguments = $arguments[0];
+            if (isset($arguments[0]))
+                while (is_array($arguments[0]))
+                    $arguments = $arguments[0];
 
             // LANÇA ERRO PERSONALIZADO CASO OS ARGUMENTOS PARA CRIAR O PLUGIN ESTEJAM INVÁLIDOS
             try {
