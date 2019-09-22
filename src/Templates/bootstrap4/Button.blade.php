@@ -1,1 +1,1 @@
-<button {!! $attrTag !!}>{!! $meta['label'] !!}</button>
+<button {!! $attrTag !!}>{!! $meta['html'] !!}</button>
