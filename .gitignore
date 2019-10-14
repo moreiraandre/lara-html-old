@@ -1,0 +1,4 @@
+.idea
+vendor
+/laradock/
+/composer.lock
