@@ -1,9 +1,5 @@
 <?php
 
-/**
- * Armazena linhas. Faz a gestão das linhas, bem como criação de plugins e suas colunas.
- */
-
 namespace LaraHtml\Traits;
 
 use LaraHtml\Exceptions\LaraHtmlParametersException;
@@ -11,11 +7,6 @@ use LaraHtml\Grid\Col;
 use LaraHtml\Grid\Plugin;
 use LaraHtml\Grid\Row;
 
-/**
- * Trait StoresRows
- *
- * @package LaraHtml\Traits
- */
 trait StorePlugins
 {
 
