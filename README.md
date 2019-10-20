@@ -163,6 +163,12 @@ $colNome->attrClass = 'input-mask'; // SUBSTITUI O VALOR DA CONFIGURAÇÃO
 ```
 > O prefixo `attr` indica a definição de atributos, o atributo deve ser escrito no padrão _StudlyCase_.
 
+## Definindo meta dados
+Definindo dados auxiliares que **não** são atributos de tag.
+```php
+$colNome->addMeta('label', 'Descrição');
+```
+
 ## Atribuindo dados em massa.
 ```php
 $form = $screen->addForm('/post');
